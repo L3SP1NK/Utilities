@@ -1,0 +1,154 @@
+#!/bin/bash
+
+TIME="date +%H:%M:%S"
+HELP='echo -e \n \e[93m -a \e[0m Update apt\n \e[93m -f \e[0m Move log file to trash\n \e[93m -g \e[0m Find github repositories and git pull\n\e[0m'
+
+clear
+
+function APT()
+{
+	dpkg --configure -a
+	apt update
+	apt upgrade -y
+	apt update
+	apt dist-upgrade -y
+	apt update
+	apt full-upgrade -y
+	dpkg --configure -a
+	apt --fix-broken install
+	apt clean -y
+	apt autoclean -y
+	apt autoremove -y
+	echo 'Done!'
+}
+
+function TRASH_LOG()
+{
+	mv $(find / -type f -name "*.log") ~/.trash
+	mv $(find / -type f -name "*.log*") ~/.trash
+}
+
+WORKSPACE=/
+
+
+## Kill the "enter username prompt" when git pull
+function NO_INPUT()
+{
+	if [[ -t 0 ]]
+		then
+			stty -echo -icanon time 0 min 0
+	fi
+}
+
+function GIT()
+{
+	cd ${WORKSPACE}
+	for GIT_PATH in $(find ${WORKSPACE} -type d -name ".git")
+		do
+			cd ${GIT_PATH};
+			echo -e "\n${GIT_PATH}";
+			cd ..;
+			git config pull.rebase false
+			git stash
+			git pull
+			cd ${WORKSPACE}
+		done
+}
+
+## Options (need optimisation)
+if [[ ${1} ]]
+	then
+		if [[ ${1} == "-a" ]]
+			then
+				${TIME}
+				echo -e "\e[93mStarting apt update...\e[0m"
+				APT
+					if [[ ${?} -eq "0" ]]
+						then
+							${TIME}
+							echo -e "\e[32mApt update done!\e[0m"
+						else
+							${TIME}
+							echo -e "\e[31mSomething went wrong!\e[0m"
+					fi
+			else
+				if [[ ${1} == "-f" ]]
+					then
+						${TIME}
+						echo -e "\e[93mFinding logs...\e[0m"
+						TRASH_LOG
+						if [[ ${?} -eq "0" ]]
+							then
+								${TIME}
+								echo -e "\e[32mLog moved has been to the trash!\e[0m"
+							else
+								${TIME}
+								echo -e "\e[31mSomething went wrong!\e[0m"
+						fi
+					else
+						if [[ ${1} == "-g" ]]
+							then
+								${TIME}
+								echo -e "\e[93mFinding github repositories...\e[0m"
+								NO_INPUT
+								GIT
+								if [[ ${?} -eq "0" ]]
+									then
+										${TIME}
+										echo -e "\e[32mGithub repositories updated succesfully!\e[0m"
+									else
+										${TIME}
+										echo -e "\e[31mSomething went wrong!\e[0m"
+								fi
+							else
+								if [[ ${1} == "-h" ]]
+									then
+										${HELP}
+									else
+										true
+								fi
+
+						fi
+				fi
+
+		fi
+	else
+
+## If no options provided, run all
+		${TIME}
+		echo -e "\e[93mStarting apt update...\e[0m"
+		APT
+		if [[ ${?} -eq "0" ]]
+			then
+				${TIME}
+				echo -e "\e[32mApt update done!\e[0m"
+			else
+				${TIME}
+				echo -e "\e[31mSomething went wrong!\e[0m"
+		fi
+
+		${TIME}
+		echo -e "\e[93mFinding logs...\e[0m"
+		TRASH_LOG
+		if [[ ${?} -eq "0" ]]
+			then
+				${TIME}
+				echo -e "\e[32mLog moved has been to the trash!\e[0m"
+			else
+				${TIME}
+				echo -e "\e[31mSomething went wrong!\e[0m"
+		fi
+
+		${TIME}
+		echo -e "\e[93mFinding github repositories...\e[0m"
+		NO_INPUT
+		GIT
+		if [[ ${?} -eq "0" ]]
+			then
+				${TIME}
+				echo -e "\e[32mGithub repositories updated succesfully!\e[0m"
+			else
+				${TIME}
+				echo -e "\e[31mSomething went wrong!\e[0m"
+		fi
+fi

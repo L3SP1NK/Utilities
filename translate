@@ -1,0 +1,8 @@
+#!/bin/bash
+
+if [[ ${1} == "-en" ]]
+	then
+		firefox "https://translate.google.com/?sl=auto&tl=en&text=${2}&op=translate"
+	else
+		firefox "https://translate.google.com/?sl=auto&tl=fr&text=${1}&op=translate"
+fi

@@ -1,0 +1,23 @@
+#!/bin/bash -e
+
+function WEATHER_INFO() {
+	clear
+	echo -e "\e[1m\e[33mWeather format ? (1 or 2):\e[0m"
+	read -p "➜ " DISPLAY_FORMAT
+	if [[ $DISPLAY_FORMAT -eq 1  ]]
+			then
+				curl -sf 'http://wttr.in/Dijon' | sed 's/Follow//;s/@igor_chubin//;s/for wttr.in updates//'
+	elif [[ $DISPLAY_FORMAT -eq 2 ]]
+			then
+				curl -sf 'http://wttr.in/Dijon?format=v2' | sed 's/Follow//;s/@igor_chubin//;s/for wttr.in updates//'
+	elif [[ $DISPLAY_FORMAT -ne 1 ]] || [[ $DISPLAY_FORMAT -ne 2 ]]
+			then
+				echo -e "\e[1m\e[31mQuitting...\e[0m"
+			else
+				exit 1
+	fi
+
+
+}
+
+WEATHER_INFO

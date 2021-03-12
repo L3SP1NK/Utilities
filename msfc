@@ -1,0 +1,18 @@
+#!/bin/bash
+
+clear
+service postgresql start
+
+# Ctrl+Z background sessions
+trap "" TSTP
+/usr/bin/msfconsole -q
+
+echo -e '\e[33mStop the postgresql service? (y/n):\e[0m'
+read STOP_SERVICE
+
+if [[ ${STOP_SERVICE} == "y" ]]
+	then
+		service postgresql stop
+	else
+		exit
+fi

@@ -1,0 +1,11 @@
+#!/bin/bash
+
+echo -e "\e[32mSynchronizing cached writes to persistent storage...\e[0m"
+
+sync
+swapoff -av
+swapon -av
+sync
+echo 3 > /proc/sys/vm/drop_caches
+
+echo -e "\e[32mDone!\e[0m"
