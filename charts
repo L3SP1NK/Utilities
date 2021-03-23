@@ -3,5 +3,5 @@ if [[ ${1} ]]
 	then
 		firefox --new-window https://www.tradingview.com/chart?symbol=BINANCE%3A${1}
 	else
-		echo -e "\e[33mPlease enter a symbol (ex:BTCUSDT)"
+		echo -e "\e[33mPlease enter a symbol (ex:BTCUSDT)\n Default exchange is Binance."
 fi
