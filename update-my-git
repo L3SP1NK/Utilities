@@ -6,7 +6,7 @@ git add *
 git commit
 git push
 ln -f * /usr/bin
-cd CWD
+cd ${CWD}
 
 if [[ ${?} -eq "0" ]]
 	then
