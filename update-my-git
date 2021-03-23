@@ -1,0 +1,18 @@
+#!/bin/bash
+CWD=$(pwd)
+
+cd /opt/utilities
+git add *
+git commit
+git push
+ln -f * /usr/bin
+cd CWD
+
+if [[ ${?} -eq "0" ]]
+	then
+		${TIME}
+		echo -e "\e[32mDone!\e[0m"
+	else
+		${TIME}
+		echo -e "\e[31mSomething went wrong!\e[0m"
+fi

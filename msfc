@@ -1,26 +1,42 @@
 #!/bin/bash
+
 clear
 
-echo -e '\e[33mStart the postgresql service? (y/n):\e[0m'
-read START_SERVICE
+function CHECK()
+{
+	if [[ ${?} -eq "0" ]]
+		then
+			echo -e '\e[32mDone!\e[0m'
+		else
+			echo -e '\e[31mSomething went wrong...\e[0m'
+		exit 1
+	fi
+}
+
+service postgresql status
+
+echo -e '\e[33mStart the postgresql service? (y/N):\e[0m'
+read -s START_SERVICE
 
 if [[ ${START_SERVICE} == "y" ]]
 	then
 		service postgresql start
+		CHECK
 		trap "" TSTP #(1)
-		/usr/bin/msfconsole -q
+		/usr/bin/msfconsole
 	else
 		trap "" TSTP #(1)
-		/usr/bin/msfconsole -q
+		/usr/bin/msfconsole
 fi
 
 # Exit Metasploit properly to be prompted
-echo -e '\e[33mStop the postgresql service? (y/n):\e[0m'
-read STOP_SERVICE
+echo -e '\e[33mStop the postgresql service? (y/N):\e[0m'
+read -s STOP_SERVICE
 
 if [[ ${STOP_SERVICE} == "y" ]]
 	then
 		service postgresql stop
+		CHECK
 	else
 		exit
 fi
