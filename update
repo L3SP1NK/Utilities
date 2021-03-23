@@ -22,7 +22,6 @@ function UPDATE_APT()
 
 	dpkg --configure -a
 	apt --fix-broken install
-	apt --fix-broken
 
 	apt update
 	apt upgrade -y
@@ -35,7 +34,6 @@ function UPDATE_APT()
 
 	dpkg --configure -a
 	apt --fix-broken install
-	apt --fix-broken
 
 	apt clean -y
 	apt autoclean -y
