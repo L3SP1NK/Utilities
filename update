@@ -17,8 +17,8 @@ function CHECK_DONE()
 function UPDATE_APT()
 {
 	apt clean -y
-	apt autoclean --purge -y
-	apt autoremove -y
+	apt autoclean -y
+	apt autoremove --purge -y
 
 	dpkg --configure -a
 	apt --fix-broken install
@@ -38,8 +38,8 @@ function UPDATE_APT()
 	apt --fix-broken
 
 	apt clean -y
-	apt autoclean --purge -y
-	apt autoremove -y
+	apt autoclean -y
+	apt autoremove --purge -y
 
 }
 
