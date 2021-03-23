@@ -22,10 +22,12 @@ function APT()
 	echo 'Done!'
 }
 
-function TRASH_LOG()
+function TRASH_LOG 2>/dev/null()
 {
-	mv $(find / -type f -name "*.log") ~/.trash
-	mv $(find / -type f -name "*.log*") ~/.trash
+	mv -vuf $(find / -type f -name "*.log") ~/.trash
+	mv -vuf $(find / -type f -name "*.log*") ~/.trash
+	mv -vuf $(find / -type f -name "*.old") ~/.trash
+	mv -vuf $(find / -type f -name "*.old*") ~/.trash
 }
 
 WORKSPACE=/
@@ -76,7 +78,7 @@ if [[ ${1} ]]
 					then
 						${TIME}
 						echo -e "\e[93mFinding logs...\e[0m"
-						TRASH_LOG
+						TRASH_LOG 2>/dev/null
 						if [[ ${?} -eq "0" ]]
 							then
 								${TIME}
@@ -129,7 +131,7 @@ if [[ ${1} ]]
 
 		${TIME}
 		echo -e "\e[93mFinding logs...\e[0m"
-		TRASH_LOG
+		TRASH_LOG 2>/dev/null
 		if [[ ${?} -eq "0" ]]
 			then
 				${TIME}
