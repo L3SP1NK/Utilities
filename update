@@ -43,11 +43,13 @@ function UPDATE_APT()
 
 function TRASH_LOG()
 {
+	mkdir -p ~/.trash
 	mv -vuf $(find / -type f -name "*.log") ~/.trash
 	mv -vuf $(find / -type f -name "*.log*") ~/.trash
 
 	mv -vuf $(find / -type f -name "*.old") ~/.trash
 	mv -vuf $(find / -type f -name "*.old*") ~/.trash
+	mv /var/log/journal ~/.trash
 }
 
 WORKSPACE=/
