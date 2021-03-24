@@ -1,7 +1,5 @@
 #!/bin/bash
 
-TIME="date +%H:%M:%S"
-
 function CHECK_DONE()
 {
 	if [[ ${?} -eq "0" ]]
@@ -44,12 +42,13 @@ function UPDATE_APT()
 function TRASH_LOG()
 {
 	mkdir -p ~/.trash
-	mv -vuf $(find / -type f -name "*.log") ~/.trash
-	mv -vuf $(find / -type f -name "*.log*") ~/.trash
+	trash -vf $(find / -type f -name "*.log")
+	trash -vf $(find / -type f -name "*.log*")
 
-	mv -vuf $(find / -type f -name "*.old") ~/.trash
-	mv -vuf $(find / -type f -name "*.old*") ~/.trash
-	mv /var/log/journal ~/.trash
+	trash -vf $(find / -type f -name "*.old")
+	trash -vf $(find / -type f -name "*.old*")
+
+	trash /var/log/journal
 }
 
 WORKSPACE=/
