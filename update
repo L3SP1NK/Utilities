@@ -5,8 +5,6 @@ clear
 
 function UPDATE_APT()
 {
-	tail -f /var/log/dpkg.log&
-
 	apt clean -y
 	apt autoclean -y
 	apt autoremove --purge -y
