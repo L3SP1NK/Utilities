@@ -12,7 +12,7 @@ function UPDATE_APT()
 	dpkg --configure -a
 	apt --fix-broken install
 
-	apt-get build-dep $(apt-cache search kali-tools|cut -d ' ' -f 1)  kali-linux-core xfce4 kali-desktop-xfce kali-linux-everything kali-linux-large
+	apt-get build-dep $(apt-cache search kali-tools|cut -d ' ' -f 1)  kali-linux-core xfce4 kali-desktop-xfce
 	apt-get install $(apt-cache search kali-tools|cut -d ' ' -f 1)  kali-linux-core xfce4 kali-desktop-xfce kali-linux-everything kali-linux-large
 
 	apt update
@@ -39,19 +39,19 @@ function UPDATE_NPM()
 	npm doctor
 	npm update
 	cat /root/.npm/_logs/* | ccze -A
-	trash /root/.npm/_logs/ root/*.json
+	mv -vf /root/.npm/_logs/ root/*.json
 }
 
 function TRASH_LOG()
 {
 	mkdir -p ~/.trash
-	trash -vf $(find / -type f -name "*.log")
-	trash -vf $(find / -type f -name "*.log*")
+	mv -vf $(find / -type f -name "*.log") ~/.trash
+	mv -vf $(find / -type f -name "*.log*") ~/.trash
 
-	trash -vf $(find / -type f -name "*.old")
-	trash -vf $(find / -type f -name "*.old*")
+	mv -vf $(find / -type f -name "*.old") ~/.trash
+	mv -vf $(find / -type f -name "*.old*") ~/.trash
 
-	trash /var/log/journal
+	mv -vf /var/log/journal/* ~/.trash
 }
 
 WORKSPACE=/
@@ -83,11 +83,11 @@ function UPDATE_GIT()
 
 echo -e "\e[35m\e[1m$(date +%H:%M:%S)\e[0m"
 echo -e "\e[33mUpdating \e[1mAPT\e[0m \e[33mpackages...\e[0m"
-UPDATE_APT
+UPDATE_APT | ccze -A
 
 echo -e "\e[35m\e[1m$(date +%H:%M:%S)\e[0m"
 echo -e "\e[33mUpdating \e[1mGIT\e[0m \e[33mrepositories...\e[0m"
-UPDATE_GIT
+UPDATE_GIT | ccze -A
 
 echo -e "\e[35m\e[1m$(date +%H:%M:%S)\e[0m"
 echo -e "\e[33mUpdating \e[1mNPM\e[0m \e[33mpackages...\e[0m"
@@ -95,5 +95,5 @@ UPDATE_NPM
 
 echo -e "\e[35m\e[1m$(date +%H:%M:%S)\e[0m"
 echo -e "\e[33mSearching for \e[1mlogs\e[0m \e[33mto \e[1mtrash\e[0m\e[33m...\e[0m"
-TRASH_LOG 2>/dev/null
+TRASH_LOG
 
