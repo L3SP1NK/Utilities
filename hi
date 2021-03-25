@@ -1,4 +1,5 @@
-#!/bin/bash -e
+#!/bin/bash
+# .:: Say hi,date ::.
 
 DATE=$(date "+%d %B")
 TIME=$(date "+%H:%M:%S")
@@ -10,12 +11,23 @@ UPTIME_PRETTY=$(uptime -p | sed 's/,//;s/up //')
 function HI() {
 		if [[ $? -eq 0 ]]
 			then
-				echo -e "We are the \e[36m\e[1m${DATE}\e[0m and it's \e[36m\e[1m${TIME}\e[0m.\nThis \e[36m\e[1m${DAY}\e[0m is the day \e[36m\e[1m${DOY}\e[0m of the year \e[36m\e[1m${YEAR}\e[0m\n\nI'm up since \e[36m\e[1m${UPTIME_PRETTY}\e[0m"
-				echo "Network" $(ethtool eth0 | grep Speed)
+				cowsay -f $(ls /usr/share/cowsay/cows/*|shuf|head -n 1) "Hi"
+				echo -e "We are the \e[35m\e[1m${DATE}\e[0m and it's \e[35m\e[1m${TIME}\e[0m.\nThis \e[35m\e[1m${DAY}\e[0m is the day \e[35m\e[1m${DOY}\e[0m of the year \e[35m\e[1m${YEAR}\e[0m\n\nI'm up since \e[35m\e[1m${UPTIME_PRETTY}\e[0m"
 				read
 			else
 				echo -e "\e[31mError $RET\e[0m"
 		fi
 }
+
+function CHECK_DONE()
+{
+	if [[ ${?} -eq "0" ]]
+		then
+			exit
+		else
+			echo -e "\e[31mSomething went wrong!\e[0m"
+	fi
+}
 HI
+CHECK_DONE
 read

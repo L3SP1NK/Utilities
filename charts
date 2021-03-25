@@ -1,7 +1,25 @@
 #!/bin/bash
-if [[ ${1} ]]
-	then
-		firefox --new-window https://www.tradingview.com/chart?symbol=BINANCE%3A${1}
-	else
-		echo -e "\e[33mPlease enter a symbol (ex:BTCUSDT)\nDefault exchange is Binance."
-fi
+# .:: Open a Trading view chart in a new Firefox windows ::.
+
+function TRADING_VIEW()
+{
+	if [[ ${1} ]]
+		then
+			firefox --new-window "https://www.tradingview.com/chart?symbol=BINANCE%3A${1}"
+		else
+			echo -e "\e[33mPlease enter a symbol (ex:BTCUSDT)\nDefault exchange is Binance."
+	fi
+}
+
+function CHECK_DONE()
+{
+	if [[ ${?} -eq "0" ]]
+		then
+			exit
+		else
+			echo -e "\e[31mSomething went wrong!\e[0m"
+	fi
+}
+
+TRADING_VIEW
+CHECK_DONE

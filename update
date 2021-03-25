@@ -1,13 +1,12 @@
 #!/bin/bash
+# .:: Update the system ::.
 
 function CHECK_DONE()
 {
 	if [[ ${?} -eq "0" ]]
 		then
-			${TIME}
 			echo -e "\e[32mDone!\e[0m"
 		else
-			${TIME}
 			echo -e "\e[31mSomething went wrong!\e[0m"
 	fi
 }
@@ -78,12 +77,17 @@ function UPDATE_GIT()
 		done
 }
 
-${TIME}
+TIME=$(date +%H:%M:%S)
+echo -e "\e[35m${TIME}\e[0m"
+echo -e "\e[33mUpdating APT packages...\e[0m"
 UPDATE_APT
 CHECK_DONE
-${TIME}
+echo -e "\e[35m${TIME}\e[0m"
+echo -e "\e[33mUpdating GIT repositories...\e[0m"
 UPDATE_GIT
 CHECK_DONE
-${TIME}
+echo -e "\e[35m${TIME}\e[0m"
+echo -e "\e[33mMoving logs and other unnecessary files to trash...\e[0m"
 TRASH_LOG 2>/dev/null
-${TIME}
+echo -e "\e[35m${TIME}\e[0m"
+

@@ -1,2 +1,28 @@
 #!/bin/bash
-xrandr --output VGA-1 --gamma 1:1:1 --brightness ${1}
+# .:: Change the brightness ::.
+
+function CHANGE_BRIGHTNESS()
+{
+	if [[ ${1} == "--vga" ]]
+		then
+			xrandr --output VGA-1 --brightness ${2}
+	elif [[ ${1} == "--hdmi" ]]
+		then
+			xrandr --output HDMI-A-0 --brightness ${2}
+		else
+			echo -e "\e[33mSpecify a display...\nbrightness --<vga/hdmi>\e[0m"
+	fi
+}
+
+function CHECK_DONE()
+{
+	if [[ ${?} -eq "0" ]]
+		then
+			exit
+		else
+			echo -e "\e[31mSomething went wrong!\e[0m"
+	fi
+}
+
+CHANGE_BRIGHTNESS
+CHECK_DONE

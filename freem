@@ -1,11 +1,33 @@
 #!/bin/bash
+# .:: Free memory  ::.
 
-echo -e "\e[32mSynchronizing cached writes to persistent storage...\e[0m"
+function FREE_MEM()
+{
+	# Swap
+	sync
+	swapoff -av
+	swapon -av
+	sync
+	# Cache
+	echo 3 > /proc/sys/vm/drop_caches
+}
 
-sync
-swapoff -av
-swapon -av
-sync
-echo 3 > /proc/sys/vm/drop_caches
+function CHECK_DONE()
+{
+	if [[ ${?} -eq "0" ]]
+		then
+			echo -e "\e[32mDone!\e[0m"
+		else
+			echo -e "\e[31mSomething went wrong!\e[0m"
+	fi
+}
 
-echo -e "\e[32mDone!\e[0m"
+
+TIME="date +%H:%M:%S"
+
+${TIME}
+echo -e "\e[33mEmptying swap space and synchronizing cached writes to persistent storage...\e[0m"
+FREE_MEM
+${TIME}
+CHECK_DONE
+${TIME}

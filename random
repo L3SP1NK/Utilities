@@ -1,7 +1,9 @@
 #!/bin/bash
+# .:: Display a random Ascii string ::.
+
 if [[ ${1} ]]
-then
-	echo -e "$(cat /dev/random | tr -cd 'a-z0-9' | head -c ${1})\n"
-else
-	echo -e "$(cat /dev/random | tr -cd 'a-z0-9' | head -c 16)\n"
+	then
+		echo -e "$(cat /dev/random | tr -cd 'a-z0-9' | head -c ${1})\n"
+	else
+		echo -e "$(cat /dev/random | tr -cd 'a-z0-9' | head -c 16)\n"
 fi

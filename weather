@@ -1,12 +1,33 @@
 #!/bin/bash
+
+# .:: Display the weather info ::.
+
 clear
 
-if [[ ${1} == "-1"  ]]
-	then
-		curl -sf 'http://wttr.in/Dijon' | grep -v "Follow"
-elif [[ ${1} == "-2" ]]
-	then
-		curl -sf 'http://wttr.in/Dijon?format=v2' | grep -v "Follow"
-	else
-		echo -e "\e[33mSpecify a version with -<version> (currently 1 or 2) \e[0m"
-fi
+CITY=Dijon
+
+function WEATHER_INFO()
+{
+	if [[ ${1} == "-v1"  ]]
+		then
+			curl -sf 'http://wttr.in/${CITY}' | grep -v "Follow"
+	elif [[ ${1} == "-v2" ]]
+		then
+			curl -sf 'http://wttr.in/${CITY}?format=v2' | grep -v "Follow"
+		else
+			echo -e "\e[33mSpecify a version with -v <version> (currently 1 or 2) \e[0m"
+	fi
+}
+
+function CHECK_DONE()
+{
+	if [[ ${?} -eq "0" ]]
+		then
+			exit
+		else
+			echo -e "\e[31mSomething went wrong!\e[0m"
+	fi
+}
+
+WEATHER_INFO
+CHECK_DONE

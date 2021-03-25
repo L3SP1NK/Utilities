@@ -1,8 +1,25 @@
 #!/bin/bash
+# .:: Google Translate the words supplied in argument in a new Firefox windows ::.
 
-if [[ ${1} == "-en" ]]
-	then
-		firefox --new-window "https://translate.google.com/?sl=auto&tl=en&text=${2}&op=translate"
-	else
-		firefox --new-window "https://translate.google.com/?sl=auto&tl=fr&text=${1}&op=translate"
-fi
+function TRANSLATE()
+{
+	if [[ ${1} == "-en" ]]
+		then
+			firefox --new-window "https://translate.google.com/?sl=auto&tl=en&text=${2}&op=translate"
+		else
+			firefox --new-window "https://translate.google.com/?sl=auto&tl=fr&text=${1}&op=translate"
+	fi
+}
+
+function CHECK_DONE()
+{
+	if [[ ${?} -eq "0" ]]
+		then
+			exit
+		else
+			echo -e "\e[31mSomething went wrong!\e[0m"
+	fi
+}
+
+TRANSLATE
+CHECKDONE
