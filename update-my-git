@@ -10,9 +10,9 @@ cd dot-files
 ln -f .zshrc ~
 
 cd ${REPO_DIR}
-git add *
+git add -v * | ccze -A
 git commit
-git push
+git push -v | ccze -A
 
 cd ${CWD}
 
