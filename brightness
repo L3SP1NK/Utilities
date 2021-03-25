@@ -9,5 +9,3 @@ elif [[ ${1} == "--hdmi" ]]
 	else
 		echo -e "\e[33mSpecify a display...\nbrightness --<vga/hdmi>\e[0m"
 fi
-
-/bin/check-error

@@ -13,11 +13,9 @@ if [[ ${START_SERVICE} == "y" ]]
 		echo -e "\e[35m\e[1mBye...\e[0m"
 		service postgresql start
 		trap "" TSTP #(1)
-		echo -e "\e[32mStarting Metasploit Framework ...\e[0m"
 		/usr/bin/msfconsole
 	else
 		trap "" TSTP #(1)
-		echo -e "\e[32mStarting Metasploit Framework ...\e[0m"
 		/usr/bin/msfconsole
 fi
 
