@@ -1,18 +1,12 @@
 #!/bin/bash
 # .:: Update the system ::.
 
-function CHECK_DONE()
-{
-	if [[ ${?} -eq "0" ]]
-		then
-			echo -e "\e[32mDone!\e[0m"
-		else
-			echo -e "\e[31mSomething went wrong!\e[0m"
-	fi
-}
+clear
 
 function UPDATE_APT()
 {
+	tail -f /var/log/dpkg.log&
+
 	apt clean -y
 	apt autoclean -y
 	apt autoremove --purge -y
@@ -20,11 +14,14 @@ function UPDATE_APT()
 	dpkg --configure -a
 	apt --fix-broken install
 
-	apt update
-	apt upgrade -y
+	apt-get build-dep $(apt-cache search kali-tools|cut -d ' ' -f 1)  kali-linux-core xfce4 kali-desktop-xfce kali-linux-everything kali-linux-large
+	apt-get install $(apt-cache search kali-tools|cut -d ' ' -f 1)  kali-linux-core xfce4 kali-desktop-xfce kali-linux-everything kali-linux-large
 
 	apt update
-	apt dist-upgrade -y
+	apt upgrade -y --with-new-pkgs
+
+	apt update
+	apt dist-upgrade -y --ignore-hold
 
 	apt update
 	apt full-upgrade -y
@@ -36,6 +33,15 @@ function UPDATE_APT()
 	apt autoclean -y
 	apt autoremove --purge -y
 
+}
+
+function UPDATE_NPM()
+{
+	npm audit
+	npm doctor
+	npm update
+	cat /root/.npm/_logs/* | ccze -A
+	trash /root/.npm/_logs/ root/*.json
 }
 
 function TRASH_LOG()
@@ -77,16 +83,19 @@ function UPDATE_GIT()
 		done
 }
 
-TIME=$(date +%H:%M:%S)
 echo -e "\e[35m\e[1m$(date +%H:%M:%S)\e[0m"
-echo -e "\e[33mUpdating APT packages...\e[0m"
+echo -e "\e[33mUpdating \e[1mAPT\e[0m \e[33mpackages...\e[0m"
 UPDATE_APT
-CHECK_DONE
+
 echo -e "\e[35m\e[1m$(date +%H:%M:%S)\e[0m"
-echo -e "\e[33mUpdating GIT repositories...\e[0m"
+echo -e "\e[33mUpdating \e[1mGIT\e[0m \e[33mrepositories...\e[0m"
 UPDATE_GIT
-CHECK_DONE
+
 echo -e "\e[35m\e[1m$(date +%H:%M:%S)\e[0m"
-echo -e "\e[33mMoving logs and other unnecessary files to trash...\e[0m"
+echo -e "\e[33mUpdating \e[1mNPM\e[0m \e[33mpackages...\e[0m"
+UPDATE_NPM
+
+echo -e "\e[35m\e[1m$(date +%H:%M:%S)\e[0m"
+echo -e "\e[33mSearching for \e[1mlogs\e[0m \e[33mto \e[1mtrash\e[0m\e[33m...\e[0m"
 TRASH_LOG 2>/dev/null
-echo -e "\e[35m\e[1m$(date +%H:%M:%S)\e[0m"
+

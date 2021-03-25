@@ -1,5 +1,4 @@
 #!/bin/bash
-# .:: Change the brightness ::.
 
 if [[ ${1} == "--vga" ]]
 	then
@@ -11,14 +10,4 @@ elif [[ ${1} == "--hdmi" ]]
 		echo -e "\e[33mSpecify a display...\nbrightness --<vga/hdmi>\e[0m"
 fi
 
-function CHECK_DONE()
-{
-	if [[ ${?} -eq "0" ]]
-		then
-			exit
-		else
-			echo -e "\e[31mSomething went wrong!\e[0m"
-	fi
-}
-
-CHECK_DONE
+/bin/check-error

@@ -3,17 +3,6 @@
 
 clear
 
-function CHECK()
-{
-	if [[ ${?} -eq "0" ]]
-		then
-			echo -e '\e[32mDone!\e[0m'
-		else
-			echo -e '\e[31mSomething went wrong...\e[0m'
-		exit 1
-	fi
-}
-
 service postgresql status
 
 echo -e '\e[33mStart the postgresql service? (y/N):\e[0m'
@@ -21,23 +10,26 @@ read -s START_SERVICE
 
 if [[ ${START_SERVICE} == "y" ]]
 	then
+		echo -e "\e[35m\e[1mBye...\e[0m"
 		service postgresql start
-		CHECK
 		trap "" TSTP #(1)
+		echo -e "\e[32mStarting Metasploit Framework ...\e[0m"
 		/usr/bin/msfconsole
 	else
 		trap "" TSTP #(1)
+		echo -e "\e[32mStarting Metasploit Framework ...\e[0m"
 		/usr/bin/msfconsole
 fi
 
-# Exit Metasploit properly to be prompted
+# Metasploit need to be exited properly
 echo -e '\e[33mStop the postgresql service? (y/N):\e[0m'
 read -s STOP_SERVICE
 
 if [[ ${STOP_SERVICE} == "y" ]]
 	then
+		echo -e "\e[33mStoping service...\e[0m"
 		service postgresql stop
-		CHECK
+
 	else
-		exit
+		exit 1
 fi

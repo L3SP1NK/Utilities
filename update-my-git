@@ -1,22 +1,18 @@
 #!/bin/bash
 
-# .:: Update my github repository ::.
-
 CWD=$(pwd)
+REPO_DIR=/opt/utilities
 
-cd /opt/utilities
+cd ${REPO_DIR}
+
 git add *
+
+ln -f * /bin
+ln -f dot-files/.zshrc ~
+
 git commit
 git push
-ln -f * /bin
-ln -f .zshrc ~
+
 cd ${CWD}
 
-if [[ ${?} -eq "0" ]]
-	then
-		${TIME}
-		echo -e "\e[32mDone!\e[0m"
-	else
-		${TIME}
-		echo -e "\e[31mSomething went wrong!\e[0m"
-fi
+echo -e "\e[35m\e[1m$(date +%H:%M:%S)\e[0m"

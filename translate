@@ -7,15 +7,3 @@ if [[ ${1} == "-en" ]]
 	else
 		firefox --new-window "https://translate.google.com/?sl=auto&tl=fr&text=${1}&op=translate"
 fi
-
-function CHECK_DONE()
-{
-	if [[ ${?} -eq "0" ]]
-		then
-			exit
-		else
-			echo -e "\e[31mSomething went wrong!\e[0m"
-	fi
-}
-
-CHECK_DONE
