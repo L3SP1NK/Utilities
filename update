@@ -39,7 +39,7 @@ function UPDATE_NPM()
 	npm doctor
 	npm update
 	cat /root/.npm/_logs/* | ccze -A
-	mv -vf /root/.npm/_logs/ root/*.json
+	mv -vf /root/.npm/_logs/* /root/*.json ~/.trash
 }
 
 function TRASH_LOG()
