@@ -5,14 +5,15 @@ REPO_DIR=/opt/utilities
 
 cd ${REPO_DIR}
 
-git add *
-
 ln -f * /bin
-ln -f dot-files/.zshrc ~
+cd dot-files
+ln -f .zshrc ~
 
+cd ${REPO_DIR}
+git add *
 git commit
 git push
 
 cd ${CWD}
 
-echo -e "\e[35m\e[1m$(date +%H:%M:%S)\e[0m"
+echo -e "\e[31mDone!\e[0m"
