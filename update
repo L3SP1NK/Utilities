@@ -72,7 +72,7 @@ function UPDATE_GIT()
 	for GIT_PATH in $(find ${WORKSPACE} -type d -name ".git")
 		do
 			cd ${GIT_PATH};
-			echo -e "\n${GIT_PATH}";
+			echo -e "\n\e[34m\e[1m${GIT_PATH}\e[0m"
 			cd ..
 			git config pull.rebase false
 			git stash
