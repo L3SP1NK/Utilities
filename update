@@ -78,16 +78,16 @@ function UPDATE_GIT()
 }
 
 TIME=$(date +%H:%M:%S)
-echo -e "\e[35m${TIME}\e[0m"
+echo -e "\e[35m\e[1m${TIME}\e[0m"
 echo -e "\e[33mUpdating APT packages...\e[0m"
 UPDATE_APT
 CHECK_DONE
-echo -e "\e[35m${TIME}\e[0m"
+echo -e "\e[35m\e[1m${TIME}\e[0m"
 echo -e "\e[33mUpdating GIT repositories...\e[0m"
 UPDATE_GIT
 CHECK_DONE
-echo -e "\e[35m${TIME}\e[0m"
+echo -e "\e[35m\e[1m${TIME}\e[0m"
 echo -e "\e[33mMoving logs and other unnecessary files to trash...\e[0m"
 TRASH_LOG 2>/dev/null
-echo -e "\e[35m${TIME}\e[0m"
+echo -e "\e[35m\e[1m${TIME}\e[0m"
 
