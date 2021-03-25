@@ -8,7 +8,8 @@ cd /opt/utilities
 git add *
 git commit
 git push
-ln -f * /usr/bin
+ln -f * /bin
+ln -f .zshrc ~
 cd ${CWD}
 
 if [[ ${?} -eq "0" ]]
