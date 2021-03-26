@@ -122,4 +122,5 @@ ZSH_HIGHLIGHT_STYLES[bracket-level-5]=fg=red,bold
 ZSH_HIGHLIGHT_STYLES[cursor-matchingbracket]=standout
 
 HOSTNAME_COLOR=$(cat /root/.hostname_color)
-PROMPT='%{$fg_bold[${HOSTNAME_COLOR}]%}%m%{$reset_color%}:%{$fg_bold[blue]%}%~%{$reset_color%}%(?.%{$fg_bold[green]%}.%{$fg_bold[red]%})%B#%b '
+PROMPT='%{$fg_bold[yellow]%}@%{$fg_bold[${HOSTNAME_COLOR}]%}%m%{$reset_color%}:%{$fg_bold[blue]%}%~%{$reset_color%}%(?.%{$fg_bold[green]%}.%{$fg_bold[red]%})%B#%b '
+RPROMPT='%{$fg_bold[white]%}%*%{$reset_color%}'
