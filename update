@@ -12,9 +12,6 @@ function UPDATE_APT()
 	dpkg --configure -a
 	apt --fix-broken install
 
-	apt-get build-dep $(apt-cache search kali-tools|cut -d ' ' -f 1)  kali-linux-core xfce4 kali-desktop-xfce
-	apt-get install $(apt-cache search kali-tools|cut -d ' ' -f 1)  kali-linux-core xfce4 kali-desktop-xfce kali-linux-everything kali-linux-large
-
 	apt update
 	apt upgrade -y --with-new-pkgs
 
