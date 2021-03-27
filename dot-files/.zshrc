@@ -49,11 +49,8 @@ alias lt='ls --time-style="+%d-%b-%y %H:%M:%S" -hAltr'
 alias note='gpg -d -o ~/.note --no-symkey-cache ~/.note.gpg&&nano ~/.note&&gpg -c --cipher-algo AES256 --no-symkey-cache ~/.note&&rm -f ~/.note'
 alias pass='gpg -d -o ~/.pass --no-symkey-cache ~/.pass.gpg&&nano ~/.pass&&gpg -c --cipher-algo AES256 --no-symkey-cache ~/.pass&&rm -f ~/.pass'
 alias nspeed='ethtool eth0 | grep Speed'
-alias touchpad='flatpak run com.github.unrud.RemoteTouchpad'
-alias stopx='xfce4-session-logout --logout --fast'
 alias emoji="cat ~/.emoji | tac"
 alias c='ccze -A'
-alias clock='figlet -f miniwi $(date +%H:%M:%S) | ccze -A'
 
 ## Man/less color
 export LESS_TERMCAP_mb=$'\E[1;31m'
@@ -83,9 +80,9 @@ ZSH_HIGHLIGHT_STYLES[global-alias]=fg=yellow
 
 ## Path
 ZSH_HIGHLIGHT_STYLES[autodirectory]=fg=cyan
-ZSH_HIGHLIGHT_STYLES[path]=fg=white,underline
-ZSH_HIGHLIGHT_STYLES[path_pathseparator]=fg=white,underline
-ZSH_HIGHLIGHT_STYLES[path_prefix_pathseparator]=fg=white,underline
+ZSH_HIGHLIGHT_STYLES[path]=fg=grey,underline
+ZSH_HIGHLIGHT_STYLES[path_pathseparator]=fg=grey,underline
+ZSH_HIGHLIGHT_STYLES[path_prefix_pathseparator]=fg=grey,underline
 ZSH_HIGHLIGHT_STYLES[globbing]=fg=blue,bold
 ZSH_HIGHLIGHT_STYLES[history-expansion]=fg=blue,bold
 
@@ -122,5 +119,5 @@ ZSH_HIGHLIGHT_STYLES[bracket-level-5]=fg=red,bold
 ZSH_HIGHLIGHT_STYLES[cursor-matchingbracket]=standout
 
 HOSTNAME_COLOR=$(cat /root/.hostname_color)
-PROMPT='%{$fg_bold[yellow]%}@%{$fg_bold[${HOSTNAME_COLOR}]%}%m%{$reset_color%}:%{$fg_bold[blue]%}%~%{$reset_color%}%(?.%{$fg_bold[green]%}.%{$fg_bold[red]%})%B#%b '
+PROMPT='%{$fg_bold[white]%}@%{$fg_bold[${HOSTNAME_COLOR}]%}%m%{$reset_color%}:%{$fg_bold[blue]%}%~%{$reset_color%}%(?.%{$fg_bold[green]%}.%{$fg_bold[red]%})%B#%b '
 RPROMPT='%{$fg_bold[white]%}%*%{$reset_color%}'
