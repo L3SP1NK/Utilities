@@ -98,7 +98,7 @@ echo -e "\e[32mDone!\e[0m"
 
 echo -e "\e[35m\e[1m$(date +%H:%M:%S)\e[0m"
 echo -e "\e[33mUpdating \e[1mNPM\e[0m \e[33mpackages...\e[0m"
-UPDATE_NPM
+#UPDATE_NPM
 echo -e "\e[32mDone!\e[0m"
 
 echo -e "\e[35m\e[1m$(date +%H:%M:%S)\e[0m"
