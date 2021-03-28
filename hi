@@ -1,5 +1,5 @@
 #!/bin/bash
-# .:: Say hi,date ::.
+# .:: Say hi, show date ... ::. #
 
 DATE=$(date "+%d %B")
 TIME=$(date "+%H:%M:%S")

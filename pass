@@ -1,0 +1,7 @@
+#!/bin/bash
+# .:: GPG encrypted password manager ::. #
+
+gpg -d -o ~/.pass --no-symkey-cache ~/.pass.gpg
+nano ~/.pass
+gpg -c --cipher-algo AES256 --no-symkey-cache ~/.pass
+rm -vf ~/.pass

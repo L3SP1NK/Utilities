@@ -1,0 +1,7 @@
+#!/bin/bash
+# .:: GPG encrypted note taking ::. #
+
+gpg -d -o ~/.note --no-symkey-cache ~/.note.gpg
+nano ~/.note
+gpg -c --cipher-algo AES256 --no-symkey-cache ~/.note
+rm -f ~/.note

@@ -1,8 +1,7 @@
 #!/bin/bash
-# .:: Metasploit launcher ::.
+# .:: Metasploit launcher ::. #
 
 clear
-
 service postgresql status
 
 echo -e '\e[33mStart the postgresql service? (y/N):\e[0m'
