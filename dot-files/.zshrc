@@ -18,7 +18,7 @@ HIST_STAMPS="+%d %b %H:%M"
 plugins=(
 	zsh-completions
 	zsh-navigation-tools
-	zsh-syntax-highlighting
+#	zsh-syntax-highlighting
 	zsh-autosuggestions
 	command-not-found
 )
@@ -65,14 +65,14 @@ export LESS_TERMCAP_ue=$'\E[0m'
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern)
 ZSH_HIGHLIGHT_STYLES[default]=fg
 
-ZSH_HIGHLIGHT_STYLES[precommand]=fg=green,bold
-ZSH_HIGHLIGHT_STYLES[unknown-token]=fg=red,bold
+ZSH_HIGHLIGHT_STYLES[precommand]=fg=green
+ZSH_HIGHLIGHT_STYLES[unknown-token]=fg=red
 ZSH_HIGHLIGHT_STYLES[reserved-word]=fg=yellow,bold,underline
 ZSH_HIGHLIGHT_STYLES[comment]=fg=cyan,bold
 ZSH_HIGHLIGHT_STYLES[assign]=fg=cyan
 ZSH_HIGHLIGHT_STYLES[named-fd]=fg=magenta,bold
 ZSH_HIGHLIGHT_STYLES[numeric-fd]=fg=yellow,bold
-ZSH_HIGHLIGHT_STYLES[arg0]=fg=green,bold
+#ZSH_HIGHLIGHT_STYLES[arg0]=fg=green,bold
 ZSH_HIGHLIGHT_STYLES[suffix-alias]=fg=yellow
 ZSH_HIGHLIGHT_STYLES[global-alias]=fg=yellow
 
@@ -87,20 +87,20 @@ ZSH_HIGHLIGHT_STYLES[history-expansion]=fg=blue,bold
 ## Substitution
 ZSH_HIGHLIGHT_STYLES[command-substitution]=cyan
 ZSH_HIGHLIGHT_STYLES[command-substitution-delimiter]=fg=red,bold
-ZSH_HIGHLIGHT_STYLES[process-substitution]=fg=magenta
-ZSH_HIGHLIGHT_STYLES[process-substitution-delimiter]=fg=magenta
-ZSH_HIGHLIGHT_STYLES[redirection]=fg=magenta,bold
-ZSH_HIGHLIGHT_STYLES[commandseparator]=fg=magenta,bold
+ZSH_HIGHLIGHT_STYLES[process-substitution]=fg=blue
+ZSH_HIGHLIGHT_STYLES[process-substitution-delimiter]=fg=blue
+ZSH_HIGHLIGHT_STYLES[redirection]=fg=blue,bold
+ZSH_HIGHLIGHT_STYLES[commandseparator]=fg=blue,bold
 
 ## Hyphens
-ZSH_HIGHLIGHT_STYLES[single-hyphen-option]=fg=yellow,bold
-ZSH_HIGHLIGHT_STYLES[double-hyphen-option]=fg=yellow,bold
+ZSH_HIGHLIGHT_STYLES[single-hyphen-option]=fg=magenta
+ZSH_HIGHLIGHT_STYLES[double-hyphen-option]=fg=magenta
 
 ## Quotes
 ZSH_HIGHLIGHT_STYLES[back-quoted-argument]=fg=magenta,bold
 ZSH_HIGHLIGHT_STYLES[back-quoted-argument-delimiter]=fg=magenta,bold
-ZSH_HIGHLIGHT_STYLES[single-quoted-argument]=fg=cyan,bold
-ZSH_HIGHLIGHT_STYLES[double-quoted-argument]=fg=cyan,bold
+ZSH_HIGHLIGHT_STYLES[single-quoted-argument]=fg=yellow
+ZSH_HIGHLIGHT_STYLES[double-quoted-argument]=fg=yellow
 ZSH_HIGHLIGHT_STYLES[dollar-quoted-argument]=fg=magenta
 ZSH_HIGHLIGHT_STYLES[rc-quote]=fg=green,bold
 ZSH_HIGHLIGHT_STYLES[dollar-double-quoted-argument]=fg=magenta
