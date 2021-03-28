@@ -46,8 +46,6 @@ alias ip='ifconfig | grep -v inet6 | grep inet | ccze -A'
 ## Custom
 alias l='ls --time-style="+%d-%b-%y %H:%M:%S" -hAl'
 alias lt='ls --time-style="+%d-%b-%y %H:%M:%S" -hAltr'
-alias note='gpg -d -o ~/.note --no-symkey-cache ~/.note.gpg&&nano ~/.note&&gpg -c --cipher-algo AES256 --no-symkey-cache ~/.note&&rm -f ~/.note'
-alias pass='gpg -d -o ~/.pass --no-symkey-cache ~/.pass.gpg&&nano ~/.pass&&gpg -c --cipher-algo AES256 --no-symkey-cache ~/.pass&&rm -f ~/.pass'
 alias nspeed='ethtool eth0 | grep Speed'
 alias emoji="cat ~/.emoji | tac"
 alias c='ccze -A'
