@@ -3,7 +3,7 @@
 # .:: Mount Veracrypt disk ::. #
 
 echo -e "\e[33mDisk present on system:\e[0m"
-fdisk -l | grep Disk | ccze -A
+fdisk -l | grep sd | ccze -A
 echo -e "\e[33mContent of /mnt:\e[0m"
 ls --color=auto /mnt
 echo -e "\e[33mContinue? (y/N)\e[0m"
@@ -15,7 +15,7 @@ if [[ ${CONTINUE} == y ]]
 		read DISK_TO_MOUNT
 		echo -e "\e[33mEnter the disk password:\e[0m"
 		read -s PASSWORD
-		veracrypt --mount ${DISK_TO_MOUNT} /mnt -P ${PASSWORD}
+		veracrypt --mount ${DISK_TO_MOUNT} /mnt -p ${PASSWORD}
 	else
 		echo -e "\e[35mBye...\e[0m"
 		exit
