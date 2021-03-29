@@ -2,6 +2,7 @@
 # .:: Update the system ::. #
 
 clear
+HOSTNAME_COLOR=$(cat ~/.hostname_color)
 
 function UPDATE_APT()
 {
@@ -68,10 +69,15 @@ function UPDATE_GIT()
 
 function UPDATE_KERNEL()
 {
-	# Copy firmware to /lib when newer
-	cp -ur /opt/FIRMWARE/linux-firmware/amd* /lib/firmware
-	cp -ur /opt/FIRMWARE/unofficial-amdgpu-firmware-repo/amdgpu/* /lib/firmware/amdgpu
-	update-initramfs -du
+	if [[ ${HOSTNAME_COLOR} == red ]]
+		then
+			cp -vur /opt/FIRMWARE/linux-firmware/* /lib/firmware
+			cp -vur /opt/FIRMWARE/unofficial-amdgpu-firmware-repo/amdgpu/* /lib/firmware/amdgpu
+			update-initramfs -du
+		else
+			cp -vur /opt/FIRMWARE/linux-firmware/* /lib/firmware
+			update-initramfs -du
+	fi
 }
 
 function TRASH_LOG()
