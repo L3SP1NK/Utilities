@@ -7,7 +7,6 @@ export ARCHFLAGS="-arch x86_64"
 export UPDATE_ZSH_DAYS=1
 export LANG=en_US.UTF-8
 export EDITOR=nano
-export DISPLAY=:0.0
 
 CASE_SENSITIVE="true"
 DISABLE_UPDATE_PROMPT="true"
@@ -117,5 +116,13 @@ ZSH_HIGHLIGHT_STYLES[bracket-level-5]=fg=red,bold
 ZSH_HIGHLIGHT_STYLES[cursor-matchingbracket]=standout
 
 HOSTNAME_COLOR=$(cat /root/.hostname_color)
+
+if [[ ${SSH_CONNECTION} ]]
+	then
+		unset DISPLAY
+	else
+		export DISPLAY=:0.0
+fi
+
 PROMPT='%{$fg_bold[white]%}@%{$fg_bold[${HOSTNAME_COLOR}]%}%m%{$reset_color%}:%{$fg_bold[blue]%}%~%{$reset_color%}%(?.%{$fg_bold[green]%}.%{$fg_bold[red]%})%B#%b '
 RPROMPT='%{$fg_bold[white]%}%*%{$reset_color%}'
