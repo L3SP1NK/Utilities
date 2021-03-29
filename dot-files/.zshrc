@@ -93,14 +93,14 @@ ZSH_HIGHLIGHT_STYLES[redirection]=fg=blue,bold
 ZSH_HIGHLIGHT_STYLES[commandseparator]=fg=blue,bold
 
 ## Hyphens
-ZSH_HIGHLIGHT_STYLES[single-hyphen-option]=fg=magenta,bold
-ZSH_HIGHLIGHT_STYLES[double-hyphen-option]=fg=magenta,bold
+ZSH_HIGHLIGHT_STYLES[single-hyphen-option]=fg=yellow,bold
+ZSH_HIGHLIGHT_STYLES[double-hyphen-option]=fg=yellow,bold
 
 ## Quotes
 ZSH_HIGHLIGHT_STYLES[back-quoted-argument]=fg=magenta,bold
 ZSH_HIGHLIGHT_STYLES[back-quoted-argument-delimiter]=fg=magenta,bold
-ZSH_HIGHLIGHT_STYLES[single-quoted-argument]=fg=yellow,bold
-ZSH_HIGHLIGHT_STYLES[double-quoted-argument]=fg=yellow,bold
+ZSH_HIGHLIGHT_STYLES[single-quoted-argument]=fg=magenta,bold
+ZSH_HIGHLIGHT_STYLES[double-quoted-argument]=fg=magenta,bold
 ZSH_HIGHLIGHT_STYLES[dollar-quoted-argument]=fg=magenta
 ZSH_HIGHLIGHT_STYLES[rc-quote]=fg=green,bold
 ZSH_HIGHLIGHT_STYLES[dollar-double-quoted-argument]=fg=magenta
