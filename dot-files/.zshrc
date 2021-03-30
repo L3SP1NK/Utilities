@@ -29,7 +29,7 @@ source $ZSH/oh-my-zsh.sh
 ## Alias
 
 ## Add verbose mode
-alias rm='trash -v'
+alias rm='rm -v'
 alias trash='trash -v'
 alias cp='cp -v'
 alias mv='mv -v'
