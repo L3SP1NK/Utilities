@@ -83,10 +83,8 @@ function UPDATE_KERNEL()
 function TRASH_LOG()
 {
 	mkdir -p ~/.trash
-	mv -vf $(find / -type f -name "*.log") ~/.trash
 	mv -vf $(find / -type f -name "*.log*") ~/.trash
 
-	mv -vf $(find / -type f -name "*.old") ~/.trash
 	mv -vf $(find / -type f -name "*.old*") ~/.trash
 
 	mv -vf /var/log/journal/* ~/.trash

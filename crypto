@@ -1,0 +1,5 @@
+#!/bin/bash
+#..:Display favorites crypto prices (in USD):..
+
+echo -e "\e[33mBTC:\e[1m$(curl -s https://api.coinbase.com/v2/prices/BTC-USD/buy | cut -d\: -f5 | cut -d\" -f2)"
+echo -e "\e[36mETH:\e[1m$(curl -s https://api.coinbase.com/v2/prices/ETH-USD/buy | cut -d\: -f5 | cut -d\" -f2)"
