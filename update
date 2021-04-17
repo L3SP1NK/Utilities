@@ -2,7 +2,9 @@
 # .:: Update the system ::. #
 
 clear
+
 HOSTNAME_COLOR=$(cat ~/.hostname_color)
+ID_LIKE=$(cat /etc/os-release | grep ID_LIKE | cut -d '=' -f 2)
 
 function UPDATE_APT()
 {
@@ -90,10 +92,15 @@ function TRASH_LOG()
 	mv -vf /var/log/journal/* ~/.trash
 }
 
-echo -e "\e[35m\e[1m$(date +%H:%M:%S)\e[0m"
-echo -e "\e[33mUpdating \e[1mAPT\e[0m \e[33mpackages...\e[0m"
-UPDATE_APT | ccze -A
-echo -e "\e[32mDone!\e[0m"
+if [[ ${ID_LIKE} == "debian" ]]
+	then
+		echo -e "\e[35m\e[1m$(date +%H:%M:%S)\e[0m"
+		echo -e "\e[33mUpdating \e[1mAPT\e[0m \e[33mpackages...\e[0m"
+		UPDATE_APT | ccze -A
+		echo -e "\e[32mDone!\e[0m"
+	else
+		 echo -e "\e[35mThis script work with the \e[1mAPT\e[0m\e[35m package manager and you'r not on a \e[1mDebian \e[0m\e[35mlike system.\n\e[31mQuitting...\e[0m"
+fi
 
 echo -e "\e[35m\e[1m$(date +%H:%M:%S)\e[0m"
 echo -e "\e[33mUpdating \e[1mGIT\e[0m \e[33mrepositories...\e[0m"
