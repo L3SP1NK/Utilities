@@ -1,7 +1,7 @@
 #!/bin/bash
 #..:Display favorites crypto prices (in USD):..
 
-#echo -e "\e[33m\e[1mBTC/USD:\e[0m $(curl -s https://api.coinbase.com/v2/prices/BTC-USD/buy | cut -d\: -f5 | cut -d\" -f2)"
-#echo -e "\e[36m\e[1mETH/USD:\e[0m $(curl -s https://api.coinbase.com/v2/prices/ETH-USD/buy | cut -d\: -f5 | cut -d\" -f2)"
+clear
+
 echo -e "\e[33m\e[1mBTC:\e[0m $(curl -s https://api.coinbase.com/v2/prices/BTC-USD/buy | cut -d\: -f5 | cut -d\" -f2)\e[32m$"
 echo -e "\e[36m\e[1mETH:\e[0m $(curl -s https://api.coinbase.com/v2/prices/ETH-USD/buy | cut -d\: -f5 | cut -d\" -f2)\e[32m$"

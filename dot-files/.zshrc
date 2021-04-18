@@ -124,5 +124,5 @@ if [[ ${SSH_CONNECTION} ]]
 		export DISPLAY=:0.0
 fi
 
-PROMPT='%{$fg_bold[white]%}@%{$fg_bold[${HOSTNAME_COLOR}]%}%m%{$reset_color%}:%{$fg_bold[blue]%}%~%{$reset_color%}%(?.%{$fg_bold[green]%}.%{$fg_bold[red]%})%B#%b '
+PROMPT='%{$fg_bold[${HOSTNAME_COLOR}]%}%m%{$reset_color%}:%{$fg_bold[blue]%}%~%{$reset_color%}%(?.%{$fg_bold[green]%}.%{$fg_bold[red]%})%B#%b '
 RPROMPT='%{$fg_bold[white]%}%*%{$reset_color%}'
