@@ -1,0 +1,9 @@
+#!/bin/bash
+# .:: Open a Trading view chart ::. #
+
+if [[ ${1} ]]
+	then
+		firefox --new-window "https://www.tradingview.com/chart?symbol=BINANCE%3A${1}"
+	else
+		echo -e "\e[33mPlease enter a symbol (ex:BTCUSDT)\nDefault exchange is \e[1mBinance\e[0m\e[33m.\e[0m"
+fi
