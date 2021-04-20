@@ -2,31 +2,7 @@
 # .:: Metasploit launcher ::. #
 
 clear
-service postgresql status
 
-echo -e '\e[33mStart the postgresql service? (y/N):\e[0m'
-read -s START_SERVICE
-
-if [[ ${START_SERVICE} == "y" ]]
-	then
-		echo -e "\e[35m\e[1mBye...\e[0m"
-		service postgresql start
-		trap "" TSTP #(1)
-		/usr/bin/msfconsole
-	else
-		trap "" TSTP #(1)
-		/usr/bin/msfconsole
-fi
-
-# Metasploit need to be exited properly
-echo -e '\e[33mStop the postgresql service? (y/N):\e[0m'
-read -s STOP_SERVICE
-
-if [[ ${STOP_SERVICE} == "y" ]]
-	then
-		echo -e "\e[33mStoping service...\e[0m"
-		service postgresql stop
-
-	else
-		exit 1
-fi
+# Disable Ctrl-Z
+trap "" TSTP
+/usr/bin/msfconsole
