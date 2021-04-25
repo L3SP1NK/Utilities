@@ -8,10 +8,12 @@ if [[ ${1} == "-v1"  ]]
 	then
 		curl -sf "http://wttr.in/${CITY}" | grep -v "Follow"
 		echo -e "\e[35m\e[1m$(date +%H:%M:%S)\e[0m"
+		read
 elif [[ ${1} == "-v2" ]]
 	then
 		curl -sf "http://wttr.in/${CITY}?format=v2" | grep -v "Follow"
 		echo -e "\e[35m\e[1m$(date +%H:%M:%S)\e[0m"
+		read
 	else
 		echo -e "\e[33mSpecify a version with -v <version> (currently 1 or 2) \e[0m"
 fi
