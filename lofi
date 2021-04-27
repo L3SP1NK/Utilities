@@ -1,0 +1,13 @@
+#!/bin/bash
+# .:: Choose between different live radio hosted on youtube :..
+
+
+LIVE-RADIO_1="https://www.youtube.com/watch?v=5qap5aO4i9A" # lofi hip hop radio - beats to realax/study to
+LIVE-RADIO_2="https://www.youtube.com/watch?v=DWcJFNfaw9c" # lofi hip hop radio - beats to sleep/chill to
+LIVE-RADIO_3="https://www.youtube.com/watch?v=rc9cjjEun_k" # lofi hip hop - beats to sleep/study/relax to
+LIVE-RADIO_4="https://www.youtube.com/watch?v=-5KAN9_CzSA" # cofee radio shop // 24/7 lofi hip hop beats
+LIVE-RADIO_5="https://www.youtube.com/watch?v=PdEl1Zi37v4" # kei morito - lofi Tokyo
+LIVE-RADIO_6="https://www.youtube.com/watch?v=5yx6BWlEVcY" # Chillhop Radio - jazzy & lofi hip hop beats
+LIVE-RADIO_7="https://www.youtube.com/watch?v=7NOSDKb0HlU" # lofi hip hop radio - beats to study/relax to
+
+mpv --no-video ${LIVE-RADIO_$1}
