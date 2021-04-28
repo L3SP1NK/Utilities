@@ -1,0 +1,21 @@
+#!/bin/bash
+
+# ! NOT WORKING !
+
+# LOFI
+RADIO_1='https://www.youtube.com/watch?v=5qap5aO4i9A' # lofi hip hop radio - beats to realax/study to
+RADIO_2='https://www.youtube.com/watch?v=DWcJFNfaw9c' # lofi hip hop  - beats to sleep/chill to
+RADIO_3='https://www.youtube.com/watch?v=rc9cjjEun_k' # lofi hip hop - beats to sleep/study/relax to
+RADIO_4='https://www.youtube.com/watch?v=-5KAN9_CzSA' # cofee shop radio // 24/7 lofi hip hop beats
+RADIO_5='https://www.youtube.com/watch?v=PdEl1Zi37v4' # kei morito - lofi Tokyo
+RADIO_6='https://www.youtube.com/watch?v=5yx6BWlEVcY' # Chillhop Radio - jazzy & lofi hip hop beats
+RADIO_7='https://www.youtube.com/watch?v=7NOSDKb0HlU' # lofi hip hop  - beats to study/relax to
+# RELAX/MEDITATION
+RADIO_8='https://www.youtube.com/watch?v=SjQUF39sRnc' # Beautiful Relaxing Music, Peaceful Soothing Instrumental Music, with Guitar "Forest Calm" Tim Janis
+
+if [[ ${1} ]]
+	then
+		mpv --no-video "RADIO_${1}"
+	else
+		echo 'Please enter a radio number (1-7)'
+fi

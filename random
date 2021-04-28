@@ -1,5 +1,4 @@
 #!/bin/bash
-# .:: Display a random Ascii string ::. #
 
 if [[ ${1} ]]
 	then

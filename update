@@ -1,5 +1,4 @@
 #!/bin/bash
-# .:: Update the system ::. #
 
 clear
 HOSTNAME_COLOR=$(cat ~/.hostname_color)

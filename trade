@@ -1,5 +1,4 @@
 #!/bin/bash
-# .:: Open a Trading view chart ::. #
 
 if [[ ${1} ]]
 	then

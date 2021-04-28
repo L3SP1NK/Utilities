@@ -1,5 +1,4 @@
 #!/bin/bash
-# .:: Google Translate the words supplied ::. #
 
 if [[ ${1} == "-en" ]]
 	then

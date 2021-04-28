@@ -1,7 +1,4 @@
 #!/bin/bash
-# .:: Metasploit launcher ::. #
-
-clear
 
 # Disable Ctrl-Z
 trap "" TSTP
