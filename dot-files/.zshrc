@@ -103,8 +103,8 @@ ZSH_HIGHLIGHT_STYLES[double-quoted-argument]=fg=magenta,bold
 ZSH_HIGHLIGHT_STYLES[dollar-quoted-argument]=fg=magenta
 ZSH_HIGHLIGHT_STYLES[rc-quote]=fg=green,bold
 ZSH_HIGHLIGHT_STYLES[dollar-double-quoted-argument]=fg=magenta
-ZSH_HIGHLIGHT_STYLES[back-double-quoted-argument]=fg=magenta
-ZSH_HIGHLIGHT_STYLES[back-dollar-quoted-argument]=fg=magneta
+ZSH_HIGHLIGHT_STYLES[back-double-quoted-argument]=fg=magenta,bold
+ZSH_HIGHLIGHT_STYLES[back-dollar-quoted-argument]=fg=red,bold
 
 ## Brackets
 ZSH_HIGHLIGHT_STYLES[bracket-error]=fg=red,bold
