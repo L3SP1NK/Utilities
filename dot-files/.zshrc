@@ -46,7 +46,7 @@ alias ip='ifconfig | ccze -A'
 alias l='ls --time-style="+%d-%b-%y %H:%M:%S" -hAl'
 alias lt='ls --time-style="+%d-%b-%y %H:%M:%S" -hAltr'
 alias nspeed='ethtool eth0 | grep Speed'
-alias emoji="cat ~/.emoji | tac"
+alias emoji="cat ~/.emoji"
 alias c='ccze -A'
 
 ## Man/less color
