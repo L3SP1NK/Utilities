@@ -3,6 +3,7 @@
 function FREE_MEM()
 {
 	# Swap
+	rm -r .cache
 	sync
 	swapoff -av
 	swapon -av
