@@ -68,7 +68,7 @@ function UPDATE_GIT()
 
 function UPDATE_KERNEL()
 {
-	if [[ ${HOSTNAME_COLOR} == "red" ]]
+	if [[ ${HOSTNAME_COLOR} == "yellow" ]]
 		then
 			cp -vur /opt/FIRMWARE/linux-firmware/* /lib/firmware
 			cp -vur /opt/FIRMWARE/unofficial-amdgpu-firmware-repo/amdgpu/* /lib/firmware/amdgpu
