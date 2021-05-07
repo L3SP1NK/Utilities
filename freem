@@ -1,18 +1,25 @@
 #!/bin/bash
 
-function FREE_MEM()
+function CACHE_DIR()
 {
-	# Swap
-	rm -r .cache
+ 	# cache
+	rm -rf .cache
+	rm -rf /root/.mozilla/firefox/*/cache2
+}
+
+function SWAP_SPACE()
+{
+ 	# swap
 	sync
 	swapoff -av
 	swapon -av
 	sync
-	# Cache
 	echo 3 > /proc/sys/vm/drop_caches
 }
 
-echo -e "\e[35m\e[1m$(date +%H:%M:%S)\e[0m"
+echo -e "\e[33mPlease close all application running currently ! \e[0m"
+read
+echo -e "\e[33mRemoving the cache directory...\e[0m"
+CACHE_DIR
 echo -e "\e[33mEmptying swap space and synchronizing cached writes to persistent storage...\e[0m"
-FREE_MEM
-echo -e "\e[35m\e[1m$(date +%H:%M:%S)\e[0m"
+SWAP_SPACE
