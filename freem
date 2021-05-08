@@ -17,7 +17,7 @@ function SWAP_SPACE()
 	echo 3 > /proc/sys/vm/drop_caches
 }
 
-echo -e "\e[31mPlease close all application running currently ! \e[0m"
+echo -e "\e[31mPlease close all application currently running ! \e[0m"
 read
 echo -e "\e[33mRemoving the cache directory...\e[0m"
 CACHE_DIR
