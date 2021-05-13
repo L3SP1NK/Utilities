@@ -42,7 +42,7 @@ function UPDATE_NPM()
 WORKSPACE=/
 
 
-# Kill the "enter username prompt" when git pull
+# Kill the "enter username" prompt
 function NO_INPUT()
 {
 	if [[ -t 0 ]]
@@ -114,3 +114,4 @@ echo -e "\e[33mSearching for \e[1mlogs\e[0m \e[33mto \e[1mtrash\e[0m\e[33m...\e[
 TRASH_LOG
 echo -e "\e[32mDone!\e[0m"
 
+notify-send -u critical 'Update done!'
