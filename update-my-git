@@ -4,16 +4,14 @@ CWD=$(pwd)
 REPO_DIR=/opt/utilities
 
 cd ${REPO_DIR}
-
-ln -f * /bin
-cd dot-files
-ln -f .zshrc ~
-
-cd ${REPO_DIR}
 git pull
 git add -v * | ccze -A
 git commit
 git push -v | ccze -A
+
+ln -f * /bin
+cd dot-files
+ln -f .zshrc ~
 
 cd ${CWD}
 
