@@ -3,7 +3,8 @@
 function CACHE_DIR()
 {
  	# cache
-	rm -rf .cache
+	rm -rf /root/.cache
+	rm -rf /home/.cache
 	rm -rf /root/.mozilla/firefox/*/cache2
 }
 
