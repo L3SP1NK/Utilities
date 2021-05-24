@@ -9,9 +9,9 @@ git add -v * | ccze -A
 git commit
 git push -v | ccze -A
 
-ln -sf * /bin
+ln -f * /bin
 cd dot-files
-ln -sf .zshrc ~
+ln -f .zshrc ~
 
 cd ${CWD}
 
