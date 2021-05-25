@@ -48,8 +48,8 @@ alias lt='ls --time-style="+%d-%b-%y %H:%M:%S" -hAltr'
 alias netspeed='ethtool eth0 | grep Speed'
 alias emoji="cat ~/.emoji"
 alias c='ccze -A'
-alias ideapad='xfreerdp /u:lespink /v:ideapad +auto-reconnect /auto-reconnect-max-retries:10 -encryption +window-drag +aero +async-update /from-stdin:force /log-level:ERROR /size:1920x1050 |c'
-alias ulefone='xvncviewer -quality 0 -x11cursor 192.168.1.21:5900'
+alias ideapad='xfreerdp /u:lespink /v:ideapad +auto-reconnect /auto-reconnect-max-retries:10 -encryption +window-drag +aero +async-update /from-stdin:force /log-level:ERROR /size:1920x1050'
+alias ulefone='xvncviewer -quality 0  192.168.1.21:5900'
 
 ## Man/less color
 export LESS_TERMCAP_mb=$'\E[1;31m'
