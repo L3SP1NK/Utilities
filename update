@@ -42,13 +42,10 @@ function UPDATE_NPM()
 WORKSPACE=/
 
 
-# Kill the "enter username" prompt
-function NO_INPUT()
+function UPDATE_FLATPAK()
 {
-	if [[ -t 0 ]]
-		then
-			stty -echo -icanon time 0 min 0
-	fi
+	flatpak list
+	flatpak udpdate
 }
 
 function UPDATE_GIT()
@@ -90,8 +87,20 @@ function TRASH_LOG()
 }
 
 echo -e "\e[35m\e[1m$(date +%H:%M:%S)\e[0m"
+echo -e "\e[33m\e[1m$(apt list --installed | wc -l)\e[0m\e[33m Packages currently installed.\e[0m"
 echo -e "\e[33mUpdating \e[1mAPT\e[0m \e[33mpackages...\e[0m"
-UPDATE_APT | ccze -A
+UPDATE_APT 2>/dev/null | ccze -A
+echo -e "\e[32mDone!\e[0m"
+
+
+echo -e "\e[35m\e[1m$(date +%H:%M:%S)\e[0m"
+echo -e "\e[33mYou are using \e[1m$(flatpak --version).\e[0m"
+UPDATE_FLATPAK
+echo -e "\e[32mDone!\e[0m"
+
+echo -e "\e[35m\e[1m$(date +%H:%M:%S)\e[0m"
+echo -e "\e[33mUpdating \e[1mNPM\e[0m \e[33mpackages...\e[0m"
+#UPDATE_NPM
 echo -e "\e[32mDone!\e[0m"
 
 echo -e "\e[35m\e[1m$(date +%H:%M:%S)\e[0m"
@@ -99,10 +108,6 @@ echo -e "\e[33mUpdating \e[1mGIT\e[0m \e[33mrepositories...\e[0m"
 UPDATE_GIT
 echo -e "\e[32mDone!\e[0m"
 
-echo -e "\e[35m\e[1m$(date +%H:%M:%S)\e[0m"
-echo -e "\e[33mUpdating \e[1mNPM\e[0m \e[33mpackages...\e[0m"
-#UPDATE_NPM
-echo -e "\e[32mDone!\e[0m"
 
 echo -e "\e[35m\e[1m$(date +%H:%M:%S)\e[0m"
 echo -e "\e[33mUpdating \e[1mkernel\e[0m \e[33m...\e[0m"
