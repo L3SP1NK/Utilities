@@ -45,7 +45,7 @@ WORKSPACE=/
 function UPDATE_FLATPAK()
 {
 	flatpak list
-	flatpak udpdate
+	flatpak update
 }
 
 function UPDATE_GIT()
