@@ -50,7 +50,6 @@ alias emoji="cat ~/.emoji"
 alias c='ccze -A'
 alias ideapad='xfreerdp /u:lespink /v:ideapad /p:lespinkideapad +auto-reconnect /auto-reconnect-max-retries:10 -encryption +window-drag +aero /from-stdin:force /log-level:ERROR /f /cert-ignore'
 alias ulefone='xvncviewer -quality 0  192.168.1.21:5900'
-alias weather='xterm -fullscreen -fs 14 -fa "monospace" -display :0.0 -e /bin/weather-info -v1 -fw&xterm -fullscreen -fs 14 -fa "monospace" -display :0.0 -e /bin/weather-info -v2 -fw'
 
 ## Man/less color
 export LESS_TERMCAP_mb=$'\E[1;31m'
