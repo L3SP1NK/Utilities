@@ -1,0 +1,21 @@
+#!/bin/bash
+clear
+
+CITY=Dijon
+
+function WEATHER_INFO_1()
+{
+	curl -sf "http://wttr.in/${CITY}" | grep -v "Follow"
+	echo -e "\e[36m\e[1m$(date +%H:%M:%S)\e[0m"
+	read
+}
+
+function WEATHER_INFO_2()
+{
+	curl -sf "http://wttr.in/${CITY}?format=v2" | grep -v "Follow"
+	echo -e "\e[36m\e[1m$(date +%H:%M:%S)\e[0m"
+	read
+}
+
+WEATHER_INFO_1
+WEATHER_INFO_2
