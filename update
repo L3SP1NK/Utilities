@@ -76,16 +76,6 @@ function UPDATE_KERNEL()
 	fi
 }
 
-function TRASH_LOG()
-{
-	mkdir -p ~/.trash
-	mv -vf $(find / -type f -name "*.log*") ~/.trash
-
-	mv -vf $(find / -type f -name "*.old*") ~/.trash
-
-	mv -vf /var/log/journal/* ~/.trash
-}
-
 echo -e "\n\e[35m\e[1m $(date +%H:%M:%S)\e[0m"
 echo -e "\e[33m\e[1m $(apt list --installed | wc -l)\e[0m\e[33m Packages currently installed.\e[0m"
 echo -e "\e[33m Updating\e[1m APT\e[0m\e[33m packages...\e[0m"
@@ -129,11 +119,6 @@ fi
 echo -e "\n\e[35m\e[1m $(date +%H:%M:%S)\e[0m"
 echo -e "\e[33m Updating\e[1m kernel\e[0m\e[33m ...\e[0m"
 UPDATE_KERNEL
-echo -e "\e[32m Done!\e[0m\n"
-
-echo -e "\n\e[35m\e[1m $(date +%H:%M:%S)\e[0m"
-echo -e "\e[33m Searching for \e[1mlogs\e[0m\e[33m to \e[1mtrash\e[0m\e[33m...\e[0m"
-TRASH_LOG
 echo -e "\e[32m Done!\e[0m\n"
 
 notify-send -u critical 'Update done!'
