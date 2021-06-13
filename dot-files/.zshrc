@@ -49,7 +49,7 @@ source $ZSH/oh-my-zsh.sh
 	alias netspeed='ethtool eth0 | grep Speed'
 	alias emoji="cat ~/.emoji"
 	alias c='ccze -A'
-	alias ideapad='xfreerdp /u:lespink /v:ideapad /p:lespinkideapad +auto-reconnect /auto-reconnect-max-retries:10 -encryption +window-drag +aero /from-stdin:force /log-level:ERROR /f /cert-ignore'
+	alias ideapad='xfreerdp /u:lespink /v:ideapad /p:eloise +auto-reconnect /auto-reconnect-max-retries:10 -encryption +window-drag +aero /from-stdin:force /log-level:ERROR /f /cert-ignore'
 	alias ulefone='xvncviewer -quality 0  192.168.1.21:5900'
 	alias samsung='xvncviewer -quality 0  192.168.1.94:5900'
 
