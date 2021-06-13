@@ -6,6 +6,7 @@ REPO_DIR=/opt/utilities
 cd ${REPO_DIR}
 git pull
 git add -v * | ccze -A
+git add -v */* | ccze -A
 git commit -a
 git push -v | ccze -A
 
