@@ -24,4 +24,3 @@ echo -e "\e[33mRemoving the cache directory...\e[0m"
 CACHE_DIR
 echo -e "\e[33mEmptying swap space and synchronizing cached writes to persistent storage...\e[0m"
 SWAP_SPACE
-exit
