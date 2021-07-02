@@ -1,6 +1,6 @@
 #!/bin/bash
 
-gpg -d -o ~/.note --no-symkey-cache ~/.note.gpg
+#gpg -d -o ~/.note --no-symkey-cache ~/.note.gpg
 nano ~/.note
-gpg -c --cipher-algo AES256 --no-symkey-cache ~/.note
-rm -f ~/.note
+#gpg -c --cipher-algo AES256 --no-symkey-cache ~/.note
+#rm -f ~/.note
