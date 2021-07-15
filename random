@@ -2,7 +2,9 @@
 
 if [[ ${1} ]]
 	then
-		echo -e "$(cat /dev/random | tr -cd 'a-z0-9' | head -c ${1})\n"
+		echo $(cat /dev/random | tr -dc 'a-zA-Z0-9!?@#$%^&*"^_+=><~`:;.' | head -c ${1})
+#		echo -e "$(cat /dev/random | tr -cd 'a-z0-9' | head -c ${1})\n"
 	else
-		echo -e "$(cat /dev/random | tr -cd 'a-z0-9' | head -c 16)\n"
+		echo $(cat /dev/random | tr -dc 'a-zA-Z0-9!?@#$%^&*"^_+=><~`:;.' | head -c 16)
+#		echo -e "$(cat /dev/random | tr -cd 'a-z0-9' | head -c 16)\n"
 fi
