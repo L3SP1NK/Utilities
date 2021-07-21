@@ -1,6 +1,6 @@
 #!/bin/bash
-
 clear
+neofetch | ccze -A
 HOSTNAME_COLOR=$(cat ~/.hostname_color)
 
 function UPDATE_APT()
