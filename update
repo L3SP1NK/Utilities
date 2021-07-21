@@ -1,4 +1,5 @@
 #!/bin/bash
+
 clear
 neofetch | ccze -A
 HOSTNAME_COLOR=$(cat ~/.hostname_color)
@@ -80,7 +81,7 @@ echo -e "\n\e[35m\e[1m $(date +%H:%M:%S)\e[0m"
 echo -e "\e[33m\e[1m $(apt list --installed | wc -l)\e[0m\e[33m Packages currently installed.\e[0m"
 echo -e "\e[33m Updating\e[1m APT\e[0m\e[33m packages...\e[0m"
 UPDATE_APT 2>/dev/null | ccze -A
-echo -e "\e[32m Done !\e[0m\n"
+echo -e '\e[32m Done !\e[0m\n'
 
 
 which flatpak > /dev/null
@@ -90,7 +91,7 @@ if [[ ${?} -eq 0 ]]
 		echo -e "\e[33m\e[1m Flatpak\e[0m\e[33m is located at $(which flatpak).\e[0m"
 		echo -e "\e[33m You are using\e[1m $(flatpak --version).\e[0m"
 		UPDATE_FLATPAK
-		echo -e "\e[32m Done !\e[0m\n"
+		echo -e '\e[32m Done !\e[0m\n'
 else
 		echo -e "\e[33m\e[1m Flatpak\e[0m\e[33m isn't installed.\e[0m"
 fi
@@ -102,7 +103,7 @@ if [[ ${?} -eq 0 ]]
 		echo -e "\e[33m\e[1m NPM\e[0m\e[33m is located at $(which npm).\e[0m"
 		echo -e "\e[33m Updating\e[1mNPM\e[0m\e[33m packages...\e[0m"
 		UPDATE_NPM
-		echo -e "\e[32m Done !\e[0m\n"
+		echo -e '\e[32m Done !\e[0m\n'
 	else
 		echo -e "\e[33m\e[1m NPM\e[0m\e[33m isn't installed.\e[0m"
 fi
@@ -114,7 +115,7 @@ if [[ ${?} -eq 0 ]]
 		echo -e "\e[33m\e[1m Git\e[0m\e[33m is located at $(which flatpak).\e[0m"
 		echo -e "\e[33m Updating\e[1m GIT\e[0m\e[33m repositories...\e[0m"
 		UPDATE_GIT
-		echo -e "\e[32m Done !\e[0m\n"
+		echo -e '\e[32m Done !\e[0m\n'
 	else
 		echo -e "\e[33m\e[1m Git\e[0m\e[33m isn't installed.\e[0m"
 fi
@@ -122,6 +123,6 @@ fi
 echo -e "\n\e[35m\e[1m $(date +%H:%M:%S)\e[0m"
 echo -e "\e[33m Updating\e[1m kernel\e[0m\e[33m ...\e[0m"
 UPDATE_KERNEL
-echo -e "\e[32m Done !\e[0m\n"
+echo -e '\e[32m Done !\e[0m\n'
 
 echo -e "\e[32m Update finnished !\e[0m\n"
