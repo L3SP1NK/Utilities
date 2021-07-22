@@ -49,7 +49,6 @@ source $ZSH/oh-my-zsh.sh
 	alias emoji="cat ~/.emoji"
 	alias c='ccze -A'
 	alias note='nano .note'
-	alias day='nano .day'
 
 	# Man/less color
 	export LESS_TERMCAP_mb=$'\E[1;31m'
