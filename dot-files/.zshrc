@@ -121,9 +121,12 @@ OS=$(head -n3 /etc/os-release | grep ID | cut -d "=" -f 2)
 
 if [[ ${OS} == kali ]]
 	then
+		HOSTNAME_COLOR=cyan
+elif [[ ${OS} == debian ]]
+	then
 		HOSTNAME_COLOR=red
 	else
-		HOSTNAME_COLOR=yellow
+		HOSTNAME_COLOR=white
 fi
 
 PROMPT='%{$fg_bold[${HOSTNAME_COLOR}]%}%m%{$reset_color%}:%{$fg_bold[blue]%}%~%{$reset_color%}%(?.%{$fg_bold[green]%}.%{$fg_bold[red]%})%B#%b '
