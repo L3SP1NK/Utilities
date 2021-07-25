@@ -30,9 +30,10 @@ source $ZSH/oh-my-zsh.sh
 ## Alias
 
 	# Add verbose mode
-	alias rm='trash -v'
+	alias rm='rm -vi'
 	alias cp='cp -v'
 	alias mv='mv -v'
+	alias trash='trash -v'
 
 	# Add color
 	alias ls='ls --color=auto'
