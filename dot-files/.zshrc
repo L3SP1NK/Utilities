@@ -130,4 +130,4 @@ elif [[ ${OS} == '"Debian GNU/Linux 10 (buster)"' ]]
 fi
 
 PROMPT='%{$fg[${HOSTNAME_COLOR}]%}%m%{$reset_color%}:%{$fg_bold[blue]%}%~%{$reset_color%}%(?.%{$fg_bold[green]%}.%{$fg_bold[red]%})%B#%b '
-RPROMPT='%{$fg_bold[white]%}%*%{$reset_color%}'
+RPROMPT='%{$fg[white]%}%*%{$reset_color%}'
