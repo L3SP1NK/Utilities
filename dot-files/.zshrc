@@ -117,12 +117,12 @@ source $ZSH/oh-my-zsh.sh
 	ZSH_HIGHLIGHT_STYLES[bracket-level-5]=fg=red,bold
 	ZSH_HIGHLIGHT_STYLES[cursor-matchingbracket]=standout
 
-OS=$(head -n3 /etc/os-release | grep ID | cut -d "=" -f 2)
+OS=$(cat /etc/os-release | grep PRETTY | cut -d "=" -f 2)
 
-if [[ ${OS} == kali ]]
+if [[ ${OS} == '"Kali GNU/Linux Rolling"' ]]
 	then
 		HOSTNAME_COLOR=cyan
-elif [[ ${OS} == debian ]]
+elif [[ ${OS} == '"Debian GNU/Linux 10 (buster)"' ]]
 	then
 		HOSTNAME_COLOR=red
 	else

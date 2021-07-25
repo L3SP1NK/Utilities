@@ -2,7 +2,6 @@
 
 clear
 neofetch
-HOSTNAME_COLOR=$(cat ~/.hostname_color)
 
 function UPDATE_APT()
 {
