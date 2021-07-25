@@ -8,12 +8,12 @@ export UPDATE_ZSH_DAYS=1
 export LANG=en_US.UTF-8
 export EDITOR=nano
 
-HOSTNAME_COLOR=$(cat /root/.hostname_color)
 CASE_SENSITIVE="true"
 DISABLE_UPDATE_PROMPT="true"
 DISABLE_MAGIC_FUNCTIONS="true"
 COMPLETION_WAITING_DOTS="true"
 HIST_STAMPS="+%d %b %H:%M"
+
 
 plugins=(
 	zsh-completions
@@ -116,12 +116,13 @@ source $ZSH/oh-my-zsh.sh
 	ZSH_HIGHLIGHT_STYLES[bracket-level-5]=fg=red,bold
 	ZSH_HIGHLIGHT_STYLES[cursor-matchingbracket]=standout
 
+OS=$(head -n3 /etc/os-release | grep ID | cut -d "=" -f 2)
 
-if [[ ${SSH_CONNECTION} ]]
+if [[ ${OS} == kali ]]
 	then
-		unset DISPLAY
+		HOSTNAME_COLOR=red
 	else
-		export DISPLAY=:0.0
+		HOSTNAME_COLOR=yellow
 fi
 
 PROMPT='%{$fg_bold[${HOSTNAME_COLOR}]%}%m%{$reset_color%}:%{$fg_bold[blue]%}%~%{$reset_color%}%(?.%{$fg_bold[green]%}.%{$fg_bold[red]%})%B#%b '
