@@ -94,53 +94,59 @@ function UPDATE_KERNEL()
 	apt-get install -y firmware-linux firmware-linux-free firmware-linux-nonfree 2>/dev/null
 
 	# Check if xorg.conf is configured
-	files=$(shopt -s nullglob dotglob; echo /etc/X11/xorg.conf 2>/dev/null)
-	if [[ ${#files} ]]
+	if [ -n "$(ls -A ${FIRMWARE_PATH} 2>/dev/null)" ]
 		then
 			cat /etc/X11/xorg.conf 2>/dev/null | grep -e "amdgpu" > /dev/null
 				if [[ ${?} -eq 0 ]]
 					then
-						echo -e "\n${YELLOW}Cloning the linux firmware (+ the unofficial AMD) repositories...${RESET_COLOR}"
-						mkdir -p ${FIRMWARE_PATH}
-						cd ${FIRMWARE_PATH}
-						git clone https://github.com/Umio-Yasuno/unofficial-amdgpu-firmware-repo.git 2>/dev/null
+						echo -e "\n${YELLOW}Your X server is configured to use the amdgpu driver.${RESET_COLOR}"
+						echo -e "\n${YELLOW}Do you want to clone the firmware repository to ${FIRMWARE_PATH} ? (Y/n)${RESET_COLOR}"
+						read -s CLONE_REPO
+							if [[ ${CLONE_REPO} == n ]]
+								then
+									exit 0
+								else
+									echo -e "\n${YELLOW}Cloning the linux firmware (+ the unofficial AMD) repositories...${RESET_COLOR}"
+									mkdir -p ${FIRMWARE_PATH}
+									cd ${FIRMWARE_PATH}
+									git clone https://github.com/Umio-Yasuno/unofficial-amdgpu-firmware-repo.git 2>/dev/null
+										if [[ ${?} -eq 128 ]]
+											then
+												echo -e "\n${GREEN}These repository is already there ! ${RESET_COLOR}"
+												echo -e "\n${YELLOW}Copying firmwares files...${RESET_COLOR}"
+												cp -vur ${FIRMWARE_PATH}/unofficial-amdgpu-firmware-repo/amdgpu/* /lib/firmware/amdgpu
+												cp -vur ${FIRMWARE_PATH}/linux-firmware/* /lib/firmware
+												update-initramfs -du
+											else
+												cp -vur ${FIRMWARE_PATH}/linux-firmware/* /lib/firmware
+												cp -vur ${FIRMWARE_PATH}/unofficial-amdgpu-firmware-repo/amdgpu/* /lib/firmware/amdgpu
+												update-initramfs -du
+										fi
+							fi
+								else
+									echo -e "\n${RED}AMD driver is not loaded.${RESET_COLOR}"
+							fi
+							echo -e "\n${YELLOW}Cloning the linux firmware repository...${RESET_COLOR}"
+							mkdir -p ${FIRMWARE_PATH}
+							cd ${FIRMWARE_PATH}
+							git clone https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git 2>/dev/null
 							if [[ ${?} -eq 128 ]]
 								then
-									echo -e "\n${GREEN}These repository is already there ! ${RESET_COLOR}"
-									echo -e "\n${YELLOW}Copying firmwares files...${RESET_COLOR}"
-									cp -vur ${FIRMWARE_PATH}/unofficial-amdgpu-firmware-repo/amdgpu/* /lib/firmware/amdgpu
+									echo -e "\n${YELLOW}The repository is already there ! ${RESET_COLOR}"
+									echo -e "\n${YELLOW}Copying file...${RESET_COLOR}"
 									cp -vur ${FIRMWARE_PATH}/linux-firmware/* /lib/firmware
 									update-initramfs -du
 								else
 									cp -vur ${FIRMWARE_PATH}/linux-firmware/* /lib/firmware
-									cp -vur ${FIRMWARE_PATH}/unofficial-amdgpu-firmware-repo/amdgpu/* /lib/firmware/amdgpu
 									update-initramfs -du
 							fi
 					else
-						echo -e "\n${RED}AMD driver is not loaded.${RESET_COLOR}"
-				fi
-				echo -e "\n${YELLOW}Cloning the linux firmware repository...${RESET_COLOR}"
-				mkdir -p ${FIRMWARE_PATH}
-				cd ${FIRMWARE_PATH}
-				git clone https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git 2>/dev/null
-				if [[ ${?} -eq 128 ]]
-					then
-						echo -e "\n${YELLOW}The repository is already there ! ${RESET_COLOR}"
-						echo -e "\n${YELLOW}Copying file...${RESET_COLOR}"
-						cp -vur ${FIRMWARE_PATH}/linux-firmware/* /lib/firmware
-						update-initramfs -du
-					else
-						cp -vur ${FIRMWARE_PATH}/linux-firmware/* /lib/firmware
-						update-initramfs -du
-				fi
-		else
-			echo -e "\n${YELLOW}Xorg is not configured yet ! ${RESET_COLOR}"
-			echo -e "\n${YELLOW}Stop the X sessions and run 'X -configure'.${RESET_COLOR}"
-	fi
-
+						echo -e "\n${YELLOW}Xorg is not configured yet ! ${RESET_COLOR}"
+						echo -e "\n${YELLOW}Stop the X sessions and run 'X -configure'.${RESET_COLOR}"
+			fi
 }
 
-#clear
+clear
 
 which apt-get > /dev/null
 if [[ ${?} -eq 0 ]]

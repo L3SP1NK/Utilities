@@ -1,0 +1,20 @@
+#!/bin/bash
+# Backup system and VMs with rsync
+clear
+
+# Set path
+VMS_DIR="/root/VirtualBox-VMs"
+SYSTEM_DIR="/"
+
+# Set color
+YELLOW="\e[34m"
+RESET_COLOR="\e[0m"
+
+if [[ -n "$(ls -A ${VMS_DIR} 2>/dev/null)" ]]
+then
+	echo -e "${YELLOW}VMs is located at ${VMS_DIR}.${RESET_COLOR}"
+	echo -e "${YELLOW}System is mounted on ${SYSTEM_DIR}.${RESET_COLOR}"
+	echo -e "${YELLOW}Is this information correct ? (Y/n)${RESET_COLOR}"
+else
+
+fi
