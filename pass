@@ -1,4 +1,5 @@
 #!/bin/bash
+# Password manager
 
 gpg -d -o ~/.pass --no-symkey-cache ~/.pass.gpg
 nano ~/.pass

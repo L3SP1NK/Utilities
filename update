@@ -1,4 +1,5 @@
 #!/bin/bash
+# Update the system
 
 # Set color
 RESET_COLOR="\e[0m"

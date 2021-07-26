@@ -1,4 +1,6 @@
 #!/bin/bash
+# Basic countdown (forked)
+clear
 
 if [ "$#" -lt "2" ]
 	then

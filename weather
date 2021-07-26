@@ -1,4 +1,5 @@
 #!/bin/bash
+# Get weather information
 clear
 
 CITY=${1}

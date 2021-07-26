@@ -1,4 +1,5 @@
 #!/bin/bash
+# Update my git repository
 
 CWD=$(pwd)
 REPO_DIR=/opt/utilities

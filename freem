@@ -1,4 +1,6 @@
 #!/bin/bash
+# Free swap space and caches
+clear
 
 function CACHE_DIR()
 {
