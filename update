@@ -148,7 +148,7 @@ if [[ ${?} -eq 0 ]]
 		echo -e "\n${GREY}$(date +%H:%M:%S)${RESET_COLOR}"
 		echo -e "\n${YELLOW}${BOLD}$(apt list --installed | wc -l)${RESET_COLOR}${YELLOW} Packages currently installed.${RESET_COLOR}"
 		echo -e "\n${YELLOW}Updating${BOLD} APT${RESET_COLOR}${YELLOW} packages...${RESET_COLOR}"
-#		UPDATE_APT 2>/dev/null
+		UPDATE_APT 2>/dev/null
 		echo -e "\n${GREEN}Done ! ${RESET_COLOR}"
 	else
 		echo -e "\n${RED}The${BOLD}APT${RESET_COLOR}${RED} package manager is not installed on this system.${RESET_COLOR}"
@@ -160,7 +160,7 @@ if [[ ${?} -eq 0 ]]
 		echo -e "\n${GREY}$(date +%H:%M:%S)${RESET_COLOR}"
 		echo -e "\n${YELLOW}${BOLD}Flatpak${RESET_COLOR}${YELLOW} is located at $(which flatpak).${RESET_COLOR}"
 		echo -e "\n${YELLOW}You are using${BOLD} $(flatpak --version).${RESET_COLOR}"
-#		UPDATE_FLATPAK
+		UPDATE_FLATPAK
 		echo -e "\n${GREEN}Done ! ${RESET_COLOR}"
 	else
 		echo -e "\n${RED}${BOLD}Flatpak${RESET_COLOR}${RED} is not installed on this system.${RESET_COLOR}"
@@ -172,7 +172,7 @@ if [[ ${?} -eq 0 ]]
 		echo -e "\n${GREY}$(date +%H:%M:%S)${RESET_COLOR}"
 		echo -e "\n${YELLOW}${BOLD}NPM${RESET_COLOR}${YELLOW} is located at $(which npm).${RESET_COLOR}"
 		echo -e "\n${YELLOW}Updating${BOLD}NPM${RESET_COLOR}${YELLOW} packages...${RESET_COLOR}"
-#		UPDATE_NPM
+		UPDATE_NPM
 		echo -e "\n${GREEN}Done ! ${RESET_COLOR}"
 	else
 		echo -e "\n${RED}${BOLD}NPM${RESET_COLOR}${RED} is not installed on this system.${RESET_COLOR}"
@@ -184,7 +184,7 @@ if [[ ${?} -eq 0 ]]
 		echo -e "\n${GREY}$(date +%H:%M:%S)${RESET_COLOR}"
 		echo -e "\n${YELLOW}${BOLD}Git${RESET_COLOR}${YELLOW} is located at $(which git).${RESET_COLOR}"
 		echo -e "\n${YELLOW}Updating${BOLD} Git${RESET_COLOR}${YELLOW} repositories...${RESET_COLOR}"
-#		UPDATE_GIT
+		UPDATE_GIT
 		echo -e "\n${GREEN}Done ! ${RESET_COLOR}"
 	else
 		echo -e "\n${RED}${BOLD}Git${RESET_COLOR}${RED} is not installed on this system.${RESET_COLOR}"

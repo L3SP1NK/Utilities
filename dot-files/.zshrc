@@ -101,21 +101,21 @@ source $ZSH/oh-my-zsh.sh
 	# Substitution
 	ZSH_HIGHLIGHT_STYLES[command-substitution]=cyan
 	ZSH_HIGHLIGHT_STYLES[command-substitution-delimiter]=fg=red,bold
-	ZSH_HIGHLIGHT_STYLES[process-substitution]=fg=blue,bold
-	ZSH_HIGHLIGHT_STYLES[process-substitution-delimiter]=fg=blue
-	ZSH_HIGHLIGHT_STYLES[redirection]=fg=blue,bold
-	ZSH_HIGHLIGHT_STYLES[commandseparator]=fg=blue,bold
+	ZSH_HIGHLIGHT_STYLES[process-substitution]=fg=green
+	ZSH_HIGHLIGHT_STYLES[process-substitution-delimiter]=fg=green
+	ZSH_HIGHLIGHT_STYLES[redirection]=fg=green
+	ZSH_HIGHLIGHT_STYLES[commandseparator]=fg=green
 
 	# Hyphens
-	ZSH_HIGHLIGHT_STYLES[single-hyphen-option]=fg=yellow,bold
-	ZSH_HIGHLIGHT_STYLES[double-hyphen-option]=fg=yellow,bold
+	ZSH_HIGHLIGHT_STYLES[single-hyphen-option]=fg=magenta,bold
+	ZSH_HIGHLIGHT_STYLES[double-hyphen-option]=fg=magenta,bold
 
 	# Quotes
-	ZSH_HIGHLIGHT_STYLES[back-quoted-argument]=fg=magenta,bold
-	ZSH_HIGHLIGHT_STYLES[back-quoted-argument-delimiter]=fg=magenta,bold
-	ZSH_HIGHLIGHT_STYLES[single-quoted-argument]=fg=magenta,bold
-	ZSH_HIGHLIGHT_STYLES[double-quoted-argument]=fg=magenta,bold
-	ZSH_HIGHLIGHT_STYLES[dollar-quoted-argument]=fg=magenta
+	ZSH_HIGHLIGHT_STYLES[back-quoted-argument]=fg=yellow,bold
+	ZSH_HIGHLIGHT_STYLES[back-quoted-argument-delimiter]=fg=yellow,bold
+	ZSH_HIGHLIGHT_STYLES[single-quoted-argument]=fg=yellow,bold
+	ZSH_HIGHLIGHT_STYLES[double-quoted-argument]=fg=yellow,bold
+	ZSH_HIGHLIGHT_STYLES[dollar-quoted-argument]=fg=yellow
 	ZSH_HIGHLIGHT_STYLES[rc-quote]=fg=green,bold
 	ZSH_HIGHLIGHT_STYLES[dollar-double-quoted-argument]=fg=magenta
 	ZSH_HIGHLIGHT_STYLES[back-double-quoted-argument]=fg=magenta,bold
@@ -144,5 +144,3 @@ fi
 
 PROMPT='%{$fg_bold[${HOSTNAME_COLOR}]%}%m%{$reset_color%}:%{$fg_bold[blue]%}%~%{$reset_color%}%(?.%{$fg_bold[green]%}.%{$fg_bold[red]%})%B#%b '
 RPROMPT='%{$fg[white]%}%*%{$reset_color%}'
-
-
