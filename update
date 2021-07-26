@@ -1,6 +1,15 @@
 #!/bin/bash
 
-clear
+# Set color
+reset_color="\e[0m"
+bold="${\e[1m}"
+blue="\e[34m"
+red="\e[31m"
+green="\e[32m"
+yellow="\e[33m"
+grey="\e[37m"
+
+CWD=$(pwd)
 
 which neofetch>/dev/null
 if [[ ${?} -eq 0 ]]
@@ -12,67 +21,64 @@ fi
 
 function UPDATE_APT()
 {
-	echo -e "\n\e[33mRemoving downloaded archive files and unused packages...\e[0m"
-	apt clean -y
-	apt autoclean -y
-	apt autoremove --purge -y
+	echo -e "\n${yellow}Removing downloaded archive files and unused packages...${reset_color}"
+	apt-get clean -y
+	apt-get autoclean -y
+	apt-get --autoremove --purge -y
 
-	echo -e "\n\e[33mConfiguring/fixing possibly broken packages...\e[0m"
+	echo -e "\n${yellow}Configuring/fixing possibly broken packages...${reset_color}"
 	dpkg --configure -a
-	apt --fix-broken install
+	apt-get --fix-broken install
 
-	echo -e "\n\e[33mRetrieving new lists of packages...\e[0m"
-	apt update
-	apt upgrade -y --with-new-pkgs
+	echo -e "\n${yellow}Retrieving new lists of packages...${reset_color}"
+	apt-get update
 
-	echo -e "\n\e[33mRetrieving new lists of packages...\e[0m"
-	apt update
-	apt dist-upgrade -y --ignore-hold
+	echo -e "\n${yellow}Installing packages upgrades...${reset_color}"
+	apt-get upgrade -y --with-new-pkgs
+	apt-get dist-upgrade -y
+	apt-get full-upgrade -y
 
-	echo -e "\n\e[33mRetrieving new lists of packages...\e[0m"
-	apt update
-	apt full-upgrade -y
-
-	echo -e "\n\e[33mConfiguring possibly broken packages...\e[0m"
+	echo -e "\n${yellow}Configuring possibly broken packages...${reset_color}"
 	dpkg --configure -a
-	apt --fix-broken install
+	apt-get --fix-broken install
 
-	echo -e "\n\e[33mRemoving downloaded archive files and unused packages...\e[0m"
-	apt clean -y
-	apt autoclean -y
-	apt autoremove --purge -y
+	echo -e "\n${yellow}Removing downloaded archive files and unused packages...${reset_color}"
+	apt-get clean -y
+
+	apt-get autoclean -y
+	apt-get autoremove --purge -y
 
 }
 
 function UPDATE_NPM()
 {
-	echo -e "\n\e[33mChecking NPM installation...\e[0m"
+	echo -e "\n${yellow}Checking NPM installation...${reset_color}"
 	npm doctor
-	echo -e "\n\e[33mAuditing packages...\e[0m"
+	echo -e "\n${yellow}Auditing packages...${reset_color}"
 	npm audit
-	echo -e "\n\e[33mUpdating NPM packages...\e[0m"
+	echo -e "\n${yellow}Updating NPM packages...${reset_color}"
 	npm update
 	cat /root/.npm/_logs/*
 }
 
 function UPDATE_FLATPAK()
 {
-	echo -e "\n\e[33mFlatpack installed:\e[0m"
+	echo -e "\n${yellow}Flatpack installed:${reset_color}"
 	flatpak list
-	echo -e "\n\e[33mUpdating flatpack...\e[0m"
+	echo -e "\n${yellow}Updating flatpack...${reset_color}"
 	flatpak update
 }
 
-GIT_REPO_LOCATION=/
+GIT_REPO_LOCATION="/"
 function UPDATE_GIT()
 {
 	cd ${GIT_REPO_LOCATION}
-	for GIT_PATH in $(find ${GIT_REPO_LOCATION} -type d -name ".git")
+	# Search for GIT repos and pull them.
+	for GIT_PATH in $(find ${GIT_REPO_LOCATION} -type d -name ".git" 2>/dev/null)
 		do
 			cd ${GIT_PATH};
-			echo -e "\n\e[34m\e[1m${GIT_PATH}\e[0m"
+			echo -e "\n${blue}${bold}${GIT_PATH}${reset_color}"
 			cd ..
-			git config pull.rebase false
 			git stash
 			git pull
 			cd ${GIT_REPO_LOCATION}
@@ -81,64 +87,109 @@ function UPDATE_GIT()
 
 function UPDATE_KERNEL()
 {
-	cat /etc/X11/xorg.conf | grep -e 'amdgpu'
+	FIRMWARE_PATH="/opt/FIRMWARE"
+	echo -e "${yellow}Installing the linux firmware packages...${reset_color}"
+	apt-get install -y firmware-linux firmware-linux-free firmware-linux-nonfree
+
+	# Check if xorg.conf is configured
+	ls /etc/X11/xorg.conf>/dev/null
 	if [[ ${?} -eq 0 ]]
 		then
-				cp -vur /opt/FIRMWARE/linux-firmware/* /lib/firmware
-				cp -vur /opt/FIRMWARE/unofficial-amdgpu-firmware-repo/amdgpu/* /lib/firmware/amdgpu
-				update-initramfs -du
+			cat /etc/X11/xorg.conf | grep -e 'amdgpu'>/dev/null
+			if [[ ${?} -eq 0 ]]
+				then
+					echo -e "${yellow}Cloning the linux firmware (+ the unofficial AMD) repositories...${reset_color}"
+					mkdir -p ${FIRMWARE_PATH}
+					cd ${FIRMWARE_PATH}
+					git clone https://github.com/Umio-Yasuno/unofficial-amdgpu-firmware-repo.git 2>/dev/null
+					if [[ ${?} -eq 128 ]]
+						then
+							echo -e "${yellow}The repository is already there !${reset_color}"
+							echo -e "${yellow}Copying file...${reset_color}"
+							cp -vur ${FIRMWARE_PATH}/unofficial-amdgpu-firmware-repo/amdgpu/* /lib/firmware/amdgpu
+							cp -vur ${FIRMWARE_PATH}/linux-firmware/* /lib/firmware
+							update-initramfs -du
+						else
+							cp -vur ${FIRMWARE_PATH}/linux-firmware/* /lib/firmware
+							cp -vur ${FIRMWARE_PATH}/unofficial-amdgpu-firmware-repo/amdgpu/* /lib/firmware/amdgpu
+							update-initramfs -du
+						fi
+				else
+					echo "AMD driver is not loaded."
+			fi
+			echo -e "${yellow}Cloning the linux firmware repositories...${reset_color}"
+			mkdir -p ${FIRMWARE_PATH}
+			cd ${FIRMWARE_PATH}
+			git clone https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git 2>/dev/null
+			if [[ ${?} -eq 128 ]]
+				then
+					echo -e "${yellow}The repository is already there !${reset_color}"
+					echo -e "${yellow}Copying file...${reset_color}"
+					cp -vur ${FIRMWARE_PATH}/linux-firmware/* /lib/firmware
+					update-initramfs -du
+				else
+					cp -vur ${FIRMWARE_PATH}/linux-firmware/* /lib/firmware
+					update-initramfs -du
+			fi
 		else
-				cp -vur /opt/FIRMWARE/linux-firmware/* /lib/firmware
-				update-initramfs -du
+			echo -e "${yellow}Xorg is not configured yet !${reset_color}"
+			echo -e "${yellow}Stop the X sessions and run 'X -configure'.${reset_color}"
 	fi
+
 }
 
-echo -e "\n\e[37m$(date +%H:%M:%S)\e[0m"
-echo -e "\e[33m\e[1m$(apt list --installed | wc -l)\e[0m\e[33m Packages currently installed.\e[0m"
-echo -e "\e[33mUpdating\e[1m APT\e[0m\e[33m packages...\e[0m"
-UPDATE_APT 2>/dev/null
-echo -e '\e[32mDone !\e[0m\n'
+clear
 
+which apt-get > /dev/null
+if [[ ${?} -eq 0 ]]
+	then
+		echo -e "\n${grey}$(date +%H:%M:%S)${reset_color}"
+		echo -e "${yellow}${bold}$(apt-get list --installed | wc -l)${reset_color}${yellow} Packages currently installed.${reset_color}"
+		echo -e "${yellow}Updating${bold} APT${reset_color}${yellow} packages...${reset_color}"
+		UPDATE_APT 2>/dev/null
+		echo -e '${green}Done !${reset_color}\n'
+	else
+		echo -e "${red}The${bold}APT${reset_color}${red} package manager is not installed on this system.${reset_color}"
 
 which flatpak > /dev/null
 if [[ ${?} -eq 0 ]]
 	then
-		echo -e "\n\e[37m$(date +%H:%M:%S)\e[0m"
-		echo -e "\e[33m\e[1mFlatpak\e[0m\e[33m is located at $(which flatpak).\e[0m"
-		echo -e "\e[33mYou are using\e[1m $(flatpak --version).\e[0m"
+		echo -e "\n${grey}$(date +%H:%M:%S)${reset_color}"
+		echo -e "${yellow}${bold}Flatpak${reset_color}${yellow} is located at $(which flatpak).${reset_color}"
+		echo -e "${yellow}You are using${bold} $(flatpak --version).${reset_color}"
 		UPDATE_FLATPAK
-		echo -e '\e[32mDone !\e[0m\n'
+		echo -e '${green}Done !${reset_color}\n'
 else
-		echo -e "\e[33m\e[1mFlatpak\e[0m\e[33m isn't installed.\e[0m"
+		echo -e "${red}${bold}Flatpak${reset_color}${red} is not installed on this system.${reset_color}"
 fi
 
 which npm>/dev/null
 if [[ ${?} -eq 0 ]]
 	then
-		echo -e "\n\e[37m$(date +%H:%M:%S)\e[0m"
-		echo -e "\e[33m\e[1mNPM\e[0m\e[33m is located at $(which npm).\e[0m"
-		echo -e "\e[33mUpdating\e[1mNPM\e[0m\e[33m packages...\e[0m"
+		echo -e "\n${grey}$(date +%H:%M:%S)${reset_color}"
+		echo -e "${yellow}${bold}NPM${reset_color}${yellow} is located at $(which npm).${reset_color}"
+		echo -e "${yellow}Updating${bold}NPM${reset_color}${yellow} packages...${reset_color}"
 		UPDATE_NPM
-		echo -e '\e[32mDone !\e[0m\n'
+		echo -e '${green}Done !${reset_color}\n'
 	else
-		echo -e "\e[33m\e[1mNPM\e[0m\e[33m isn't installed.\e[0m"
+		echo -e "${red}${bold}NPM${reset_color}${red} is not installed on this system.${reset_color}"
 fi
 
 which git>/dev/null
 if [[ ${?} -eq 0 ]]
 	then
-		echo -e "\n\e[37m$(date +%H:%M:%S)\e[0m"
-		echo -e "\e[33m\e[1mGit\e[0m\e[33m is located at $(which git).\e[0m"
-		echo -e "\e[33mUpdating\e[1m GIT\e[0m\e[33m repositories...\e[0m"
+		echo -e "\n${grey}$(date +%H:%M:%S)${reset_color}"
+		echo -e "${yellow}${bold}Git${reset_color}${yellow} is located at $(which git).${reset_color}"
+		echo -e "${yellow}Updating${bold} Git${reset_color}${yellow} repositories...${reset_color}"
 		UPDATE_GIT
-		echo -e '\e[32mDone !\e[0m\n'
+		echo -e '${green}Done !${reset_color}\n'
 	else
-		echo -e "\e[33m\e[1mGit\e[0m\e[33m isn't installed.\e[0m"
+		echo -e "${red}${bold}Git${reset_color}${red} is not installed on this system.${reset_color}"
 fi
 
-echo -e "\n\e[37m$(date +%H:%M:%S)\e[0m"
-echo -e "\e[33mUpdating\e[1m kernel\e[0m\e[33m ...\e[0m"
+echo -e "\n${grey}$(date +%H:%M:%S)${reset_color}"
+echo -e "${yellow}Updating${bold} kernel${reset_color}${yellow} ...${reset_color}"
 UPDATE_KERNEL
-echo -e '\e[32mDone !\e[0m\n'
+echo -e '${green}Done !${reset_color}\n'
 
-echo -e "\e[32mUpdate finished !\e[0m\n"
+echo -e "${green}Update finished !${reset_color}\n"
