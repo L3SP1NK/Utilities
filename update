@@ -2,7 +2,7 @@
 
 # Set color
 reset_color="\e[0m"
-bold="${\e[1m}"
+bold="$\e[1m"
 blue="\e[34m"
 red="\e[31m"
 green="\e[32m"
@@ -104,7 +104,7 @@ function UPDATE_KERNEL()
 					git clone https://github.com/Umio-Yasuno/unofficial-amdgpu-firmware-repo.git 2>/dev/null
 					if [[ ${?} -eq 128 ]]
 						then
-							echo -e "${yellow}The repository is already there !${reset_color}"
+							echo -e '${yellow}The repository is already there !${reset_color}'
 							echo -e "${yellow}Copying file...${reset_color}"
 							cp -vur ${FIRMWARE_PATH}/unofficial-amdgpu-firmware-repo/amdgpu/* /lib/firmware/amdgpu
 							cp -vur ${FIRMWARE_PATH}/linux-firmware/* /lib/firmware
@@ -123,7 +123,7 @@ function UPDATE_KERNEL()
 			git clone https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git 2>/dev/null
 			if [[ ${?} -eq 128 ]]
 				then
-					echo -e "${yellow}The repository is already there !${reset_color}"
+					echo -e '${yellow}The repository is already there !${reset_color}'
 					echo -e "${yellow}Copying file...${reset_color}"
 					cp -vur ${FIRMWARE_PATH}/linux-firmware/* /lib/firmware
 					update-initramfs -du
@@ -132,13 +132,13 @@ function UPDATE_KERNEL()
 					update-initramfs -du
 			fi
 		else
-			echo -e "${yellow}Xorg is not configured yet !${reset_color}"
+			echo -e '${yellow}Xorg is not configured yet !${reset_color}'
 			echo -e "${yellow}Stop the X sessions and run 'X -configure'.${reset_color}"
 	fi
 
 }
 
-clear
+#clear
 
 which apt-get > /dev/null
 if [[ ${?} -eq 0 ]]
@@ -160,7 +160,7 @@ if [[ ${?} -eq 0 ]]
 		echo -e "${yellow}You are using${bold} $(flatpak --version).${reset_color}"
 		UPDATE_FLATPAK
 		echo -e '${green}Done !${reset_color}\n'
-else
+	else
 		echo -e "${red}${bold}Flatpak${reset_color}${red} is not installed on this system.${reset_color}"
 fi
 
@@ -191,6 +191,6 @@ fi
 echo -e "\n${grey}$(date +%H:%M:%S)${reset_color}"
 echo -e "${yellow}Updating${bold} kernel${reset_color}${yellow} ...${reset_color}"
 UPDATE_KERNEL
-echo -e '${green}Done !${reset_color}\n'
+echo -e "${green}Done !${reset_color}\n"
 
-echo -e "${green}Update finished !${reset_color}\n"
+echo -e '${green}Update finished !${reset_color}\n'
