@@ -1,6 +1,10 @@
 #!/bin/bash
 # Update my git repository
 
+# Set color
+GREEN="\e[32m"
+RESET_COLOR="\e[0m"
+
 CWD=$(pwd)
 REPO_DIR=/opt/utilities
 
@@ -12,8 +16,8 @@ git push -v | ccze -A
 
 ln -f * /bin
 cd dot-files
-ln -f .zshrc ~
+ln -f .* ~
 
 cd ${CWD}
 
-echo -e "\e[32mDone!\e[0m"
+echo -e "${GREEN}Done !${RESET_COLOR}\e[0m"

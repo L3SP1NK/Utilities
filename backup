@@ -2,19 +2,90 @@
 # Backup system and VMs with rsync
 clear
 
+# Set color
+RESET_COLOR="\e[0m"
+BOLD="\e[1m"
+YELLOW="\e[33m"
+RED="\e[31m"
+GREEN="\e[32m"
+CYAN="\e[36m"
+
+echo -e "You are on $HOSTNAME at $HOME"
+echo -e "We are the $(date '+%A, %e %B %Y')"
+echo -e "It's $(date '+%H:%M:%S')"
+
+# Requirements:
+# - Check if veracrypt-console is installed.
+
+# No VMs folder present in home -> check for system backup folder.
+# Vms folder present in home -> check for VMs folder backup.
+
+# Ask for disk (system & VMs) password and store it in a variable.
+# Mount VMs backup disk to ideapad.
+# Mount system backup disk to thinkpad.
+
+
+
+function RSYNC_BACKUP_SYSTEM()
+{
+	echo -e "\n${YELLOW}Starting the ${BOLD}system${RESET_COLOR}${YELLOW} backup...${RESET_COLOR}"
+}
+
+function RSYNC_BACKUP_VMS()
+{
+	echo -e "\n${YELLOW}Starting the ${BOLD}virtual machine${RESET_COLOR}${YELLOW} backup...${RESET_COLOR}"
+}
+
 # Set path
 VMS_DIR="/root/VirtualBox-VMs"
 SYSTEM_DIR="/"
 
-# Set color
-YELLOW="\e[34m"
-RESET_COLOR="\e[0m"
-
 if [[ -n "$(ls -A ${VMS_DIR} 2>/dev/null)" ]]
-then
-	echo -e "${YELLOW}VMs is located at ${VMS_DIR}.${RESET_COLOR}"
-	echo -e "${YELLOW}System is mounted on ${SYSTEM_DIR}.${RESET_COLOR}"
-	echo -e "${YELLOW}Is this information correct ? (Y/n)${RESET_COLOR}"
-else
+	then
+		echo -e "\n${YELLOW}VMs is located at ${BOLD}${VMS_DIR}.${RESET_COLOR}"
+		echo -e "${YELLOW}System is mounted on ${BOLD}${SYSTEM_DIR}.${RESET_COLOR}"
+		echo -e "${YELLOW}Is this information correct ? (Y/n)${RESET_COLOR}"
+		read -s CORRECT_INFO
+			if [[ ${CORRECT_INFO} == "n" ]]
+				then
+					echo -e "\n${YELLOW}Exiting...${RESET_COLOR}"
+					exit 0
+				else
+					echo -e "${YELLOW}The following directory will be excluded from backup :${RESET_COLOR}"
+					echo -e "${CYAN}$(cat $HOME/.exclude_from_backup)${RESET_COLOR}"
+					echo -e "\n${YELLOW}Are you okay with that ?${RESET_COLOR}"
+					read -s CORRECT_INFO
+						if [[ ${CORRECT_INFO} == "n" ]]
+							then
+								exit 0
+							else
+								echo -e "\n${GREEN}Well, starting backup...${RESET_COLOR}"
+									RSYNC_BACKUP_SYSTEM
+									RSYNC_BACKUP_VMS
+						fi
+			fi
+	else
+		echo -e "\n${RED}VMs directory not found on this system !${RESET_COLOR}"
+		echo -e "\n${YELLOW}System is mounted on ${BOLD}${SYSTEM_DIR}.${RESET_COLOR}"
+		echo -e "${YELLOW}Is this information correct ? (Y/n)${RESET_COLOR}"
+		read -s CORRECT_INFO
+			if [[ ${CORRECT_INFO} == "n" ]]
+				then
+					echo -e "\n${YELLOW}Exiting...${RESET_COLOR}"
+					exit 0
+				else
+					echo -e "${YELLOW}The following directory will be excluded from backup :${RESET_COLOR}"
+					echo -e "${CYAN}$(cat $HOME/.exclude_from_backup)${RESET_COLOR}"
+					echo -e "\n${YELLOW}Are you okay with that ?${RESET_COLOR}"
+					read -s CORRECT_INFO
+						if [[ ${CORRECT_INFO} == "n" ]]
+							then
+								exit 0
+							else
+								echo -e "\n${GREEN}Well, starting backup...${RESET_COLOR}"
+									RSYNC_BACKUP_SYSTEM
+									RSYNC_BACKUP_VMS
+						fi
+			fi
 
 fi
