@@ -12,6 +12,7 @@ CASE_SENSITIVE="true"
 DISABLE_UPDATE_PROMPT="true"
 DISABLE_MAGIC_FUNCTIONS="true"
 COMPLETION_WAITING_DOTS="true"
+#ZSH_THEME="random"
 
 ## History configurations
 HISTFILE=~/.zsh_history
@@ -43,10 +44,9 @@ source $ZSH/oh-my-zsh.sh
 ## Alias
 
 	# Add verbose mode
-	alias rm='rm -vi'
 	alias cp='cp -v'
 	alias mv='mv -v'
-	alias trash='trash -v'
+	alias rm='trash -v'
 
 	# Add color
 	alias ls='ls --color=auto'
@@ -144,3 +144,5 @@ fi
 
 PROMPT='%{$fg_bold[${HOSTNAME_COLOR}]%}%m%{$reset_color%}:%{$fg_bold[blue]%}%~%{$reset_color%}%(?.%{$fg_bold[green]%}.%{$fg_bold[red]%})%B#%b '
 RPROMPT='%{$fg[white]%}%*%{$reset_color%}'
+
+

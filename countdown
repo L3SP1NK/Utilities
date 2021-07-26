@@ -13,12 +13,12 @@ now=`date +%s`
 
 if [ "$1" = "-d" ]
 	then
-		until=`date -d "$2" +%s` 
-		sec_rem=`expr $until - $now` 
-		echo "-d" 
+		until=`date -d "$2" +%s`
+		sec_rem=`expr $until - $now`
+		echo "-d"
 	if [ $sec_rem -lt 1 ]
 		then
-			echo "$2 is already history !" 
+			echo "$2 is already history !"
 	fi
 fi
 
