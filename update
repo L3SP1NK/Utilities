@@ -150,6 +150,7 @@ if [[ ${?} -eq 0 ]]
 		echo -e '${green}Done !${reset_color}\n'
 	else
 		echo -e "${red}The${bold}APT${reset_color}${red} package manager is not installed on this system.${reset_color}"
+fi
 
 which flatpak > /dev/null
 if [[ ${?} -eq 0 ]]
