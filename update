@@ -144,7 +144,7 @@ which apt-get > /dev/null
 if [[ ${?} -eq 0 ]]
 	then
 		echo -e "\n${grey}$(date +%H:%M:%S)${reset_color}"
-		echo -e "${yellow}${bold}$(apt-get list --installed | wc -l)${reset_color}${yellow} Packages currently installed.${reset_color}"
+		echo -e "${yellow}${bold}$(apt list --installed | wc -l)${reset_color}${yellow} Packages currently installed.${reset_color}"
 		echo -e "${yellow}Updating${bold} APT${reset_color}${yellow} packages...${reset_color}"
 		UPDATE_APT 2>/dev/null
 		echo -e '${green}Done !${reset_color}\n'
