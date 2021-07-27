@@ -133,10 +133,10 @@ source $ZSH/oh-my-zsh.sh
 ## Check on which distro i am
 DISTRO=$(cat /etc/os-release | grep PRETTY | cut -d "=" -f 2)
 
-if [[ ${DISTRO} == "Kali GNU/Linux Rolling" ]]
+if [[ ${DISTRO} == '"Kali GNU/Linux Rolling"' ]]
 	then
 		HOSTNAME_COLOR=cyan
-elif [[ ${DISTRO} == "Debian GNU/Linux 10 (buster)" ]]
+elif [[ ${DISTRO} == '"Debian GNU/Linux 10 (buster)"' ]]
 	then
 		HOSTNAME_COLOR=magenta
 	else
