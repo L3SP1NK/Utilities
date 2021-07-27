@@ -24,7 +24,11 @@ echo -e "It's $(date '+%H:%M:%S')"
 # Mount VMs backup disk to ideapad.
 # Mount system backup disk to thinkpad.
 
+# Thinkpad:
+# clear && rsync -av --exclude-from=/root/.exclude_from_backup / /mnt/Backup-Thinkpad --delete-after
 
+# Ideapad:
+# clear && rsync -av --exclude-from=/root/.exclude_from_backup / root@thinkpad:/mnt/Backup-Ideapad --delete-after
 
 function RSYNC_BACKUP_SYSTEM()
 {
@@ -65,7 +69,7 @@ if [[ -n "$(ls -A ${VMS_DIR} 2>/dev/null)" ]]
 						fi
 			fi
 	else
-		echo -e "\n${RED}VMs directory not found on this system !${RESET_COLOR}"
+		echo -e "\n${RED}Virtual Machines directory not found on this system !${RESET_COLOR}"
 		echo -e "\n${YELLOW}System is mounted on ${BOLD}${SYSTEM_DIR}.${RESET_COLOR}"
 		echo -e "${YELLOW}Is this information correct ? (Y/n)${RESET_COLOR}"
 		read -s CORRECT_INFO
