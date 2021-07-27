@@ -1,24 +1,37 @@
 #!/bin/bash
 # Update my git repository
+clear
 
 # Set color
 GREEN="\e[32m"
+RED="\e[31m"
 RESET_COLOR="\e[0m"
 
 CWD=$(pwd)
+USER="lespink"
 REPO_DIR=/opt/utilities
 
+# Check if root
+if [ "$EUID" -ne 0 ]
+	then
+		echo -e "${RED}This script must be runned as root${RESET_COLOR}"
+		exit
+fi
+
+# Add the change to the repo
 cd ${REPO_DIR}
 git pull
-git add -v * | ccze -A
+git add -v *
 git commit -a
-git push -v | ccze -A
+git push -v
 
-ln -f * /bin
+# Make symbolic link
+ln -vf * /bin
 cd dot-files
-ln -f .* $HOME
-ln -f .* /root
+ln -vf .* /home/$USER
+ln -vf .* /root
 
 cd ${CWD}
 
-echo -e "${GREEN}Done !${RESET_COLOR}\e[0m"
+echo -e "${GREEN}Your git repo has been updated successfully !${RESET_COLOR}\e[0m"
+
