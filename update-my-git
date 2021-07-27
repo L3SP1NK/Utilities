@@ -16,7 +16,8 @@ git push -v | ccze -A
 
 ln -f * /bin
 cd dot-files
-ln -f .* ~
+ln -f .* $HOME
+ln -f .* /root
 
 cd ${CWD}
 
