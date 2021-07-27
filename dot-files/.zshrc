@@ -142,12 +142,14 @@ elif [[ ${OS} == '"Debian GNU/Linux 10 (buster)"' ]]
 		HOSTNAME_COLOR=white
 fi
 
-if [[ "$EUID" -ne 0 ]]
-	then
-		NAME_COLOR=green
-	else
-		NAME_COLOR=red
-fi
+## Add the user name to the prompt
+#if [[ "$EUID" -ne 0 ]]
+#	then
+#		NAME_COLOR=green
+#	else
+#		NAME_COLOR=red
+#fi
 
-PROMPT='%{$fg_bold[${NAME_COLOR}]%}%n%{$fg_bold[yellow]%}@%{$fg_bold[${HOSTNAME_COLOR}]%}%m%{$reset_color%}:%{$fg_bold[blue]%}%~%{$reset_color%}%(?.%{$fg_bold[green]%}.%{$fg_bold[red]%})%B#%b '
+#PROMPT='%{$fg_bold[${NAME_COLOR}]%}%n%{$fg_bold[yellow]%}@%{$fg_bold[${HOSTNAME_COLOR}]%}%m%{$reset_color%}:%{$fg_bold[blue]%}%~%{$reset_color%}%(?.%{$fg_bold[green]%}.%{$fg_bold[red]%})%B#%b '
+PROMPT='%{$fg_bold[${HOSTNAME_COLOR}]%}%m%{$reset_color%}:%{$fg_bold[blue]%}%~%{$reset_color%}%(?.%{$fg_bold[green]%}.%{$fg_bold[red]%})%B#%b '
 RPROMPT='%{$fg[white]%}%*%{$reset_color%}'
