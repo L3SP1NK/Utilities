@@ -131,12 +131,12 @@ source $ZSH/oh-my-zsh.sh
 	ZSH_HIGHLIGHT_STYLES[cursor-matchingbracket]=standout
 
 ## Check on which distro i am
-DISTRO=$(head -n3 /etc/os-release | grep ID | cut -d "=" -f 2)
+DISTRO=$(cat /etc/os-release | grep PRETTY | cut -d "=" -f 2)
 
-if [[ ${DISTRO} == kali ]]
+if [[ ${DISTRO} == "Kali GNU/Linux Rolling" ]]
 	then
 		HOSTNAME_COLOR=cyan
-elif [[ ${DISTRO} == debian ]]
+elif [[ ${DISTRO} == "Debian GNU/Linux 10 (buster)" ]]
 	then
 		HOSTNAME_COLOR=magenta
 	else
