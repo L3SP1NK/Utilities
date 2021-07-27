@@ -227,7 +227,7 @@ set historylog
 
 ## To include most of the existing syntax definitions, you can do:
 include "/usr/share/nano/*.nanorc"
-#include "/usr/share/nanorc/*.nanorc"
+include "/usr/share/nanorc/*.nanorc"
 
 
 
