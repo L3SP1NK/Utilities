@@ -46,7 +46,7 @@ source $ZSH/oh-my-zsh.sh
 	# Add verbose mode
 	alias cp='cp -v'
 	alias mv='mv -v'
-	alias rm='trash -v'
+	alias rm='rm -v'
 
 	# Add color
 	alias ls='ls --color=auto'
