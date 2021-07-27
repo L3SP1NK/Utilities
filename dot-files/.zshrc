@@ -130,26 +130,13 @@ source $ZSH/oh-my-zsh.sh
 	ZSH_HIGHLIGHT_STYLES[bracket-level-5]=fg=red,bold
 	ZSH_HIGHLIGHT_STYLES[cursor-matchingbracket]=standout
 
-OS=$(cat /etc/os-release | grep PRETTY | cut -d "=" -f 2)
-
-if [[ ${OS} == '"Kali GNU/Linux Rolling"' ]]
-	then
-		HOSTNAME_COLOR=cyan
-elif [[ ${OS} == '"Debian GNU/Linux 10 (buster)"' ]]
-	then
-		HOSTNAME_COLOR=red
+## Add the user name to the prompt
+if [[ "$EUID" -ne 0 ]]
+then
+		NAME_COLOR=green
 	else
-		HOSTNAME_COLOR=white
+		NAME_COLOR=red
 fi
 
-## Add the user name to the prompt
-#if [[ "$EUID" -ne 0 ]]
-#	then
-#		NAME_COLOR=green
-#	else
-#		NAME_COLOR=red
-#fi
-
-#PROMPT='%{$fg_bold[${NAME_COLOR}]%}%n%{$fg_bold[yellow]%}@%{$fg_bold[${HOSTNAME_COLOR}]%}%m%{$reset_color%}:%{$fg_bold[blue]%}%~%{$reset_color%}%(?.%{$fg_bold[green]%}.%{$fg_bold[red]%})%B#%b '
-PROMPT='%{$fg_bold[${HOSTNAME_COLOR}]%}%m%{$reset_color%}:%{$fg_bold[blue]%}%~%{$reset_color%}%(?.%{$fg_bold[green]%}.%{$fg_bold[red]%})%B#%b '
+PROMPT='%{$fg_bold[${NAME_COLOR}]%}%n%{$fg_bold[yellow]%}@%{$fg_bold[cyan]%}%m%{$reset_color%}:%{$fg_bold[blue]%}%~%{$reset_color%}%(?.%{$fg_bold[green]%}.%{$fg_bold[red]%})%B#%b '
 RPROMPT='%{$fg[white]%}%*%{$reset_color%}'
