@@ -130,6 +130,19 @@ source $ZSH/oh-my-zsh.sh
 	ZSH_HIGHLIGHT_STYLES[bracket-level-5]=fg=red,bold
 	ZSH_HIGHLIGHT_STYLES[cursor-matchingbracket]=standout
 
+## Check on which distro i am
+DISTRO=$(head -n3 /etc/os-release | grep ID | cut -d "=" -f 2)
+
+if [[ ${DISTRO} == kali ]]
+	then
+		HOSTNAME_COLOR=cyan
+elif [[ ${DISTRO} == debian ]]
+	then
+		HOSTNAME_COLOR=magenta
+	else
+		HOSTNAME_COLOR=white
+fi
+
 ## Add the user name to the prompt
 if [[ "$EUID" -ne 0 ]]
 then
@@ -138,5 +151,5 @@ then
 		NAME_COLOR=red
 fi
 
-PROMPT='%{$fg_bold[${NAME_COLOR}]%}%n%{$fg_bold[yellow]%}@%{$fg_bold[cyan]%}%m%{$reset_color%}:%{$fg_bold[blue]%}%~%{$reset_color%}%(?.%{$fg_bold[green]%}.%{$fg_bold[red]%})%B#%b '
+PROMPT='%{$fg_bold[${NAME_COLOR}]%}%n%{$fg_bold[yellow]%}@%{$fg_bold[${HOSTNAME_COLOR}]%}%m%{$reset_color%}:%{$fg_bold[blue]%}%~%{$reset_color%}%(?.%{$fg_bold[green]%}.%{$fg_bold[red]%})%B#%b '
 RPROMPT='%{$fg[white]%}%*%{$reset_color%}'
