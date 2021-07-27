@@ -30,6 +30,7 @@ echo -e "It's $(date '+%H:%M:%S')"
 # Ideapad:
 # clear && rsync -av --exclude-from=/root/.exclude_from_backup / root@thinkpad:/mnt/Backup-Ideapad --delete-after
 
+
 function RSYNC_BACKUP_SYSTEM()
 {
 	echo -e "\n${YELLOW}Starting the ${BOLD}system${RESET_COLOR}${YELLOW} backup...${RESET_COLOR}"
