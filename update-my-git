@@ -18,13 +18,16 @@ CWD=$(pwd)
 USER="lespink"
 REPO_DIR=/opt/utilities
 
-# Add the change to the repo
-cd ${REPO_DIR}
-git pull
-git add -v *
-git commit -a
-git push -v
-
+ls ~/.git-credentials
+if [[ ${?} -eq 0 ]]
+	then
+		# Add the change to the repo
+		cd ${REPO_DIR}
+		git pull
+		git add -v *
+		git commit -a
+		git push -v
+fi
 # Make symbolic link
 ln -vf * /bin
 cd config
