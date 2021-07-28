@@ -24,7 +24,7 @@ xterm*background: rgb:00/00/00
 
 ! white/grey
 *color7:       #585858
-*color15:      #585858
+*color15:      #eeeeee
 
 ! Application Resources
 xterm.locale: true
