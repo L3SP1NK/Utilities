@@ -32,14 +32,12 @@ HIST_STAMPS="+%d %b %H:%M"
 plugins=(
 	zsh-completions
 	zsh-navigation-tools
-	zsh-syntax-highlighting
 	zsh-autosuggestions
 	command-not-found
 )
 
 ## Base zsh script (after plugins)
 source $ZSH/oh-my-zsh.sh
-
 
 ## Alias
 
@@ -74,8 +72,6 @@ source $ZSH/oh-my-zsh.sh
 	export LESS_TERMCAP_ue=$'\E[0m'
 
 ## Syntax highligthing configuration
-#	. /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
 	ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern)
 	ZSH_HIGHLIGHT_STYLES[default]=fg
 
@@ -131,25 +127,25 @@ source $ZSH/oh-my-zsh.sh
 	ZSH_HIGHLIGHT_STYLES[cursor-matchingbracket]=standout
 
 ## Check on which distro i am
-#DISTRO=$(cat /etc/os-release | grep PRETTY | cut -d "=" -f 2)
-#
-#if [[ ${DISTRO} == '"Kali GNU/Linux Rolling"' ]]
-#	then
-#		HOSTNAME_COLOR=cyan
-#elif [[ ${DISTRO} == '"Debian GNU/Linux 10 (buster)"' ]]
-#	then
-#		HOSTNAME_COLOR=magenta
-#	else
-#		HOSTNAME_COLOR=white
-#fi
-#
-## Add the user name to the prompt
-#if [[ "$EUID" -ne 0 ]]
-#then
-#		NAME_COLOR=green
-#	else
-#		NAME_COLOR=red
-#fi
+DISTRO=$(cat /etc/os-release | grep PRETTY | cut -d "=" -f 2)
 
-#PROMPT='$fg_bold[${NAME_COLOR}]%}%n%{$fg_bold[yellow]%}@%{$fg_bold[${HOSTNAME_COLOR}]%}%m%{$reset_color%}:%{$fg_bold[blue]%}%~%{$reset_color%}%(?.%{$fg_bold[green]%}.%{$fg_bold[red]%})%B#%b '
-PROMPT='$fg_bold[green]%}%n%{$fg_bold[yellow]%}@%{$fg_bold[red]%}%m%{$reset_color%}:%{$fg_bold[blue]%}%~%{$reset_color%}%(?.%{$fg_bold[green]%}.%{$fg_bold[red]%})%B#%b '
+if [[ ${DISTRO} == '"Kali GNU/Linux Rolling"' ]]
+	then
+		HOSTNAME_COLOR=cyan
+elif [[ ${DISTRO} == '"Debian GNU/Linux 10 (buster)"' ]]
+	then
+		HOSTNAME_COLOR=magenta
+	else
+		HOSTNAME_COLOR=white
+fi
+
+# Add the user name to the prompt
+if [[ "$EUID" -ne 0 ]]
+	then
+		NAME_COLOR=green
+	else
+		NAME_COLOR=red
+fi
+
+PROMPT='%{$fg_bold[${NAME_COLOR}]%}%n%{$fg_bold[yellow]%}@%{$fg_bold[${HOSTNAME_COLOR}]%}%m%{$reset_color%}:%{$fg_bold[blue]%}%~%{$reset_color%}%(?.%{$fg_bold[green]%}.%{$fg_bold[red]%})%B#%b '
+#RPROMPT='%{$fg_bold[grey]%}%*'
