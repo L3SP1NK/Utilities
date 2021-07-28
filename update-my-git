@@ -27,7 +27,6 @@ if [[ ${?} -eq 0 ]]
 		git add -v .*
 		git add -v *
 		cd dot-files
-		git add -v *
 		git add -v .*
 		git commit -a
 		git push -v
@@ -39,8 +38,8 @@ fi
 cd ${REPO_DIR}
 ln -vf * /bin
 cd dot-files
-ln -vf .* /home/$USER
-ln -vf .* /root
+cp -vurf .* /home/lespink
+cp -vurf .* /root
 
 cd ${CWD}
 
