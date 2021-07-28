@@ -34,8 +34,8 @@ cd ${REPO_DIR}
 # Make symbolic link
 ln -vf * /bin
 cd dot-files
-ln -vf .* /home/$USER
-ln -vf .* /root
+ln -vfF .* /home/$USER
+ln -vfF .* /root
 
 cd ${CWD}
 
