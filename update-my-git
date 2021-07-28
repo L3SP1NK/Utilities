@@ -27,7 +27,7 @@ git push -v
 
 # Make symbolic link
 ln -vf * /bin
-cd dot-files
+cd config
 ln -vf .* /home/$USER
 ln -vf .* /root
 
