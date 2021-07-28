@@ -19,10 +19,11 @@ USER="lespink"
 REPO_DIR=/opt/utilities
 
 ls ~/.git-credentials 2>/dev/null
+cd ${REPO_DIR}
+
 if [[ ${?} -eq 0 ]]
 	then
 		# Add the change to the repo
-		cd ${REPO_DIR}
 		git pull
 		git add -v *
 		git commit -a
@@ -30,7 +31,7 @@ if [[ ${?} -eq 0 ]]
 	else
 		echo -e "${RED}Git credentials not found !${RESET_COLOR}"
 fi
-cd ${REPO_DIR}
+
 # Make symbolic link
 ln -vf * /bin
 cd dot-files
