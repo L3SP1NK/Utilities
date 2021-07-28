@@ -1,5 +1,5 @@
 #!/bin/bash
-# Backup system and VMs with rsync
+# Backup system and VMs with rsync.
 clear
 
 # Set color

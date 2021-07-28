@@ -1,6 +1,14 @@
 #!/bin/bash
-# Free swap space and caches
+# Free swap space and caches.
 clear
+
+# Set color
+RESET_COLOR="\e[0m"
+BOLD="\e[1m"
+BLUE="\e[34m"
+RED="\e[31m"
+GREEN="\e[32m"
+YELLOW="\e[33m"
 
 # Check if root
 if [ "$EUID" -ne 0 ]
@@ -27,9 +35,9 @@ function SWAP_SPACE()
 	echo 3 > /proc/sys/vm/drop_caches
 }
 
-echo -e "\e[31mPlease close all application currently running ! \e[0m"
+echo -e "${RED}Please close all application currently running ! ${RESET_COLOR}"
 read
-echo -e "\e[33mRemoving the cache directory...\e[0m"
+echo -e "${YELLOW}Removing the cache directory...${RESET_COLOR}"
 CACHE_DIR
-echo -e "\e[33mEmptying swap space and synchronizing cached writes to persistent storage...\e[0m"
+echo -e "${YELLOW}Emptying swap space and synchronizing cached writes to persistent storage...${RESET_COLOR}"
 SWAP_SPACE

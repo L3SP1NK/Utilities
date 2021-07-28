@@ -1,5 +1,5 @@
 #!/bin/bash
-# Update my git repository
+# Update my git repository.
 clear
 
 # Check if root
@@ -38,8 +38,8 @@ fi
 cd ${REPO_DIR}
 ln -vf * /bin
 cd dot-files
-cp -vurf .* /home/lespink
-cp -vurf .* /root
+ln -vf .* /home/$USER
+ln -vf .* /root
 
 cd ${CWD}
 

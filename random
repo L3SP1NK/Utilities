@@ -1,5 +1,5 @@
 #!/bin/bash
-# Random password generator
+# Random password generator.
 
 if [[ ${1} ]]
 	then

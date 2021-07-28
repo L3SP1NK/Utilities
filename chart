@@ -1,9 +1,20 @@
 #!/bin/bash
-# Open the selected chart in Trading View
+# Open the desired chart in Trading View.
+
+# Set color
+RESET_COLOR="\e[0m"
+RED="\e[31m"
+GREEN="\e[32m"
 
 if [[ ${1} ]]
 	then
-		firefox --new-window "https://www.tradingview.com/chart?symbol=BINANCE%3A${1}"
+		which firefox>/dev/null
+			if [[ ${?} -eq 0 ]]
+				then
+					firefox --new-window "https://www.tradingview.com/chart?symbol=BINANCE%3A${1}"
+				else
+					echo "${RED}Firefox is not installed on this system !${RESET_COLOR}"
+					exit 0
 	else
-		echo -e "\e[33mPlease enter a symbol (ex:BTCUSDT)\nDefault exchange is \e[1mBinance\e[0m\e[33m.\e[0m"
+		echo -e "${RED}Please enter a symbol (ex:BTCUSDT)\nDefault exchange is Binance.${RESET_COLOR}"
 fi
