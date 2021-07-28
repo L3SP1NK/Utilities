@@ -32,6 +32,7 @@ HIST_STAMPS="+%d %b %H:%M"
 plugins=(
 	zsh-completions
 	zsh-navigation-tools
+	zsh-syntax-highlighting
 	zsh-autosuggestions
 	command-not-found
 )
@@ -72,6 +73,7 @@ source $ZSH/oh-my-zsh.sh
 	export LESS_TERMCAP_ue=$'\E[0m'
 
 ## Syntax highligthing configuration
+
 	ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern)
 	ZSH_HIGHLIGHT_STYLES[default]=fg
 
@@ -148,4 +150,4 @@ if [[ "$EUID" -ne 0 ]]
 fi
 
 PROMPT='%{$fg_bold[${NAME_COLOR}]%}%n%{$fg_bold[yellow]%}@%{$fg_bold[${HOSTNAME_COLOR}]%}%m%{$reset_color%}:%{$fg_bold[blue]%}%~%{$reset_color%}%(?.%{$fg_bold[green]%}.%{$fg_bold[red]%})%B#%b '
-#RPROMPT='%{$fg_bold[grey]%}%*'
+RPROMPT='%{$fg_bold[grey]%}%*%{$reset_color%}'
