@@ -30,10 +30,10 @@ HIST_STAMPS="+%d %b %H:%M"
 
 
 plugins=(
-	zsh-completions
-	zsh-navigation-tools
-	zsh-syntax-highlighting
-	zsh-autosuggestions
+#	zsh-completions
+#	zsh-navigation-tools
+#	zsh-syntax-highlighting
+#	zsh-autosuggestions
 	command-not-found
 )
 
@@ -73,7 +73,7 @@ source $ZSH/oh-my-zsh.sh
 	export LESS_TERMCAP_ue=$'\E[0m'
 
 ## Syntax highligthing configuration
-
+	. /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 	ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern)
 	ZSH_HIGHLIGHT_STYLES[default]=fg
 

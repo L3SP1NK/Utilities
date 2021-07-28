@@ -14,7 +14,7 @@ if [ "$EUID" -ne 0 ]
 fi
 
 # Check for requirements
-apt install -y curl zsh zsh-common
+apt install -y curl zsh zsh-common zsh-syntax-highlighting zsh-autosuggestions
 
 USER="lespink"
 GIT_PERSO_PATH="/opt/utilities"
