@@ -18,13 +18,17 @@ CWD=$(pwd)
 USER="lespink"
 REPO_DIR=/opt/utilities
 
-cd ${REPO_DIR}
 ls ~/.git-credentials 2>/dev/null
 if [[ ${?} -eq 0 ]]
 	then
 		# Add the change to the repo
+		cd ${REPO_DIR}
 		git pull
+		git add -v .*
 		git add -v *
+		cd dot-files
+		git add -v *
+		git add -v .*
 		git commit -a
 		git push -v
 	else
@@ -32,6 +36,7 @@ if [[ ${?} -eq 0 ]]
 fi
 
 # Make symbolic link
+cd ${REPO_DIR}
 ln -vf * /bin
 cd dot-files
 ln -vf .* /home/$USER
