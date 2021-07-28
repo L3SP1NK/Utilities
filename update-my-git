@@ -32,10 +32,10 @@ if [[ ${?} -eq 0 ]]
 fi
 cd ${REPO_DIR}
 # Make symbolic link
-cp -vuf * /bin
+ln -vf * /bin
 cd dot-files
-cp -vufr .* /home/$USER
-cp -vufr .* /root
+ln -vf .* /home/$USER
+ln -vf .* /root
 
 cd ${CWD}
 
