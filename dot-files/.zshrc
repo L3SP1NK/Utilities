@@ -30,10 +30,10 @@ HIST_STAMPS="+%d %b %H:%M"
 
 
 plugins=(
-#	zsh-completions
-#	zsh-navigation-tools
+	zsh-completions
+	zsh-navigation-tools
 #	zsh-syntax-highlighting
-#	zsh-autosuggestions
+	zsh-autosuggestions
 	command-not-found
 )
 
