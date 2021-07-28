@@ -1,6 +1,13 @@
 #!/bin/bash
 # Update the system
 
+# Check if root
+if [ "$EUID" -ne 0 ]
+    then
+        echo -e "${RED}This script must be runned as root${RESET_COLOR}"
+        exit
+fi
+
 # Set color
 RESET_COLOR="\e[0m"
 BOLD="\e[1m"

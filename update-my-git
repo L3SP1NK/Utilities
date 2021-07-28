@@ -2,6 +2,13 @@
 # Update my git repository
 clear
 
+# Check if root
+if [ "$EUID" -ne 0 ]
+	then
+		echo -e "${RED}This script must be runned as root${RESET_COLOR}"
+		exit
+fi
+
 # Set color
 GREEN="\e[32m"
 RED="\e[31m"
@@ -10,13 +17,6 @@ RESET_COLOR="\e[0m"
 CWD=$(pwd)
 USER="lespink"
 REPO_DIR=/opt/utilities
-
-# Check if root
-if [ "$EUID" -ne 0 ]
-	then
-		echo -e "${RED}This script must be runned as root${RESET_COLOR}"
-		exit
-fi
 
 # Add the change to the repo
 cd ${REPO_DIR}

@@ -2,6 +2,13 @@
 # Free swap space and caches
 clear
 
+# Check if root
+if [ "$EUID" -ne 0 ]
+    then
+        echo -e "${RED}This script must be runned as root${RESET_COLOR}"
+        exit
+fi
+
 function CACHE_DIR()
 {
  	# cache
