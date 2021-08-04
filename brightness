@@ -1,8 +1,8 @@
 #!/bin/bash
 # Change the brightness of multiple monitor.
 
-OUTPUT_1=LVDS1
-OUTPUT_2=VGA1
+OUTPUT_1=LVDS-1
+OUTPUT_2=VGA-1
 
 if [[ ${1} ]]
 	then
