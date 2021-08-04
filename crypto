@@ -1,6 +1,5 @@
 #!/bin/bash
 # Get the price in USD of the choosen cryptocurrencies.
-clear
 
 BITCOIN=$(curl -s https://api.coinbase.com/v2/prices/BTC-USD/buy | cut -d\: -f5 | cut -d\" -f2)
 ETHERUM=$(curl -s https://api.coinbase.com/v2/prices/ETH-USD/buy | cut -d\: -f5 | cut -d\" -f2)
