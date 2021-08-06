@@ -7,7 +7,6 @@ OUTPUT_2=VGA-1
 if [[ ${1} ]]
 	then
 		xrandr --output ${OUTPUT_1} --brightness ${1} --output ${OUTPUT_2} --brightness ${1}
-		kill -9 $PPID
 	else
 		echo -e "\e[33mSpecify a brightness level... (from 0.0 to 1)\e[0m"
 fi
