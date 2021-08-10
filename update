@@ -179,7 +179,7 @@ if [[ ${?} -eq 0 ]]
 		echo -e "\n${RED}${BOLD}Flatpak${RESET_COLOR}${RED} is not installed on this system.${RESET_COLOR}"
 fi
 
-which npm>/dev/null
+which npm > /dev/null
 if [[ ${?} -eq 0 ]]
 	then
 		echo -e "\n${GREY}$(date +%H:%M:%S)${RESET_COLOR}"
@@ -191,7 +191,7 @@ if [[ ${?} -eq 0 ]]
 		echo -e "\n${RED}${BOLD}NPM${RESET_COLOR}${RED} is not installed on this system.${RESET_COLOR}"
 fi
 
-which git>/dev/null
+which git > /dev/null
 if [[ ${?} -eq 0 ]]
 	then
 		echo -e "\n${GREY}$(date +%H:%M:%S)${RESET_COLOR}"
