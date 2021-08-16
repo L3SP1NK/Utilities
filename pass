@@ -4,4 +4,4 @@
 gpg -d -o ~/.pass --no-symkey-cache ~/.pass.gpg
 $EDITOR ~/.pass
 gpg -c --cipher-algo AES256 --no-symkey-cache ~/.pass
-rm -vf ~/.pass
+shred -fuzv ~/.pass
