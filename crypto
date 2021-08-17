@@ -4,5 +4,5 @@
 BITCOIN=$(curl -s https://api.coinbase.com/v2/prices/BTC-USD/buy | cut -d\: -f5 | cut -d\" -f2)
 ETHERUM=$(curl -s https://api.coinbase.com/v2/prices/ETH-USD/buy | cut -d\: -f5 | cut -d\" -f2)
 
-echo -e "\e[33mBTC:\e[32m$\e[0m"${BITCOIN}
-echo -e "\e[36mETH:\e[32m$\e[0m"${ETHERUM}
+echo -e "\e[33mBTC: \e[32m$\e[0m"${BITCOIN}
+echo -e "\e[36mETH: \e[32m$\e[0m"${ETHERUM}
