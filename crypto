@@ -23,11 +23,11 @@ if [[ ${?} -eq "0" ]]
 		echo -e "\n${CYAN}$(date '+%A %d %B %Y ~ %T')${RESET_COLOR}\n"
 
 		# Coinbase (not all crypto available)
-#		echo -e "${YELLOW}BTC${RESET_COLOR}: ${GREEN}\$${RESET_COLOR}$(curl -s ${COINBASE_URL}BTC-USD/buy | cut -d\: -f5 | cut -d\" -f2)"
+#		echo -e "${YELLOW}₿TC${RESET_COLOR}: ${GREEN}\$${RESET_COLOR}$(curl -s ${COINBASE_URL}BTC-USD/buy | cut -d\: -f5 | cut -d\" -f2)"
 #		echo -e "${BLUE}ETH${RESET_COLOR}: ${GREEN}\$${RESET_COLOR}$(curl -s ${COINBASE_URL}ETH-USD/buy | cut -d\: -f5 | cut -d\" -f2)\n"
 
 		# Kraken
-		echo -e "${YELLOW}BTC${RESET_COLOR}: ${GREEN}\$${RESET_COLOR}$(curl -s "${KRAKEN_URL}BTCUSD" | jq | awk "/a/ { getline; print $1;}" | sed 's/\("\s*\|,\)//g' | sed 's/ //g'|perl -pe 's/^0+ | 0+$//xg')"
+		echo -e "${YELLOW}₿TC${RESET_COLOR}: ${GREEN}\$${RESET_COLOR}$(curl -s "${KRAKEN_URL}BTCUSD" | jq | awk "/a/ { getline; print $1;}" | sed 's/\("\s*\|,\)//g' | sed 's/ //g'|perl -pe 's/^0+ | 0+$//xg')"
 		echo -e "${BLUE}ETH${RESET_COLOR}: ${GREEN}\$${RESET_COLOR}$(curl -s "${KRAKEN_URL}ETHUSD" | jq | awk "/a/ { getline; print $1;}" | sed 's/\("\s*\|,\)//g' | sed 's/ //g'|perl -pe 's/^0+ | 0+$//xg')"
 		echo -e "${RED}XMR${RESET_COLOR}: ${GREEN}\$${RESET_COLOR}$(curl -s "${KRAKEN_URL}XMRUSD" | jq | awk "/a/ { getline; print $1;}" | sed 's/\("\s*\|,\)//g' | sed 's/ //g'|perl -pe 's/^0+ | 0+$//xg')"
 
