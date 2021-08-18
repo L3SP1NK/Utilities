@@ -8,14 +8,14 @@ BLUE="\e[34m\e[1m"
 CYAN="\e[36m\e[1m"
 RESET_COLOR="\e[0m"
 
-REQUIREMENTS="curl perl awk sed jq"
-which ${REQUIREMENTS} > /dev/null
-
 COINBASE_URL="https://api.coinbase.com/v2/prices/"
 KRAKEN_URL='https://api.kraken.com/0/public/Ticker?pair='
 BSC_URL='https://api.bscscan.com/api?module=stats&action=bnbprice&apikey='
 # Binance Smart Chain API key, get one at https://bscscan.com/apis
 BSC_API="CQ21TRV2YCQ3WV9EA4TSR5BRD12P2TDG16"
+
+REQUIREMENTS="curl perl awk sed jq"
+which ${REQUIREMENTS} > /dev/null
 
 if [[ ${?} -eq "0" ]]
 	then
@@ -23,8 +23,8 @@ if [[ ${?} -eq "0" ]]
 		echo -e "\n${CYAN}$(date '+%A %d %B %Y ~ %T')${RESET_COLOR}\n"
 
 		# Coinbase (not all crypto available)
-		echo -e "${YELLOW}₿TC${RESET_COLOR}: ${GREEN}\$${RESET_COLOR}$(curl -s ${COINBASE_URL}BTC-USD/buy | cut -d\: -f5 | cut -d\" -f2)"
-		echo -e "${BLUE}ETH${RESET_COLOR}: ${GREEN}\$${RESET_COLOR}$(curl -s ${COINBASE_URL}ETH-USD/buy | cut -d\: -f5 | cut -d\" -f2)\n"
+#		echo -e "${YELLOW}₿TC${RESET_COLOR}: ${GREEN}\$${RESET_COLOR}$(curl -s ${COINBASE_URL}BTC-USD/buy | cut -d\: -f5 | cut -d\" -f2)"
+# 		echo -e "${BLUE}ETH${RESET_COLOR}: ${GREEN}\$${RESET_COLOR}$(curl -s ${COINBASE_URL}ETH-USD/buy | cut -d\: -f5 | cut -d\" -f2)\n"
 
 		# Kraken
 		echo -e "${YELLOW}₿TC${RESET_COLOR}: ${GREEN}\$${RESET_COLOR}$(curl -s "${KRAKEN_URL}BTCUSD" | jq | awk "/a/ { getline; print $1;}" | sed 's/\("\s*\|,\)//g' | sed 's/ //g'|perl -pe 's/^0+ | 0+$//xg')"

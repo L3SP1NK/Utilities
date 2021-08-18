@@ -1,12 +1,12 @@
 #!/bin/bash
 # Metasploit framework launcher.
 
-which msfconsole>/dev/null
+which msfconsole > /dev/null
 if [[ ${?} -eq 0 ]]
 	then
 		# Disable Ctrl-Z
 		trap "" TSTP
 		/usr/bin/msfconsole
 	else
-		echo "\e[31mMetasploit is not installed on this system !\e[0m"
+		echo "\e[31mThe Metasploit framework is not installed on this system !\e[0m"
 fi

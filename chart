@@ -8,13 +8,13 @@ GREEN="\e[32m"
 
 if [[ ${1} ]]
 	then
-		which firefox>/dev/null
+		which firefox > /dev/null
 			if [[ ${?} -eq 0 ]]
 				then
 					firefox --new-window "https://www.tradingview.com/chart?symbol=BINANCE%3A${1}"
 				else
 					echo "${RED}Firefox is not installed on this system !${RESET_COLOR}"
-					exit 0
+					exit 1
 	else
 		echo -e "${RED}Please enter a symbol (ex:BTCUSDT)\nDefault exchange is Binance.${RESET_COLOR}"
 fi
