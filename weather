@@ -1,6 +1,6 @@
 #!/bin/bash
 # Get weather information.
-clear
+reset
 
 CITY=${1}
 

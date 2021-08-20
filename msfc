@@ -2,7 +2,7 @@
 # Metasploit framework launcher.
 
 which msfconsole > /dev/null
-if [[ ${?} -eq 0 ]]
+if [[ ${?} -eq "0" ]]
 	then
 		# Disable Ctrl-Z
 		trap "" TSTP

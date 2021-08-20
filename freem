@@ -1,8 +1,7 @@
 #!/bin/bash
 # Free swap space and caches.
-clear
+reset
 
-# Set color
 RESET_COLOR="\e[0m"
 BOLD="\e[1m"
 BLUE="\e[34m"
@@ -11,7 +10,7 @@ GREEN="\e[32m"
 YELLOW="\e[33m"
 
 # Check if root
-if [ "$EUID" -ne 0 ]
+if [ "$EUID" -ne "0" ]
     then
         echo -e "${RED}This script must be runned as root !${RESET_COLOR}"
         exit
