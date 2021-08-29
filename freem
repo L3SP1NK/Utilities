@@ -44,8 +44,6 @@ function SWAP_SPACE()
 	echo 3>/proc/sys/vm/drop_caches
 }
 
-SWAP_SPACE
-
 # Check if root
 if [ "$EUID" -ne "0" ]
     then
