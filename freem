@@ -24,6 +24,16 @@ function CACHE_DIR()
 		then
 			echo -e "${YELLOW}Removing the ${BOLD}firefox ${RESET_COLOR}${YELLOW}cache directory...${RESET_COLOR}"
 			rm -vrf ${USER_HOME}/.mozilla/firefox/*/cache* 2>/dev/null
+
+	elif [[ -d ${USER_HOME}/.config/Binance/Partitions/binance.app/Cache/* ]]
+		then
+			echo -e "${YELLOW}Removing the ${BOLD}firefox ${RESET_COLOR}${YELLOW}cache directory...${RESET_COLOR}"
+			rm -vrf ${USER_HOME}/.config/Binance/Partitions/binance.app/Cache/* 2>/dev/null
+
+	elif [[ -d ${USER_HOME}/.config/molotov/Cache/* ]]
+		then
+			echo -e "${YELLOW}Removing the ${BOLD}firefox ${RESET_COLOR}${YELLOW}cache directory...${RESET_COLOR}"
+			rm -vrf ${USER_HOME}/.config/molotov/Cache/* 2>/dev/null
 	fi
 }
 
