@@ -1,6 +1,11 @@
 #!/bin/bash
-# Get weather information.
+## Get weather information.
 reset
+
+## Colors.
+RESET_COLOR="\e[0m"
+BOLD="\e[1m"
+RED="\e[31m"
 
 CITY=${1}
 
@@ -18,7 +23,13 @@ function WEATHER_INFO_2()
 	read
 }
 
-WEATHER_INFO_1
-WEATHER_INFO_2
+REQUIREMENTS="curl"
 
-kill -9 $PPID
+which ${REQUIREMENTS} > /dev/null
+if [[ ${?} -eq "0" ]]
+	then
+		WEATHER_INFO_1
+		WEATHER_INFO_2
+	else
+		echo -e "${RED}To run this program, you need the following package(s) installed: ${BOLD}${REQUIREMENTS}${RESET_COLORS}"
+fi

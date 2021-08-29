@@ -1,38 +1,39 @@
 #!/bin/bash
-# Get the price in USD of the selected cryptocurrencies.
+## Get the price in USD of the selected cryptocurrencies.
 
-RED="\e[31m\e[1m"
-GREEN="\e[32m\e[1m"
-YELLOW="\e[33m\e[1m"
-BLUE="\e[34m\e[1m"
-CYAN="\e[36m\e[1m"
 RESET_COLOR="\e[0m"
+BOLD="\e[1m"
+RED="\e[31m"
+GREEN="\e[32m"
+YELLOW="\e[33m"
+BLUE="\e[34m"
+CYAN="\e[36m"
 
 COINBASE_URL="https://api.coinbase.com/v2/prices/"
 KRAKEN_URL='https://api.kraken.com/0/public/Ticker?pair='
 BSC_URL='https://api.bscscan.com/api?module=stats&action=bnbprice&apikey='
-# Binance Smart Chain API key, get one at https://bscscan.com/apis
+## Binance Smart Chain API key, get one at https://bscscan.com/apis
 BSC_API="CQ21TRV2YCQ3WV9EA4TSR5BRD12P2TDG16"
 
 REQUIREMENTS="curl perl awk sed jq"
-which ${REQUIREMENTS} > /dev/null
 
+which ${REQUIREMENTS} > /dev/null
 if [[ ${?} -eq "0" ]]
 	then
-		# Date
+		## Date
 		echo -e "\n${CYAN}$(date '+%A %d %B %Y ~ %T')${RESET_COLOR}\n"
 
-		# Coinbase (not all crypto available)
+		## Coinbase (not all crypto available)
 #		echo -e "${YELLOW}₿TC${RESET_COLOR}: ${GREEN}\$${RESET_COLOR}$(curl -s ${COINBASE_URL}BTC-USD/buy | cut -d\: -f5 | cut -d\" -f2)"
-# 		echo -e "${BLUE}ETH${RESET_COLOR}: ${GREEN}\$${RESET_COLOR}$(curl -s ${COINBASE_URL}ETH-USD/buy | cut -d\: -f5 | cut -d\" -f2)\n"
+# 		echo -e "${BLUE}${BOLD}ETH${RESET_COLOR}: ${GREEN}\$${RESET_COLOR}$(curl -s ${COINBASE_URL}ETH-USD/buy | cut -d\: -f5 | cut -d\" -f2)\n"
 
-		# Kraken
+		## Kraken
 		echo -e "${YELLOW}₿TC${RESET_COLOR}: ${GREEN}\$${RESET_COLOR}$(curl -s "${KRAKEN_URL}BTCUSD" | jq | awk "/a/ { getline; print $1;}" | sed 's/\("\s*\|,\)//g' | sed 's/ //g'|perl -pe 's/^0+ | 0+$//xg')"
-		echo -e "${BLUE}ETH${RESET_COLOR}: ${GREEN}\$${RESET_COLOR}$(curl -s "${KRAKEN_URL}ETHUSD" | jq | awk "/a/ { getline; print $1;}" | sed 's/\("\s*\|,\)//g' | sed 's/ //g'|perl -pe 's/^0+ | 0+$//xg')"
-		echo -e "${RED}XMR${RESET_COLOR}: ${GREEN}\$${RESET_COLOR}$(curl -s "${KRAKEN_URL}XMRUSD" | jq | awk "/a/ { getline; print $1;}" | sed 's/\("\s*\|,\)//g' | sed 's/ //g'|perl -pe 's/^0+ | 0+$//xg')"
+		echo -e "${BLUE}${BOLD}ETH${RESET_COLOR}: ${GREEN}\$${RESET_COLOR}$(curl -s "${KRAKEN_URL}ETHUSD" | jq | awk "/a/ { getline; print $1;}" | sed 's/\("\s*\|,\)//g' | sed 's/ //g'|perl -pe 's/^0+ | 0+$//xg')"
+		echo -e "${RED}${BOLD}XMR${RESET_COLOR}: ${GREEN}\$${RESET_COLOR}$(curl -s "${KRAKEN_URL}XMRUSD" | jq | awk "/a/ { getline; print $1;}" | sed 's/\("\s*\|,\)//g' | sed 's/ //g'|perl -pe 's/^0+ | 0+$//xg')"
 
-		# Binance Smart Chain
-		echo -e "${YELLOW}BNB${RESET_COLOR}: ${GREEN}\$${RESET_COLOR}$(curl -s "${BSC_URL}${BSC_API}" | cut -d "," -f 5 | cut -d : -f 2 | sed 's/"//g')\n"
+		## Binance Smart Chain
+		echo -e "${YELLOW}${BOLD}BNB${RESET_COLOR}: ${GREEN}\$${RESET_COLOR}$(curl -s "${BSC_URL}${BSC_API}" | cut -d "," -f 5 | cut -d : -f 2 | sed 's/"//g')\n"
 	else
-		echo -e "${RED}You need ${REQUIREMENTS} installed.${RESET_COLOR}\n"
+		echo -e "${RED}To run this program, you need the following packages installed: ${BOLD}${REQUIREMENTS}${RESET_COLORS}"
 fi

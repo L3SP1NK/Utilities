@@ -1,6 +1,5 @@
 #!/bin/bash
 # Free swap space and caches.
-reset
 
 RESET_COLOR="\e[0m"
 BOLD="\e[1m"
@@ -9,18 +8,23 @@ RED="\e[31m"
 GREEN="\e[32m"
 YELLOW="\e[33m"
 
-# Check if root
-if [ "$EUID" -ne "0" ]
-    then
-        echo -e "${RED}This script must be runned as root !${RESET_COLOR}"
-        exit
-fi
+USER_HOME="/home/lespink"
 
 function CACHE_DIR()
 {
-	rm -rf /root/.cache
-	rm -rf /$HOME/.cache
-	rm -rf /$HOME/.mozilla/firefox/*/cache2
+	if [[ -d /root/.cache ]]
+		then
+			echo -e "${YELLOW}Removing the ${BOLD}root ${RESET_COLOR}${YELLOW}cache directory...${RESET_COLOR}"
+			rm -vrf /root/.cache 2>/dev/null
+	elif [[ -d ${USER_HOME}/.cache ]]
+		then
+			echo -e "${YELLOW}Removing the ${BOLD}user ${RESET_COLOR}${YELLOW}cache directory...${RESET_COLOR}"
+			rm -vrf ${USER_HOME}/.cache 2>/dev/null
+	elif [[ -d ${USER_HOME}/.mozilla/firefox/*/cache* ]]
+		then
+			echo -e "${YELLOW}Removing the ${BOLD}firefox ${RESET_COLOR}${YELLOW}cache directory...${RESET_COLOR}"
+			rm -vrf ${USER_HOME}/.mozilla/firefox/*/cache* 2>/dev/null
+	fi
 }
 
 function SWAP_SPACE()
@@ -32,9 +36,22 @@ function SWAP_SPACE()
 	echo 3>/proc/sys/vm/drop_caches
 }
 
-echo -e "${RED}Please close all application currently running ! ${RESET_COLOR}"
-read
-echo -e "${YELLOW}Removing the cache directory...${RESET_COLOR}"
-CACHE_DIR
-echo -e "${YELLOW}Emptying swap space and synchronizing cached writes to persistent storage...${RESET_COLOR}"
 SWAP_SPACE
+
+# Check if root
+if [ "$EUID" -ne "0" ]
+    then
+        echo -e "${RED}This script must be runned as root !${RESET_COLOR}"
+        exit 1
+	else
+		echo -e "${RED}Please close all application currently running ! ${RESET_COLOR}"
+		read
+		CACHE_DIR
+			if [[ $(swapon --show) == "" ]]
+				then
+					echo -e "${YELLOW}Swap device not found on this system.${RESET_COLOR}"
+				else
+					echo -e "${YELLOW}Emptying ${BOLD}swap ${RESET_COLOR}${YELLOW}space and synchronizing cached writes to persistent storage...${RESET_COLOR}"
+					SWAP_SPACE
+			fi
+fi

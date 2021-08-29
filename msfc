@@ -1,12 +1,18 @@
 #!/bin/bash
-# Metasploit framework launcher.
+## Metasploit framework launcher.
 
-which msfconsole > /dev/null
+REQUIREMENTS="msfconsole"
+
+## Color
+RESET_COLOR="\e[0m"
+RED="\e[31m"
+
+which ${REQUIREMENTS} > /dev/null
 if [[ ${?} -eq "0" ]]
 	then
-		# Disable Ctrl-Z
+		## Disable Ctrl-Z
 		trap "" TSTP
 		/usr/bin/msfconsole
 	else
-		echo "\e[31mThe Metasploit framework is not installed on this system !\e[0m"
+		echo "${RED}The Metasploit framework is not installed on this system !${RESET_COLOR}"
 fi
