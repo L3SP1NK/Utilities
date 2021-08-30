@@ -1,6 +1,7 @@
 #!/bin/bash
 # Change the brightness of multiple monitor.
 
+## Display:
 OUTPUT_1="eDP"
 OUTPUT_2="HDMI-A-0"
 

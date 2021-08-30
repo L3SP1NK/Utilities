@@ -1,5 +1,5 @@
 #!/bin/bash
-## Simple password manager.
+## Simple note taking.
 
 ## Colors.
 RESET_COLOR="\e[0m"

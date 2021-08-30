@@ -1,5 +1,6 @@
 #!/bin/bash
-# Basic countdown (forked).
+## Basic countdown (forked).
+
 reset
 
 if [ "$#" -lt "2" ]

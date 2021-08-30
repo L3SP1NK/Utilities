@@ -1,5 +1,7 @@
 #!/bin/bash
 ## Get weather information.
+## Data from http://wttr.in
+
 reset
 
 ## Colors.

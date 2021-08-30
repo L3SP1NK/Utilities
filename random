@@ -1,5 +1,7 @@
 #!/bin/bash
 ## Random password generator.
+## Copy random passwords to the clipboard.
+## See the "pass" script to store them securely.
 
 RESET_COLOR="\e[0m"
 BOLD="\e[1m"
