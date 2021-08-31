@@ -58,6 +58,10 @@ function SWAP_SPACE()
 	sync
 	swapoff -av
 	swapon -av
+}
+
+function CACHED_WRITES()
+{
 	sync
 	echo 3>/proc/sys/vm/drop_caches
 }
@@ -70,12 +74,14 @@ if [ "$EUID" -ne "0" ]
 	else
 		echo -e "${RED}Please close all application currently running ! ${RESET_COLOR}"
 		read
+		echo -e "${YELLOW}Synchronizing cached writes to persistent storage...${RESET_COLOR}"
 		CACHE_DIR
+		CACHED_WRITES
 			if [[ $(swapon --show) == "" ]]
 				then
 					echo -e "${YELLOW}Swap device not found on this system.${RESET_COLOR}"
 				else
-					echo -e "${YELLOW}Emptying ${BOLD}swap ${RESET_COLOR}${YELLOW}space and synchronizing cached writes to persistent storage...${RESET_COLOR}"
+					echo -e "${YELLOW}Emptying ${BOLD}swap ${RESET_COLOR}${YELLOW}space...${RESET_COLOR}"
 					SWAP_SPACE
 			fi
 fi
