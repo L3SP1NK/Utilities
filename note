@@ -12,7 +12,7 @@ NOTE_FILE="${HOME}/.note"
 ## Check if root.
 if [ "$EUID" -eq "0" ]
 	then
-		echo -e "${RED}This must not be runned as root !${RESET_COLOR}"
+		echo -e "${RED}This script must not be runned as root !${RESET_COLOR}"
 		exit 1
 	else
 		if [[ -f ${NOTE_FILE} ]]
