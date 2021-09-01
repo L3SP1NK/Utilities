@@ -20,49 +20,49 @@ function CACHE_DIR()
 		then
 			## Root
 			echo -e "${YELLOW}Removing the ${BOLD}root ${RESET_COLOR}${YELLOW}cache directory...${RESET_COLOR}"
-			rm -vfr /root/.cache 2>/dev/null
+			rm -fr /root/.cache 2>/dev/null
 	fi
 
 	if [[ -d ${USER_HOME}/.cache ]]
 		then
 			## User
 			echo -e "${YELLOW}Removing the ${BOLD}user ${RESET_COLOR}${YELLOW}cache directory...${RESET_COLOR}"
-			rm -vfr ${USER_HOME}/.cache 2>/dev/null
+			rm -fr ${USER_HOME}/.cache 2>/dev/null
 	fi
 
 	if [[ -d ${USER_HOME}/.mozilla/firefox/*/cache ]]
 		then
 			## Mozilla
 			echo -e "${YELLOW}Removing the ${BOLD}firefox ${RESET_COLOR}${YELLOW}cache directory...${RESET_COLOR}"
-			rm -vfr ${USER_HOME}/.mozilla/firefox/*/cache* 2>/dev/null
+			rm -fr ${USER_HOME}/.mozilla/firefox/*/cache* 2>/dev/null
 	fi
 
 	if [[ -d ${USER_HOME}/.config/Binance/Partitions/binance.app/Cache/ ]]
 		then
 			## Binance
 			echo -e "${YELLOW}Removing the ${BOLD}Binance ${RESET_COLOR}${YELLOW}cache directory...${RESET_COLOR}"
-			rm -vfr ${USER_HOME}/.config/Binance/Partitions/binance.app/Cache/* 2>/dev/null
+			rm -fr ${USER_HOME}/.config/Binance/Partitions/binance.app/Cache/* 2>/dev/null
 	fi
 
 	if [[ -d ${USER_HOME}/.config/molotov/Cache/ ]]
 		then
 			## Molotov
 			echo -e "${YELLOW}Removing the ${BOLD}Molotov ${RESET_COLOR}${YELLOW}cache directory...${RESET_COLOR}"
-			rm -vfr ${USER_HOME}/.config/molotov/Cache/* 2>/dev/null
+			rm -fr ${USER_HOME}/.config/molotov/Cache/* 2>/dev/null
 	fi
 
 	if [[ -d ${USER_HOME}/.config/molotov/Code\ Cache/ ]]
 		then
 			## Molotov
 			echo -e "${YELLOW}Removing the ${BOLD}Molotov Code ${RESET_COLOR}${YELLOW}cache directory...${RESET_COLOR}"
-			rm -vfr ${USER_HOME}/.config/molotov/Code\ Cache/* 2>/dev/null
+			rm -fr ${USER_HOME}/.config/molotov/Code\ Cache/* 2>/dev/null
 	fi
 
 	if [[ -d ${USER_HOME}/.local/share/TelegramDesktop/tdata/user_data*/* ]]
 		then
 			## Telegram
-			echo -e "${YELLOW}Removing the ${BOLD}Molotov Code ${RESET_COLOR}${YELLOW}cache directory...${RESET_COLOR}"
-			rm -vfr ${USER_HOME}/.local/share/TelegramDesktop/tdata/user_data*/* 2>/dev/null
+			echo -e "${YELLOW}Removing the ${BOLD}Telegram ${RESET_COLOR}${YELLOW}cache directory...${RESET_COLOR}"
+			rm -fr ${USER_HOME}/.local/share/TelegramDesktop/tdata/user_data*/* 2>/dev/null
 	fi
 }
 
