@@ -7,10 +7,7 @@ OUTPUT_2="HDMI-A-0"
 
 if [[ ${1} ]]
 	then
-		killall redshift 2>/dev/null
-		killall redshift 2>/dev/null
 		xrandr --output ${OUTPUT_1} --brightness ${1} --output ${OUTPUT_2} --brightness ${1}
-		redshift-gtk&
 	else
 		echo -e "\e[33mSpecify a brightness level... (from 0.0 to 1)\e[0m"
 fi
