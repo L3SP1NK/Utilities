@@ -73,7 +73,7 @@ function CACHED_WRITES()
 	echo 3>/proc/sys/vm/drop_caches
 }
 
-# Check if root
+## Check if root
 if [ "$EUID" -ne "0" ]
     then
         echo -e "${RED}This script must be runned as root !${RESET_COLOR}"
