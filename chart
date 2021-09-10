@@ -24,7 +24,7 @@ if [ "$EUID" -eq "0" ]
 						echo -e "${RED}Please enter a symbol (ex:BTCUSDT)\nDefault exchange is Binance.${RESET_COLOR}"
 				fi
 			else
-				echo -e "${RED}To run this program, you need the following package(s) installed: ${BOLD}${REQUIREMENTS}${RESET_COLORS}"
+				echo -e "${RED}To run this program, you need the following package(s) installed: ${BOLD}${REQUIREMENTS}${RESET_COLOR}"
 				exit 1
 		fi
 fi

@@ -1,13 +1,16 @@
 #!/bin/bash
-# Change the brightness of multiple monitor.
+## Change the brightness of multiple monitor.
+
+RESET_COLOR="\e[0m"
+RED="\e[31m"
 
 ## Display:
-OUTPUT_1="eDP"
-OUTPUT_2="HDMI-A-0"
+OUTPUT_1="$(xrandr | grep 'connected' | cut -d ' ' -f 1 | head -n 2 | sed -n '1p')"
+OUTPUT_2="$(xrandr | grep 'connected' | cut -d ' ' -f 1 | head -n 2 | sed -n '2p')"
 
-if [[ ${1} ]]
+if [[ ${1} && ${1} != "0" && ${1} != "0." && ${1} != "0.0" ]]
 	then
 		xrandr --output ${OUTPUT_1} --brightness ${1} --output ${OUTPUT_2} --brightness ${1}
 	else
-		echo -e "\e[33mSpecify a brightness level... (from 0.0 to 1)\e[0m"
+		echo -e "${RED}Specify a brightness level... (from 0.1 to 1)${RESET_COLOR}"
 fi
