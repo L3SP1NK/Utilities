@@ -1,4 +1,5 @@
 #!/bin/bash
+
 ## Change the brightness of multiple monitor.
 
 RESET_COLOR="\e[0m"

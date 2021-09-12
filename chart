@@ -1,4 +1,5 @@
 #!/bin/bash
+
 ## Open the desired chart in Trading View.
 
 RESET_COLOR="\e[0m"

@@ -1,4 +1,5 @@
 #!/bin/bash
+
 ## Get the prices of the most popular cryptocurrencies.
 ## Data from:
 ## - Binance

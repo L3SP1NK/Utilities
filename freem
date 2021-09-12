@@ -1,4 +1,5 @@
 #!/bin/bash
+
 ## vfree swap space and caches.
 ## Empty the cache of the system and the following applications:
 ## - Molotov

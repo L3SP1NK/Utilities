@@ -1,4 +1,5 @@
 #!/bin/bash
+
 ## Simple password manager.
 ## Store your passwords inside a local text file, gpg encrypted.
 ## NEVER TRUST ONLINE PASSWORDS MANAGER !

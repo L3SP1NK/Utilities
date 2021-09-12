@@ -1,4 +1,5 @@
 #!/bin/bash
+
 ## Get weather information for a given city.
 ## Data from http://wttr.in
 
