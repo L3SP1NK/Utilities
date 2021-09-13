@@ -1,5 +1,4 @@
 #!/bin/bash
-
 ## Metasploit framework launcher.
 ## A launcher is needed since you can't background a session.
 ## (Ctrl+Z background the shell process instead)

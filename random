@@ -1,5 +1,4 @@
 #!/bin/bash
-
 ## Random password generator.
 ## Copy random passwords to the clipboard.
 ## See the "pass" script to store them securely.
