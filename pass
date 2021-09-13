@@ -5,6 +5,7 @@
 
 ## Colors.
 RESET_COLOR="\e[0m"
+YELLOW="\e[33m"
 BOLD="\e[1m"
 GREEN="\e[32m"
 RED="\e[31m"
@@ -33,7 +34,14 @@ if [ "$EUID" -eq "0" ]
 							echo -e "${RED}To run this program, you need the following packages installed: ${BOLD}${REQUIREMENTS}${RESET_COLORS}"
 					fi
 			else
-				echo -e "${RED}To run this program, you need the following package(s) installed: ${BOLD}${REQUIREMENTS}${RESET_COLORS}"
-				exit 1
+				echo -e "${YELLOW}Note file note not found, do you want to create one ? (Y/n)${RESET_COLORS}"
+				read CREATE_UNCRYPTED_PASS_FILE
+					if [[ ${CREATE_UNCRYPTED_PASS_FILE} == "n" ]]
+						then
+							exit
+						else
+							touch ${UNCRYPTED_PASS_FILE}
+							${EDITOR} ${UNCRYPTED_PASS_FILE}
+					fi
 		fi
 fi
