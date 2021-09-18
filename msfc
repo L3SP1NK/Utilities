@@ -3,7 +3,6 @@
 ## A launcher is needed since you can't background a session.
 ## (Ctrl+Z background the shell process instead)
 
-## Color
 RESET_COLOR="\e[0m"
 RED="\e[31m"
 

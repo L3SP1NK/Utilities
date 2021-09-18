@@ -1,7 +1,6 @@
 #!/bin/bash
 ## Simple note taking.
 
-## Colors.
 RESET_COLOR="\e[0m"
 BOLD="\e[1m"
 YELLOW="\e[33m"

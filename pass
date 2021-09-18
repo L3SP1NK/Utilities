@@ -3,7 +3,6 @@
 ## Store your passwords inside a local text file, gpg encrypted.
 ## NEVER TRUST ONLINE PASSWORDS MANAGER !
 
-## Colors.
 RESET_COLOR="\e[0m"
 YELLOW="\e[33m"
 BOLD="\e[1m"
