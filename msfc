@@ -15,5 +15,5 @@ if [[ ${?} -eq "0" ]]
 		trap "" TSTP
 		/usr/bin/msfconsole
 	else
-		echo "${RED}The Metasploit framework is not installed on this system !${RESET_COLOR}"
+		echo "${RED}The Metasploit framework is not installed on this system!${RESET_COLOR}"
 fi

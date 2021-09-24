@@ -76,10 +76,10 @@ function CACHED_WRITES()
 ## Check if root
 if [ "$EUID" -ne "0" ]
     then
-        echo -e "${RED}This script must be runned as root !${RESET_COLOR}"
+        echo -e "${RED}This script must be runned as root!${RESET_COLOR}"
         exit 1
 	else
-		echo -e "${RED}Please close all application currently running ! ${RESET_COLOR}"
+		echo -e "${RED}Please close all application currently running! ${RESET_COLOR}"
 		read
 		echo -e "${YELLOW}Synchronizing cached writes to persistent storage...${RESET_COLOR}"
 		CACHE_DIR
