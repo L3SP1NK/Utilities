@@ -51,11 +51,11 @@ function CACHE_DIR()
 			rm -fr ${USER_HOME}/.config/molotov/Cache/* 2>/dev/null
 	fi
 
-	if [[ -d ${USER_HOME}/.config/molotov/Code\ Cache/ ]]
+	if [[ -d ${USER_HOME}/.local/share/TelegramDesktop/tdata/ ]]
 		then
-			## Molotov
-			echo -e "${YELLOW}Removing the ${BOLD}Molotov Code ${RESET_COLOR}${YELLOW}cache directory...${RESET_COLOR}"
-			rm -fr ${USER_HOME}/.config/molotov/Code\ Cache/* 2>/dev/null
+			## Telegram
+			echo -e "${YELLOW}Removing the ${BOLD}Telegram ${RESET_COLOR}${YELLOW}cache directory...${RESET_COLOR}"
+			rm -fr ${USER_HOME}/.local/share/TelegramDesktop/tdata/user*/ 2>/dev/null
 	fi
 
 }
