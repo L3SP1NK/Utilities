@@ -1,0 +1,46 @@
+#!/bin/bash
+## Simple script to verify if a Telegram user exist.
+
+RESET_COLOR="\e[0m"
+BOLD="\e[1m"
+BLUE="\e[34m"
+RED="\e[31m"
+GREEN="\e[32m"
+
+REQUIREMENTS="curl"
+TG_LINK="https://t.me/"
+TG_USER="${1}"
+
+DISPLAY_HELP()
+{
+	echo -e "Check if a Telegram username is valid.\n"
+	echo -e "./tguser <username>"
+}
+
+REQUEST=$(curl -sf "${TG_LINK}/${TG_USER}" | grep "og:description")
+NO_DESCRIPTION='<meta property="og:description" content="">'
+
+function CHECK_USER()
+{
+	## Check if the user have a descritption (Telegram automatically add one if the user don't).
+	if [[ ${REQUEST} != ${NO_DESCRIPTION} ]]
+		then
+			echo -e "${BOLD}${GREEN} [+] ${RESET_COLOR}User ${BOLD}${TG_USER}${RESET_COLOR} found!${RESET_COLOR}"
+		else
+			echo -e "${BOLD}${RED} [-] ${RESET_COLOR}User ${BOLD}${TG_USER}${RESET_COLOR} not found!${RESET_COLOR}"
+	fi
+}
+
+which ${REQUIREMENTS}>/dev/null
+
+if [[ ${?} -eq "0" ]]
+	then
+		if [[ ${1} ]]
+			then
+				CHECK_USER
+			else
+				DISPLAY_HELP
+		fi
+	else
+		echo -e "${RED}To run this program, you need the following packages installed: ${BOLD}${REQUIREMENTS}${RESET_COLORS}"
+fi
