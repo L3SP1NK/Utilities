@@ -57,7 +57,7 @@ if [[ ${1} ]]
 										echo "You'r probably not on XFCE!\Quitting..."
 								fi
 						else
-							exit
+							exit 0
 					fi
 			else
 				echo -e "${RED}To run this program, you need the following packages installed: ${BOLD}${REQUIREMENTS}${RESET_COLORS}"
