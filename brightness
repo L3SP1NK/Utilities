@@ -5,12 +5,16 @@ RESET_COLOR="\e[0m"
 RED="\e[31m"
 
 ## Display:
-OUTPUT_1="$(xrandr | grep 'connected' | cut -d ' ' -f 1 | head -n 2 | sed -n '1p')"
-OUTPUT_2="$(xrandr | grep 'connected' | cut -d ' ' -f 1 | head -n 2 | sed -n '2p')"
+DISPLAY_1="$(xrandr | grep 'connected' | cut -d ' ' -f 1 | head -n 2 | sed -n '1p')"
+DISPLAY_2="$(xrandr | grep 'connected' | cut -d ' ' -f 1 | head -n 2 | sed -n '2p')"
 
 if [[ ${1} && ${1} != "0" && ${1} != "0." && ${1} != "0.0" ]]
 	then
-		xrandr --output ${OUTPUT_1} --brightness ${1} --output ${OUTPUT_2} --brightness ${1}
+		killall redshift ## You can't change the brightness this way when redshift is active...
+		killall redshift
+		xrandr --output ${DISPLAY_1} --brightness ${1} --output ${DISPLAY_2} --brightness ${1}
+		# Relauching an instance.
+		redshift-gtk&
 	else
 		echo -e "${RED}Specify a brightness level... (from 0.1 to 1)${RESET_COLOR}"
 fi
