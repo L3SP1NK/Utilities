@@ -39,5 +39,6 @@ if [[ ${?} -eq "0" ]]
 		## Binance Smart Chain
 		echo -e "${YELLOW}${BOLD}BNB${RESET_COLOR}: ${GREEN}\$${RESET_COLOR}$(curl -s "${BSC_URL}${BSC_API}" | cut -d "," -f 5 | cut -d : -f 2 | sed 's/"//g')\n"
 	else
-		echo -e "${RED}To run this program, you need the following packages installed: ${BOLD}${REQUIREMENTS}${RESET_COLORS}"
+		echo -e "${RED}To run this program, you need the following packages installed: ${BOLD}${REQUIREMENTS}\nExiting...${RESET_COLORS}"
+		exit 1
 fi

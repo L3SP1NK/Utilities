@@ -32,5 +32,6 @@ if [[ ${?} -eq "0" ]]
 		WEATHER_INFO_1
 		WEATHER_INFO_2
 	else
-		echo -e "${RED}To run this program, you need the following package(s) installed: ${BOLD}${REQUIREMENTS}${RESET_COLOR}"
+		echo -e "${RED}To run this program, you need the following package(s) installed: ${BOLD}${REQUIREMENTS}\nExiting...${RESET_COLOR}"
+		exit 1
 fi

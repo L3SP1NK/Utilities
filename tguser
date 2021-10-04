@@ -1,5 +1,6 @@
 #!/bin/bash
 ## Simple script to verify if a Telegram user exist.
+## For now the results aren't 100% reliable, i'm working on it...
 
 RESET_COLOR="\e[0m"
 BOLD="\e[1m"
@@ -42,5 +43,6 @@ if [[ ${?} -eq "0" ]]
 				DISPLAY_HELP
 		fi
 	else
-		echo -e "${RED}To run this program, you need the following packages installed: ${BOLD}${REQUIREMENTS}${RESET_COLORS}"
+		echo -e "${RED}To run this program, you need the following packages installed: ${BOLD}${REQUIREMENTS}\nExiting...${RESET_COLORS}"
+		exit 1
 fi
