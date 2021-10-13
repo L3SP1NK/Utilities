@@ -10,7 +10,7 @@ DISPLAY_2="$(xrandr | grep 'connected' | cut -d ' ' -f 1 | head -n 2 | sed -n '2
 
 if [[ ${1} && ${1} != "0" && ${1} != "0." && ${1} != "0.0" ]]
 	then
-		xrandr --output ${DISPLAY_1} --brightness ${1} --output ${DISPLAY_2} --brightness ${1}
+		xrandr --output ${DISPLAY_1} --output ${DISPLAY_2} --brightness ${1}
 	else
 		echo -e "${RED}Please, specify a brightness level... (from 0.1 to 1)\nExiting...${RESET_COLOR}"
 		exit 1
