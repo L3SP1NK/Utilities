@@ -1,12 +1,15 @@
 #!/bin/bash
-## Simple script to verify if a Telegram user exist.
-## For now the results aren't 100% reliable, i'm working on it...
+## Verify if a Telegram user exist.
+## Currently reporting false positive (name with only numbers and/or containing special characters).
 
 RESET_COLOR="\e[0m"
 BOLD="\e[1m"
 BLUE="\e[34m"
 RED="\e[31m"
 GREEN="\e[32m"
+CYAN="\e[36m"
+UNDERLINE="\e[4m"
+ITALIC="\e[3m"
 
 REQUIREMENTS="curl"
 TG_LINK="https://t.me/"
@@ -14,8 +17,9 @@ TG_USER="${1}"
 
 DISPLAY_HELP()
 {
-	echo -e "Check if a Telegram username is valid.\n"
-	echo -e "./tguser <username>"
+	echo -e "${CYAN}${ITALIC}Check if a Telegram username is valid.\n${RESET_COLOR}"
+	echo -e "${UNDERLINE}Usage:${RESET_COLOR}"
+	echo -e " ./tguser <username>\n${RESET_COLOR}"
 }
 
 REQUEST=$(curl -sf "${TG_LINK}/${TG_USER}" | grep "og:description")
