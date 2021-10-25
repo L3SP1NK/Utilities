@@ -5,8 +5,8 @@ RESET_COLOR="\e[0m"
 RED="\e[31m"
 
 ## Display:
-DISPLAY_1="$(xrandr | grep 'connected' | cut -d ' ' -f 1 | head -n 2 | sed -n '1p')"
-DISPLAY_2="$(xrandr | grep 'connected' | cut -d ' ' -f 1 | head -n 2 | sed -n '2p')"
+DISPLAY_1="VGA1"
+DISPLAY_2="LVDS1"
 
 if [[ ${1} && ${1} != "0" && ${1} != "0." && ${1} != "0.0" ]]
 	then
