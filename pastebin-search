@@ -1,0 +1,19 @@
+#!/bin/bash
+## Search if something is present on pastebin.
+
+RED="\e[31m"
+CYAN="\e[36m"
+BOLD="\e[1m"
+RESET_COLOR="\e[0m"
+
+BROWSER=$(update-alternatives --display x-www-browser | grep currently | awk '{ print $5 }')
+REQUEST="https://www.google.com/search?q=site:'pastebin.*'%20intext:'${1}'"
+
+if [[ ${1} ]]
+	then
+		x-www-browser ${REQUEST} 2>/dev/null&
+		echo -e "Searching for ${BOLD}${CYAN}${1}${RESET_COLOR}"
+		echo "Launching ${BROWSER} in background..."
+	else
+		echo -e "${RED}Please, enter a term to search on Pastebin (e.g. 'cars').${RESET_COLOR}"
+fi
