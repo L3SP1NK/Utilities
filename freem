@@ -79,7 +79,7 @@ if [ "$EUID" -ne "0" ]
         echo -e "${RED}This script must be run as root!\nExiting...${RESET_COLOR}"
         exit 1
 	else
-		echo -e "${RED}Please close all application currently running! ${RESET_COLOR}"
+		echo -e "${RED}Please close all application currently running and press [ENTER]${RESET_COLOR}"
 		read
 		echo -e "${YELLOW}Synchronizing cached writes to persistent storage...${RESET_COLOR}\n"
 		CACHE_DIR
