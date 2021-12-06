@@ -5,7 +5,7 @@
 ## - Binance
 ## - Firefox
 
-RESET_COLOR="\e[0m"
+RC="\e[0m"
 BOLD="\e[1m"
 BLUE="\e[34m"
 RED="\e[31m"
@@ -14,81 +14,75 @@ YELLOW="\e[33m"
 
 USER_HOME="/home/lespink"
 
-function CACHE_DIR()
+CACHE_DIR()
 {
 	if [[ -d /root/.cache ]]
 		then
 			## Root
-			echo -e "${YELLOW}Removing the ${BOLD}root ${RESET_COLOR}${YELLOW}cache directory...${RESET_COLOR}"
+			echo -e "${YELLOW}Removing the ${BOLD}root ${RC}${YELLOW}cache directory...${RC}"
 			rm -fr /root/.cache 2>/dev/null
 	fi
 
 	if [[ -d ${USER_HOME}/.cache ]]
 		then
 			## User
-			echo -e "${YELLOW}Removing the ${BOLD}user ${RESET_COLOR}${YELLOW}cache directory...${RESET_COLOR}"
+			echo -e "${YELLOW}Removing the ${BOLD}user ${RC}${YELLOW}cache directory...${RC}"
 			rm -fr ${USER_HOME}/.cache 2>/dev/null
 	fi
 
 	if [[ -d ${USER_HOME}/.mozilla/firefox/*/cache ]]
 		then
 			## Mozilla
-			echo -e "${YELLOW}Removing the ${BOLD}firefox ${RESET_COLOR}${YELLOW}cache directory...${RESET_COLOR}"
+			echo -e "${YELLOW}Removing the ${BOLD}firefox ${RC}${YELLOW}cache directory...${RC}"
 			rm -fr ${USER_HOME}/.mozilla/firefox/*/cache* 2>/dev/null
 	fi
 
 	if [[ -d ${USER_HOME}/.config/Binance/Partitions/binance.app/Cache/ ]]
 		then
 			## Binance
-			echo -e "${YELLOW}Removing the ${BOLD}Binance ${RESET_COLOR}${YELLOW}cache directory...${RESET_COLOR}"
+			echo -e "${YELLOW}Removing the ${BOLD}Binance ${RC}${YELLOW}cache directory...${RC}"
 			rm -fr ${USER_HOME}/.config/Binance/Partitions/binance.app/Cache/* 2>/dev/null
 	fi
 
 	if [[ -d ${USER_HOME}/.config/molotov/Cache/ ]]
 		then
 			## Molotov
-			echo -e "${YELLOW}Removing the ${BOLD}Molotov ${RESET_COLOR}${YELLOW}cache directory...${RESET_COLOR}"
+			echo -e "${YELLOW}Removing the ${BOLD}Molotov ${RC}${YELLOW}cache directory...${RC}"
 			rm -fr ${USER_HOME}/.config/molotov/Cache/* 2>/dev/null
 	fi
 
 	if [[ -d ${USER_HOME}/.local/share/TelegramDesktop/tdata/ ]]
 		then
 			## Telegram
-			echo -e "${YELLOW}Removing the ${BOLD}Telegram ${RESET_COLOR}${YELLOW}cache directory...${RESET_COLOR}"
+			echo -e "${YELLOW}Removing the ${BOLD}Telegram ${RC}${YELLOW}cache directory...${RC}"
 			rm -fr ${USER_HOME}/.local/share/TelegramDesktop/tdata/user*/ 2>/dev/null
 	fi
 
 }
 
-function SWAP_SPACE()
+SWAP_SPACE()
 {
 	sync
 	swapoff -av
 	swapon -av
-}
-
-function CACHED_WRITES()
-{
-	sync
 	echo 3>/proc/sys/vm/drop_caches
 }
 
-## Check if root
+## Check privileges.
 if [ "$EUID" -ne "0" ]
     then
-        echo -e "${RED}This script must be run as root!\nExiting...${RESET_COLOR}"
+        echo -e "${RED}This script must be run as root!\nExiting...${RC}"
         exit 1
 	else
-		echo -e "${RED}Please close all application currently running and press [ENTER]${RESET_COLOR}"
+		echo -e "${RED}Please close all application currently running and press [ENTER]${RC}"
 		read
-		echo -e "${YELLOW}Synchronizing cached writes to persistent storage...${RESET_COLOR}\n"
+		echo -e "${YELLOW}Synchronizing cache writes to persistent storage and emptying the swap space...${RC}\n"
 		CACHE_DIR
-		CACHED_WRITES
 			if [[ $(swapon --show) == "" ]]
 				then
-					echo -e "${YELLOW}Swap device not found on this system.${RESET_COLOR}"
+					echo -e "${RED}Swap device not found on this system.${RC}"
 				else
-					echo -e "${YELLOW}Emptying ${BOLD}swap ${RESET_COLOR}${YELLOW}space...${RESET_COLOR}"
+					echo -e "${YELLOW}Emptying ${BOLD}swap ${RC}${YELLOW}space...${RC}"
 					SWAP_SPACE
 			fi
 fi

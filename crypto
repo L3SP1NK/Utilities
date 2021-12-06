@@ -5,7 +5,7 @@
 ## - Kraken
 ## - Coinbase
 
-RESET_COLOR="\e[0m"
+RC="\e[0m"
 BOLD="\e[1m"
 RED="\e[31m"
 GREEN="\e[32m"
@@ -25,20 +25,20 @@ which ${REQUIREMENTS} > /dev/null
 if [[ ${?} -eq "0" ]]
 	then
 		## Date
-		echo -e "\n${CYAN}$(date '+%A %d %B %Y ~ %T')${RESET_COLOR}\n"
+		echo -e "\n${CYAN}$(date '+%A %d %B %Y ~ %T')${RC}\n"
 
 		## Coinbase (not all crypto available)
-#		echo -e "${YELLOW}BTC${RESET_COLOR}: ${GREEN}\$${RESET_COLOR}$(curl -s ${COINBASE_URL}BTC-USD/buy | cut -d\: -f5 | cut -d\" -f2)"
-# 		echo -e "${BLUE}${BOLD}ETH${RESET_COLOR}: ${GREEN}\$${RESET_COLOR}$(curl -s ${COINBASE_URL}ETH-USD/buy | cut -d\: -f5 | cut -d\" -f2)\n"
+#		echo -e "${YELLOW}BTC${RC}: ${GREEN}\$${RC}$(curl -s ${COINBASE_URL}BTC-USD/buy | cut -d\: -f5 | cut -d\" -f2)"
+# 		echo -e "${BLUE}${BOLD}ETH${RC}: ${GREEN}\$${RC}$(curl -s ${COINBASE_URL}ETH-USD/buy | cut -d\: -f5 | cut -d\" -f2)\n"
 
 		## Kraken
-		echo -e "${YELLOW}BTC${RESET_COLOR}: ${GREEN}\$${RESET_COLOR}$(curl -s "${KRAKEN_URL}BTCUSD" | jq | awk "/a/ { getline; print $1;}" | sed 's/\("\s*\|,\)//g' | sed 's/ //g'|perl -pe 's/^0+ | 0+$//xg')"
-		echo -e "${BLUE}${BOLD}ETH${RESET_COLOR}: ${GREEN}\$${RESET_COLOR}$(curl -s "${KRAKEN_URL}ETHUSD" | jq | awk "/a/ { getline; print $1;}" | sed 's/\("\s*\|,\)//g' | sed 's/ //g'|perl -pe 's/^0+ | 0+$//xg')"
-		echo -e "${RED}${BOLD}XMR${RESET_COLOR}: ${GREEN}\$${RESET_COLOR}$(curl -s "${KRAKEN_URL}XMRUSD" | jq | awk "/a/ { getline; print $1;}" | sed 's/\("\s*\|,\)//g' | sed 's/ //g'|perl -pe 's/^0+ | 0+$//xg')"
+		echo -e "${YELLOW}BTC${RC}: ${GREEN}\$${RC}$(curl -s "${KRAKEN_URL}BTCUSD" | jq | awk "/a/ { getline; print $1;}" | sed 's/\("\s*\|,\)//g' | sed 's/ //g'|perl -pe 's/^0+ | 0+$//xg')"
+		echo -e "${BLUE}${BOLD}ETH${RC}: ${GREEN}\$${RC}$(curl -s "${KRAKEN_URL}ETHUSD" | jq | awk "/a/ { getline; print $1;}" | sed 's/\("\s*\|,\)//g' | sed 's/ //g'|perl -pe 's/^0+ | 0+$//xg')"
+		echo -e "${RED}${BOLD}XMR${RC}: ${GREEN}\$${RC}$(curl -s "${KRAKEN_URL}XMRUSD" | jq | awk "/a/ { getline; print $1;}" | sed 's/\("\s*\|,\)//g' | sed 's/ //g'|perl -pe 's/^0+ | 0+$//xg')"
 
 		## Binance Smart Chain
-		echo -e "${YELLOW}${BOLD}BNB${RESET_COLOR}: ${GREEN}\$${RESET_COLOR}$(curl -s "${BSC_URL}${BSC_API}" | cut -d "," -f 5 | cut -d : -f 2 | sed 's/"//g')\n"
+		echo -e "${YELLOW}${BOLD}BNB${RC}: ${GREEN}\$${RC}$(curl -s "${BSC_URL}${BSC_API}" | cut -d "," -f 5 | cut -d : -f 2 | sed 's/"//g')\n"
 	else
-		echo -e "${RED}To run this program, you need the following packages installed: ${BOLD}${REQUIREMENTS}\nExiting...${RESET_COLORS}"
+		echo -e "${RED}To run this program, you need the following packages installed: ${BOLD}${REQUIREMENTS}\nExiting...${RCS}"
 		exit 1
 fi

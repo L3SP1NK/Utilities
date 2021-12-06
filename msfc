@@ -3,7 +3,7 @@
 ## A launcher is needed since you can't background a session.
 ## (Ctrl+Z background the shell process instead)
 
-RESET_COLOR="\e[0m"
+RC="\e[0m"
 RED="\e[31m"
 
 REQUIREMENTS="msfconsole"
@@ -15,6 +15,6 @@ if [[ ${?} -eq "0" ]]
 		trap "" TSTP
 		/usr/bin/msfconsole
 	else
-		echo "${RED}The Metasploit framework is not installed on this system!\nExiting...${RESET_COLOR}"
+		echo "${RED}The Metasploit framework is not installed on this system!\nExiting...${RC}"
 		exit 1
 fi

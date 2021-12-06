@@ -2,13 +2,13 @@
 ## Get weather information for a given city.
 ## Data from http://wttr.in
 
-RESET_COLOR="\e[0m"
+RC="\e[0m"
 BOLD="\e[1m"
 RED="\e[31m"
 
 CITY=${1}
 
-function WEATHER_INFO_1()
+WEATHER_INFO_1()
 {
 	reset
 	echo -e "\e[36m\e[1m$(date +%H:%M:%S)\e[0m"
@@ -16,7 +16,7 @@ function WEATHER_INFO_1()
 	read
 }
 
-function WEATHER_INFO_2()
+WEATHER_INFO_2()
 {
 	reset
 	echo -e "\e[36m\e[1m$(date +%H:%M:%S)\e[0m"
@@ -32,6 +32,6 @@ if [[ ${?} -eq "0" ]]
 		WEATHER_INFO_1
 		WEATHER_INFO_2
 	else
-		echo -e "${RED}To run this program, you need the following package(s) installed: ${BOLD}${REQUIREMENTS}\nExiting...${RESET_COLOR}"
+		echo -e "${RED}To run this program, you need the following package(s) installed: ${BOLD}${REQUIREMENTS}\nExiting...${RC}"
 		exit 1
 fi

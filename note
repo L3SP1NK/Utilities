@@ -1,7 +1,7 @@
 #!/bin/bash
 ## Simple note taking.
 
-RESET_COLOR="\e[0m"
+RC="\e[0m"
 BOLD="\e[1m"
 YELLOW="\e[33m"
 RED="\e[31m"
@@ -11,14 +11,14 @@ NOTE_FILE="${HOME}/.note"
 ## Check if root.
 if [ "$EUID" -eq "0" ]
 	then
-		echo -e "${RED}This script must not be run as root\nExiting...!${RESET_COLOR}"
+		echo -e "${RED}This script must not be run as root\nExiting...!${RC}"
 		exit 1
 	else
 		if [[ -f ${NOTE_FILE} ]]
 			then
 				${EDITOR} ${NOTE_FILE}
 			else
-				echo -e "${YELLOW}Note file note not found, do you want to create one? (Y/n)${RESET_COLORS}"
+				echo -e "${YELLOW}Note file note not found, do you want to create one? (Y/n)${RCS}"
 				read CREATE_NOTE_FILE
 				if [[ ${CREATE_NOTE_FILE} == "n" ]]
 					then
