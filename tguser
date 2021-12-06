@@ -47,6 +47,6 @@ if [[ ${?} -eq "0" ]]
 				DISPLAY_HELP
 		fi
 	else
-		echo -e "${RED}To run this program, you need the following packages installed: ${BOLD}${REQUIREMENTS}\nExiting...${RCS}"
+		echo -e "${RED}To run this program, you need the following packages installed: ${BOLD}${REQUIREMENTS}\nExiting...${RC}"
 		exit 1
 fi

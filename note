@@ -18,7 +18,7 @@ if [ "$EUID" -eq "0" ]
 			then
 				${EDITOR} ${NOTE_FILE}
 			else
-				echo -e "${YELLOW}Note file note not found, do you want to create one? (Y/n)${RCS}"
+				echo -e "${YELLOW}Note file note not found, do you want to create one? (Y/n)${RC}"
 				read CREATE_NOTE_FILE
 				if [[ ${CREATE_NOTE_FILE} == "n" ]]
 					then
