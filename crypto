@@ -39,6 +39,6 @@ if [[ ${?} -eq "0" ]]
 		## Binance Smart Chain
 		echo -e "${YELLOW}${BOLD}BNB${RC}: ${GREEN}\$${RC}$(curl -s "${BSC_URL}${BSC_API}" | cut -d "," -f 5 | cut -d : -f 2 | sed 's/"//g')\n"
 	else
-		echo -e "${RED}To run this program, you need the following packages installed: ${BOLD}${REQUIREMENTS}\nExiting...${RCS}"
+		echo -e "${RED}To run this program, you need the following packages installed: ${BOLD}${REQUIREMENTS}\n${RC}${RED}Exiting...${RC}"
 		exit 1
 fi
