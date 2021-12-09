@@ -12,6 +12,7 @@ GREEN="\e[32m"
 YELLOW="\e[33m"
 BLUE="\e[34m"
 CYAN="\e[36m"
+GREY="\e[37m"
 
 COINBASE_URL="https://api.coinbase.com/v2/prices/"
 KRAKEN_URL='https://api.kraken.com/0/public/Ticker?pair='
@@ -19,25 +20,70 @@ BSC_URL='https://api.bscscan.com/api?module=stats&action=bnbprice&apikey='
 ## Binance Smart Chain API key, get one at https://bscscan.com/apis
 BSC_API="CQ21TRV2YCQ3WV9EA4TSR5BRD12P2TDG16"
 
+BTC()
+{
+		## Bitcoin (Coinbase).
+#		echo -e "  ${YELLOW}BTC${RC}: ${GREEN}\$${RC}$(curl -s ${COINBASE_URL}BTC-USD/buy \
+#		| cut -d\: -f5 \
+#		| cut -d\" -f2)" \
+#		| cut -d '.' -f 1
+
+		## Bitcoin (Kraken).
+		echo -e "  ${YELLOW}BTC${RC}: ${GREEN}\$${RC}$(curl -s "${KRAKEN_URL}BTCUSD" \
+		| jq \
+		| awk "/a/ { getline; print ${1};}" \
+		| sed 's/\("\s*\|,\)//g' \
+		| sed 's/ //g' \
+		| cut -d '.' -f 1 )"
+}
+
+ETH()
+{
+		## Etherum (Coinbase).
+#		echo -e "  ${BLUE}${BOLD}ETH${RC}: ${GREEN}\$${RC}$(curl -s ${COINBASE_URL}ETH-USD/buy \
+#		| cut -d\: -f5 \
+#		| cut -d\" -f2)" \
+#		| cut -d '.' -f 1
+
+		## Etherum (Kraken).
+		echo -e "  ${BLUE}${BOLD}ETH${RC}: ${GREEN}\$${RC}$(curl -s "${KRAKEN_URL}ETHUSD" \
+		| jq \
+		| awk "/a/ { getline; print ${1};}" \
+		| sed 's/\("\s*\|,\)//g' \
+		| sed 's/ //g' \
+		| cut -d '.' -f 1 )"
+}
+
+XMR()
+{
+		## Monero (Kraken).
+		echo -e "  ${RED}${BOLD}XMR${RC}: ${GREEN}\$${RC}$(curl -s "${KRAKEN_URL}XMRUSD" \
+		| jq \
+		| awk "/a/ { getline; print ${1};}" \
+		| sed 's/\("\s*\|,\)//g' \
+		| sed 's/ //g' \
+		| cut -d '.' -f 1 )"
+}
+
+BNB()
+{
+		## Binance coin (Binance Smart Chain).
+		echo -e "  ${YELLOW}${BOLD}BNB${RC}: ${GREEN}\$${RC}$(curl -s "${BSC_URL}${BSC_API}" \
+		| cut -d ',' -f 5 \
+		| cut -d : -f 2 \
+		| sed 's/"//g' \
+		| cut -d '.' -f 1 )\n"
+}
+
 REQUIREMENTS="curl perl awk sed jq"
 
 which ${REQUIREMENTS} > /dev/null
 if [[ ${?} -eq "0" ]]
 	then
-		## Date
-		echo -e "\n${CYAN}$(date '+%A %d %B %Y ~ %T')${RC}\n"
-
-		## Coinbase (not all crypto available)
-#		echo -e "${YELLOW}BTC${RC}: ${GREEN}\$${RC}$(curl -s ${COINBASE_URL}BTC-USD/buy | cut -d\: -f5 | cut -d\" -f2)"
-# 		echo -e "${BLUE}${BOLD}ETH${RC}: ${GREEN}\$${RC}$(curl -s ${COINBASE_URL}ETH-USD/buy | cut -d\: -f5 | cut -d\" -f2)\n"
-
-		## Kraken
-		echo -e "${YELLOW}BTC${RC}: ${GREEN}\$${RC}$(curl -s "${KRAKEN_URL}BTCUSD" | jq | awk "/a/ { getline; print $1;}" | sed 's/\("\s*\|,\)//g' | sed 's/ //g'|perl -pe 's/^0+ | 0+$//xg')"
-		echo -e "${BLUE}${BOLD}ETH${RC}: ${GREEN}\$${RC}$(curl -s "${KRAKEN_URL}ETHUSD" | jq | awk "/a/ { getline; print $1;}" | sed 's/\("\s*\|,\)//g' | sed 's/ //g'|perl -pe 's/^0+ | 0+$//xg')"
-		echo -e "${RED}${BOLD}XMR${RC}: ${GREEN}\$${RC}$(curl -s "${KRAKEN_URL}XMRUSD" | jq | awk "/a/ { getline; print $1;}" | sed 's/\("\s*\|,\)//g' | sed 's/ //g'|perl -pe 's/^0+ | 0+$//xg')"
-
-		## Binance Smart Chain
-		echo -e "${YELLOW}${BOLD}BNB${RC}: ${GREEN}\$${RC}$(curl -s "${BSC_URL}${BSC_API}" | cut -d "," -f 5 | cut -d : -f 2 | sed 's/"//g')\n"
+		BTC
+		ETH
+		XMR
+		BNB
 	else
 		echo -e "${RED}To run this program, you need the following packages installed: ${BOLD}${REQUIREMENTS}\n${RC}${RED}Exiting...${RC}"
 		exit 1
