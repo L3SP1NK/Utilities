@@ -72,7 +72,7 @@ BNB()
 		| cut -d ',' -f 5 \
 		| cut -d : -f 2 \
 		| sed 's/"//g' \
-		| cut -d '.' -f 1 )\n"
+		| cut -d '.' -f 1 )"
 }
 
 REQUIREMENTS="curl perl awk sed jq"
