@@ -76,7 +76,7 @@ if [ "$EUID" -ne "0" ]
 	else
 		echo -e "${RED}Please close all application currently running and press [ENTER]${RC}"
 		read
-		echo -e "${YELLOW}Synchronizing cache writes to persistent storage and emptying the swap space...${RC}\n"
+		echo -e "${YELLOW}Synchronizing cache writes to persistent storage and emptying the swap space...${RC}"
 		CACHE_DIR
 			if [[ $(swapon --show) == "" ]]
 				then
