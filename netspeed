@@ -1,0 +1,19 @@
+#!/bin/bash
+GREY="\e[37m"
+RED="\e[31m"
+GREEN="\e[32m"
+RC="\e[0m"
+BOLD="\e[1m"
+
+INTERFACE="$(ifconfig | head -n 1 | awk {'print $1'} | cut -d ':' -f 1)"
+
+REQUIREMENTS="ethtool ifconfig"
+which ethtool > /dev/null
+
+if [[ ${?} -ne "0" ]]
+	then
+		echo -e "${RED}\n To run this program, you need the following packages installed: ${BOLD}${REQUIREMENTS}${RC}\n${RED} Exiting...${RC}\n"
+		exit 1
+	else
+		echo -e "${BOLD}${GREY}${INTERFACE}: ${GREEN}$(ethtool ${INTERFACE} | grep Speed | awk {'print $2'})${RC}"
+fi
