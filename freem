@@ -75,7 +75,7 @@ SWAP_SPACE()
 ## Check privileges.
 if [ "$EUID" -ne "0" ]
     then
-        echo -e "${WARN} This script must be run as root!\nExiting..."
+        echo -e "${WARN} This script must be run as root!\n${WARN} Exiting..."
         exit 1
 	else
 		echo -e "${WARN} Please close all application currently running and press [ENTER]"
