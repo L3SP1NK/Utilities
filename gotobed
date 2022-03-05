@@ -1,0 +1,4 @@
+#!/bin/bash
+DATE=$(date '+%H')
+TIME="22" ## Time to go to bed.
+[ ${DATE} -gt ${TIME} ] && notify-send -u critical " 💤 Time to go to bed! 💤 " || exit 0
