@@ -3,6 +3,7 @@
 ## Currently reporting false positive (name with only numbers and/or containing special characters).
 
 ## Set colors.
+RC="\e[0m"
 BOLD="\e[1m"
 GREEN="\e[32m"
 RED="\e[31m"

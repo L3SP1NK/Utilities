@@ -2,6 +2,7 @@
 ## Search for a keyword on pastebin with Google dorks.
 
 ## Set colors.
+RC="\e[0m"
 BOLD="\e[1m"
 GREEN="\e[32m"
 RED="\e[31m"
