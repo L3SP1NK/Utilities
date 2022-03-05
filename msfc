@@ -3,18 +3,24 @@
 ## A launcher is needed since you can't background a session.
 ## (Ctrl+Z background the shell process instead)
 
-RC="\e[0m"
+## Set colors.
+BOLD="\e[1m"
+GREEN="\e[32m"
 RED="\e[31m"
+BLUE="\e[34m"
+
+WARN="${RED}${BOLD} [-]${RC}"
+INFO="${BLUE}${BOLD} [*]${RC}"
+GOOD="${GREEN}${BOLD} [+]${RC}"
 
 REQUIREMENTS="msfconsole"
 
-which ${REQUIREMENTS} > /dev/null
-if [[ ${?} -eq "0" ]]
+if ! which ${REQUIREMENTS} > /dev/null
 	then
+		echo "${WARN} The Metasploit framework is not installed on this system!\nExiting..."
+		exit 1
+	else
 		## Disable Ctrl-Z
 		trap "" TSTP
 		/usr/bin/msfconsole
-	else
-		echo "${RED}The Metasploit framework is not installed on this system!\nExiting...${RC}"
-		exit 1
 fi

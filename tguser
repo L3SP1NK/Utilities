@@ -2,14 +2,15 @@
 ## Verify if a Telegram user exist.
 ## Currently reporting false positive (name with only numbers and/or containing special characters).
 
-RC="\e[0m"
+## Set colors.
 BOLD="\e[1m"
-BLUE="\e[34m"
-RED="\e[31m"
 GREEN="\e[32m"
-CYAN="\e[36m"
-UNDERLINE="\e[4m"
-ITALIC="\e[3m"
+RED="\e[31m"
+BLUE="\e[34m"
+
+WARN="${RED}${BOLD} [-]${RC}"
+INFO="${BLUE}${BOLD} [*]${RC}"
+GOOD="${GREEN}${BOLD} [+]${RC}"
 
 REQUIREMENTS="curl"
 TG_LINK="https://t.me/"
@@ -17,9 +18,9 @@ TG_USER="${1}"
 
 DISPLAY_HELP()
 {
-	echo -e "${CYAN}${ITALIC}Check if a Telegram username is valid.\n${RC}"
-	echo -e "${UNDERLINE}Usage:${RC}"
-	echo -e " ./tguser <username>\n${RC}"
+	echo -e "${CYAN}${ITALIC}Check if a Telegram username is valid.\n"
+	echo -e "${UNDERLINE}Usage:"
+	echo -e " ./tguser <username>\n"
 }
 
 REQUEST=$(curl -sf "${TG_LINK}/${TG_USER}" | grep "og:description")
@@ -30,9 +31,9 @@ CHECK_USER()
 	## Check if the user have a descritption (Telegram automatically add one if the user don't).
 	if [[ ${REQUEST} != ${NO_DESCRIPTION} ]]
 		then
-			echo -e "${BOLD}${GREEN} [+] ${RC}User ${BOLD}${TG_USER}${RC} found!${RC}"
+			echo -e "${GREEN} [+] User ${TG_USER} found!"
 		else
-			echo -e "${BOLD}${RED} [-] ${RC}User ${BOLD}${TG_USER}${RC} not found!${RC}"
+			echo -e "${WARN} [-] User ${TG_USER} not found!"
 	fi
 }
 
@@ -47,6 +48,6 @@ if [[ ${?} -eq "0" ]]
 				DISPLAY_HELP
 		fi
 	else
-		echo -e "${RED}To run this program, you need the following packages installed: ${BOLD}${REQUIREMENTS}\nExiting...${RC}"
+		echo -e "${WARN} To run this program, you need the following packages installed: ${REQUIREMENTS}\nExiting..."
 		exit 1
 fi

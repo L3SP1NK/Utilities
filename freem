@@ -5,12 +5,15 @@
 ## - Binance
 ## - Firefox
 
-RC="\e[0m"
+## Set colors.
 BOLD="\e[1m"
-BLUE="\e[34m"
-RED="\e[31m"
 GREEN="\e[32m"
-YELLOW="\e[33m"
+RED="\e[31m"
+BLUE="\e[34m"
+
+WARN="${RED}${BOLD} [-]${RC}"
+INFO="${BLUE}${BOLD} [*]${RC}"
+GOOD="${GREEN}${BOLD} [+]${RC}"
 
 USER_HOME="/home/lespink"
 
@@ -19,42 +22,42 @@ CACHE_DIR()
 	if [[ -d /root/.cache ]]
 		then
 			## Root
-			echo -e "${YELLOW}Removing the ${BOLD}root ${RC}${YELLOW}cache directory...${RC}"
+			echo -e "${YELLOW}Removing the root ${YELLOW}cache directory..."
 			rm -fr /root/.cache 2>/dev/null
 	fi
 
 	if [[ -d ${USER_HOME}/.cache ]]
 		then
 			## User
-			echo -e "${YELLOW}Removing the ${BOLD}user ${RC}${YELLOW}cache directory...${RC}"
+			echo -e "${YELLOW}Removing the user ${YELLOW}cache directory..."
 			rm -fr ${USER_HOME}/.cache 2>/dev/null
 	fi
 
 	if [[ -d ${USER_HOME}/.mozilla/firefox/*/cache ]]
 		then
 			## Mozilla
-			echo -e "${YELLOW}Removing the ${BOLD}firefox ${RC}${YELLOW}cache directory...${RC}"
+			echo -e "${YELLOW}Removing the firefox ${YELLOW}cache directory..."
 			rm -fr ${USER_HOME}/.mozilla/firefox/*/cache* 2>/dev/null
 	fi
 
 	if [[ -d ${USER_HOME}/.config/Binance/Partitions/binance.app/Cache/ ]]
 		then
 			## Binance
-			echo -e "${YELLOW}Removing the ${BOLD}Binance ${RC}${YELLOW}cache directory...${RC}"
+			echo -e "${YELLOW}Removing the Binance ${YELLOW}cache directory..."
 			rm -fr ${USER_HOME}/.config/Binance/Partitions/binance.app/Cache/* 2>/dev/null
 	fi
 
 	if [[ -d ${USER_HOME}/.config/molotov/Cache/ ]]
 		then
 			## Molotov
-			echo -e "${YELLOW}Removing the ${BOLD}Molotov ${RC}${YELLOW}cache directory...${RC}"
+			echo -e "${YELLOW}Removing the Molotov ${YELLOW}cache directory..."
 			rm -fr ${USER_HOME}/.config/molotov/Cache/* 2>/dev/null
 	fi
 
 	if [[ -d ${USER_HOME}/.local/share/TelegramDesktop/tdata/ ]]
 		then
 			## Telegram
-			echo -e "${YELLOW}Removing the ${BOLD}Telegram ${RC}${YELLOW}cache directory...${RC}"
+			echo -e "${YELLOW}Removing the Telegram ${YELLOW}cache directory..."
 			rm -fr ${USER_HOME}/.local/share/TelegramDesktop/tdata/user*/ 2>/dev/null
 	fi
 
@@ -71,18 +74,18 @@ SWAP_SPACE()
 ## Check privileges.
 if [ "$EUID" -ne "0" ]
     then
-        echo -e "${RED}This script must be run as root!\nExiting...${RC}"
+        echo -e "${WARN} This script must be run as root!\nExiting..."
         exit 1
 	else
-		echo -e "${RED}Please close all application currently running and press [ENTER]${RC}"
+		echo -e "${WARN} Please close all application currently running and press [ENTER]"
 		read
-		echo -e "${YELLOW}Synchronizing cache writes to persistent storage and emptying the swap space...${RC}"
+		echo -e "${YELLOW}Synchronizing cache writes to persistent storage and emptying the swap space..."
 		CACHE_DIR
 			if [[ $(swapon --show) == "" ]]
 				then
-					echo -e "${RED}Swap device not found on this system.${RC}"
+					echo -e "${WARN} Swap device not found on this system."
 				else
-					echo -e "${YELLOW}Emptying ${BOLD}swap ${RC}${YELLOW}space...${RC}"
+					echo -e "${YELLOW}Emptying swap ${YELLOW}space..."
 					SWAP_SPACE
 			fi
 fi

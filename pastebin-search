@@ -1,10 +1,15 @@
 #!/bin/bash
 ## Search for a keyword on pastebin with Google dorks.
 
-RED="\e[31m"
-CYAN="\e[36m"
+## Set colors.
 BOLD="\e[1m"
-RC="\e[0m"
+GREEN="\e[32m"
+RED="\e[31m"
+BLUE="\e[34m"
+
+WARN="${RED}${BOLD} [-]${RC}"
+INFO="${BLUE}${BOLD} [*]${RC}"
+GOOD="${GREEN}${BOLD} [+]${RC}"
 
 ## <Google dorks URL> + <keyword>
 REQUEST="https://www.google.com/search?q=site:'pastebin.com'%20intext:'${1}'"
@@ -12,7 +17,7 @@ REQUEST="https://www.google.com/search?q=site:'pastebin.com'%20intext:'${1}'"
 if [[ ${1} ]]
 	then
 		x-www-browser ${REQUEST} 2>/dev/null&
-		echo -e "Searching for ${BOLD}${CYAN}${1}${RC}..."
+		echo -e "Searching for ${CYAN}${1}..."
 	else
-		echo -e "${RED}Please, enter a term to search on Pastebin (e.g. 'cars').${RC}"
+		echo -e "${WARN} Please, enter a term to search on Pastebin (e.g. 'cars')."
 fi
