@@ -5,6 +5,7 @@ BOLD="\e[1m"
 GREEN="\e[32m"
 RED="\e[31m"
 BLUE="\e[34m"
+GREY="\e[37m"
 
 WARN="${RED}${BOLD} [-]${RC}"
 INFO="${BLUE}${BOLD} [*]${RC}"
@@ -20,5 +21,5 @@ if [[ ${?} -ne "0" ]]
 		echo -e "${WARN} \n To run this program, you need the following packages installed: ${REQUIREMENTS}\n${WARN} Exiting...\n"
 		exit 1
 	else
-		echo -e "${GREY}${INTERFACE}: ${GREEN}$(ethtool ${INTERFACE} | grep Speed | awk {'print $2'})"
+		echo -e "${BOLD}${GREY}${INTERFACE}: ${BOLD}${GREEN}$(ethtool ${INTERFACE} 2>/dev/null | grep Speed | awk {'print $2'})"
 fi
