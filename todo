@@ -1,0 +1,63 @@
+#!/bin/bash
+## Simple todo manager.
+## Store your todo in a local text file, encrypted with gpg.
+
+## Set colors.
+RC="\e[0m"
+BOLD="\e[1m"
+GREEN="\e[32m"
+RED="\e[31m"
+BLUE="\e[34m"
+
+WARN="${RED}${BOLD} [-]${RC}"
+INFO="${BLUE}${BOLD} [*]${RC}"
+GOOD="${GREEN}${BOLD} [+]${RC}"
+
+REQUIREMENTS="shred gpg" ## And a CLI editor of your choice.
+
+ENCRYPTED_TODO_FILE="${HOME}/.todo.txt.gpg"
+UNCRYPTED_TODO_FILE="${HOME}/.todo.txt"
+
+RUN(){
+	if [[ -f /home/${USER}/.pass.gpg ]]
+		then
+		if ! which ${REQUIREMENTS} > /dev/null
+				then
+					echo -e "${WARN} To run this program, you need the following packages installed: ${REQUIREMENTS}\n${WARN} Exiting..."
+				else
+					## Decrypt the files.
+					gpg --yes --textmode -d -o ${UNCRYPTED_TODO_FILE} --no-symkey-cache ${ENCRYPTED_TODO_FILE} ## Decrypt the password file, without saving the password.
+					if [[ ${?} -eq "0" ]]
+						then
+							## Edit the files.
+							${EDITOR} ${UNCRYPTED_TODO_FILE}
+						else
+        					echo -e "${WARN} Wrong password!"
+        					exit 1
+        				fi
+					## Encrypt the files.
+					gpg --yes --textmode -c --cipher-algo AES256 --no-symkey-cache ${UNCRYPTED_TODO_FILE} ## Encrypt the password file, without saving the password.
+					shred -fuzv ${UNCRYPTED_TODO_FILE} &> /dev/null ## Remove the Unencrypted file with shred (to complicate file recovery).
+		fi
+			else
+				echo -e "${YELLOW}Todo file note not found, do you want to create one? (Y/n)"
+				read CREATE_UNCRYPTED_TODO_FILE
+					if [[ ${CREATE_UNCRYPTED_TODO_FILE} == "n" ]]
+						then
+							exit
+						else
+							## Create the files.
+							touch ${UNCRYPTED_TODO_FILE}
+							## Edit the files.
+							${EDITOR} ${UNCRYPTED_TODO_FILE}
+					fi
+		fi
+}
+
+if [[ "$EUID" -eq "0" ]]
+	then
+		echo -e "${WARN} This must not be run as root!\nExiting..."
+		exit 1
+	else
+		RUN
+fi
