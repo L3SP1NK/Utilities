@@ -73,20 +73,20 @@ SWAP_SPACE()
 }
 
 ## Check privileges.
-if [ "$EUID" -ne "0" ]
+if  [[ ${EUID} -ne "0" ]]
     then
-        echo -e "${WARN} This script must be run as root!\n${WARN} Exiting..."
+        echo -e "${WARN}This script must be run as root!\n${WARN} Exiting..."
         exit 1
 	else
-		echo -e "${WARN} Please close all application currently running and press [ENTER]"
+		echo -e "${WARN}Please close all application currently running and press [ENTER]"
 		read
-		echo -e "${INFO} Synchronizing cache writes to persistent storage and emptying the swap space..."
+		echo -e "${INFO}Synchronizing cache writes to persistent storage and emptying the swap space..."
 		CACHE_DIR
 			if [[ $(swapon --show) == "" ]]
 				then
-					echo -e "${WARN} Swap device not found on this system."
+					echo -e "${WARN}Swap device not found on this system."
 				else
-					echo -e "${INFO} Emptying swap space..."
+					echo -e "${INFO}Emptying swap space..."
 					SWAP_SPACE
 			fi
 fi
