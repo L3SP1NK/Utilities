@@ -20,6 +20,13 @@ USER_HOME="/home/lespink"
 
 CACHE_DIR()
 {
+	if [[ -d /var/cache ]]
+		then
+			## Remove cache folder.
+			echo -e "${INFO}Removing the cache directory..."
+			rm -fr /var/cache 2>/dev/null
+	fi
+
 	if [[ -d /root/.cache ]]
 		then
 			## Root
