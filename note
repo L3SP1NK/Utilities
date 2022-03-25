@@ -15,8 +15,8 @@ GOOD="${GREEN}${BOLD} [+] ${RC}"
 
 REQUIREMENTS="shred gpg" ## And a CLI editor of your choice.
 
-ENCRYPTED_TODO_FILE="${HOME}/.note.txt.gpg"
-UNCRYPTED_TODO_FILE="${HOME}/.note.txt"
+ENCRYPTED_TODO_FILE="${HOME}/.note.gpg"
+UNCRYPTED_TODO_FILE="${HOME}/.note"
 
 RUN(){
 	if [[ -f /home/${USER}/.pass.gpg ]]
