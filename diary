@@ -15,11 +15,11 @@ GOOD="${GREEN}${BOLD} [+] ${RC}"
 
 REQUIREMENTS="shred gpg" ## And a CLI editor of your choice.
 
-ENCRYPTED_TODO_FILE="${HOME}/.note.gpg"
-UNCRYPTED_TODO_FILE="${HOME}/.note"
+ENCRYPTED_TODO_FILE="${HOME}/.diary.gpg"
+UNCRYPTED_TODO_FILE="${HOME}/.diary"
 
 RUN(){
-	if [[ -f /home/${USER}/.note.gpg ]]
+	if [[ -f /home/${USER}/.diary.gpg ]]
 		then
 		if ! which ${REQUIREMENTS} > /dev/null
 				then
