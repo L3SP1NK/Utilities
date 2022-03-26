@@ -78,8 +78,6 @@ if  [[ ${EUID} -ne "0" ]]
         echo -e "${WARN}This script must be run as root!"
         exit 1
 	else
-		echo -e "${WARN}Please close all application currently running and press [ENTER]"
-		read
 		echo -e "${INFO}Synchronizing cache writes to persistent storage and emptying the swap space..."
 		CACHE_DIR
 			if [[ $(swapon --show) == "" ]]
