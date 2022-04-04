@@ -1,6 +1,4 @@
 #!/bin/bash
-## Simple todo manager.
-## Store your todo in a local text file, archived and encrypted with zip.
 
 ## Set colors.
 RC="\e[0m"
@@ -16,18 +14,21 @@ GOOD="${GREEN}${BOLD} [+] ${RC}"
 REQUIREMENTS="shred zip" ## And a CLI editor of your choice.
 
 ENCRYPTED_FILE="${HOME}/.note.zip"
-UNCRYPTED_FILE="${HOME}/.note"
+DECRYPTED_FILE="${HOME}/.note"
 
 RUN()
 {
+	## Prompt for the password.
+	echo "Password:"
+	read -s PASSWORD
 	## Decrypt the files.
-	unzip ${ENCRYPTED_FILE}
+	unzip -P "${PASSWORD}" ${ENCRYPTED_FILE}
 	## Edit the files.
-	${EDITOR} ${UNCRYPTED_FILE}
+	${EDITOR} ${DECRYPTED_FILE}
 	## Update the archive.
-	zip -durofy ${ENCRYPTED_FILE}
+	zip -vurfd -P "${PASSWORD}" ${ENCRYPTED_FILE} ${DECRYPTED_FILE}
 	## Remove the decrypted file.
-	shred -zuf ${UNCRYPTED_FILE}
+	shred -zuf ${DECRYPTED_FILE}
 }
 
 if [[ -f ${ENCRYPTED_FILE} ]]
@@ -39,14 +40,14 @@ if [[ -f ${ENCRYPTED_FILE} ]]
 				RUN
 		fi
 	else
-		echo -e "${YELLOW}Note file note not found, do you want to create one? (Y/n)"
-		read CREATE_UNCRYPTED_FILE
-			case ${CREATE_UNCRYPTED_FILE} in
+		echo -e "${INFO}Note file note not found, do you want to create one? (Y/n)"
+		read -s -n 1 CREATE_DECRYPTED_FILE
+			case ${CREATE_DECRYPTED_FILE} in
 				Y/y)
 					RUN
 					;;
 				*)
-					echo  -e "${WARN}Exiting..."
+					echo  -e "${GOOD}Exiting..."
 					exit 1
 					;;
 			esac
