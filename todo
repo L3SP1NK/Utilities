@@ -1,6 +1,6 @@
 #!/bin/bash
 ## Simple todo manager.
-## Store your todo in a local text file, encrypted with gpg.
+## Store your todo in a local text file, archived and encrypted with zip.
 
 ## Set colors.
 RC="\e[0m"
@@ -13,51 +13,41 @@ WARN="${RED}${BOLD} [-] ${RC}"
 INFO="${BLUE}${BOLD} [*] ${RC}"
 GOOD="${GREEN}${BOLD} [+] ${RC}"
 
-REQUIREMENTS="shred gpg" ## And a CLI editor of your choice.
+REQUIREMENTS="shred zip" ## And a CLI editor of your choice.
 
-ENCRYPTED_TODO_FILE="${HOME}/.todo.gpg"
-UNCRYPTED_TODO_FILE="${HOME}/.todo"
+ENCRYPTED_FILE="${HOME}/.todo.zip"
+UNCRYPTED_FILE="${HOME}/.todo"
 
-RUN(){
-	if [[ -f /home/${USER}/.pass.gpg ]]
-		then
-		if ! which ${REQUIREMENTS} > /dev/null
-				then
-					echo -e "${WARN} To run this program, you need the following packages installed: ${REQUIREMENTS}\n${WARN} Exiting..."
-				else
-					## Decrypt the files.
-					gpg --yes --textmode -d -o ${UNCRYPTED_TODO_FILE} --no-symkey-cache ${ENCRYPTED_TODO_FILE} ## Decrypt the password file, without saving the password.
-					if [[ ${?} -eq "0" ]]
-						then
-							## Edit the files.
-							${EDITOR} ${UNCRYPTED_TODO_FILE}
-						else
-        					echo -e "${WARN} Wrong password!"
-        					exit 1
-        				fi
-					## Encrypt the files.
-					gpg --yes --textmode -c --cipher-algo AES256 --no-symkey-cache ${UNCRYPTED_TODO_FILE} ## Encrypt the password file, without saving the password.
-					shred -fuzv ${UNCRYPTED_TODO_FILE} &> /dev/null ## Remove the Unencrypted file with shred (to complicate file recovery).
-		fi
-			else
-				echo -e "${YELLOW}Todo file note not found, do you want to create one? (Y/n)"
-				read CREATE_UNCRYPTED_TODO_FILE
-					if [[ ${CREATE_UNCRYPTED_TODO_FILE} == "n" ]]
-						then
-							exit
-						else
-							## Create the files.
-							touch ${UNCRYPTED_TODO_FILE}
-							## Edit the files.
-							${EDITOR} ${UNCRYPTED_TODO_FILE}
-					fi
-		fi
+RUN()
+{
+	## Decrypt the files.
+	unzip ${ENCRYPTED_FILE}
+	## Edit the files.
+	${EDITOR} ${UNCRYPTED_FILE}
+	## Update the archive.
+	zip -durofy ${ENCRYPTED_FILE}
+	## Remove the decrypted file.
+	shred -zuf ${UNCRYPTED_FILE}
 }
 
-if [[ "$EUID" -eq "0" ]]
+if [[ -f ${ENCRYPTED_FILE} ]]
 	then
-		echo -e "${WARN} This must not be run as root!\nExiting..."
-		exit 1
+		if ! which ${REQUIREMENTS} > /dev/null
+			then
+				echo -e "${WARN}To run this program, you need the following packages installed: ${REQUIREMENTS}\n${WARN}Exiting..."
+			else
+				RUN
+		fi
 	else
-		RUN
+		echo -e "${YELLOW}Note file note not found, do you want to create one? (Y/n)"
+		read CREATE_UNCRYPTED_FILE
+			case ${CREATE_UNCRYPTED_FILE} in
+				Y/y)
+					RUN
+					;;
+				*)
+					echo  -e "${WARN}Exiting..."
+					exit 1
+					;;
+			esac
 fi
