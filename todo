@@ -23,12 +23,14 @@ RUN()
 	read -s PASSWORD
 	## Decrypt the files.
 	unzip -P "${PASSWORD}" ${ENCRYPTED_FILE}
+	[ ${?} -ne '0' ] && exit 1
 	## Edit the files.
 	${EDITOR} ${DECRYPTED_FILE}
-	## Update the archive.
-	zip -vurfd -P "${PASSWORD}" ${ENCRYPTED_FILE} ${DECRYPTED_FILE}
+	## Create the archive.
+	shred -fuzv ${ENCRYPTED_FILE}
+	zip -vr -P "${PASSWORD}" ${ENCRYPTED_FILE} ${DECRYPTED_FILE}
 	## Remove the decrypted file.
-	shred -zuf ${DECRYPTED_FILE}
+	shred -fuzv ${DECRYPTED_FILE}
 }
 
 if [[ -f ${ENCRYPTED_FILE} ]]
