@@ -1,24 +1,14 @@
 #!/bin/bash
 ## Metasploit framework launcher.
+
 ## A launcher is needed since you can't background a session.
 ## (Ctrl+Z background the shell process instead)
 
-## Set colors.
-RC="\e[0m"
-BOLD="\e[1m"
-GREEN="\e[32m"
-RED="\e[31m"
-BLUE="\e[34m"
-
-WARN="${RED}${BOLD} [-] ${RC}"
-INFO="${BLUE}${BOLD} [*] ${RC}"
-GOOD="${GREEN}${BOLD} [+] ${RC}"
-
 REQUIREMENTS="msfconsole"
 
-if ! which ${REQUIREMENTS} > /dev/null
+if ! which ${REQUIREMENTS}>/dev/null
 	then
-		echo "${WARN} The Metasploit framework is not installed on this system!\nExiting..."
+		echo "The Metasploit framework is not installed on this system!"
 		exit 1
 	else
 		## Disable Ctrl-Z

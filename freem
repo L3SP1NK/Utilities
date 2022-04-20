@@ -1,6 +1,5 @@
 #!/bin/bash
-## Empty swap space and caches.
-## Empty the cache of the system and the following applications:
+## Empty the cache(+swap) of the system and the following applications:
 ## - Molotov
 ## - Binance
 ## - Firefox
@@ -80,11 +79,12 @@ if  [[ ${EUID} -ne "0" ]]
 	else
 		echo -e "${INFO}Synchronizing cache writes to persistent storage and emptying the swap space..."
 		CACHE_DIR
-			if [[ $(swapon --show) == "" ]]
-				then
-					echo -e "${WARN}Swap device not found on this system."
-				else
-					echo -e "${INFO}Emptying swap space..."
-					SWAP_SPACE
-			fi
+
+		if [[ $(swapon --show) == "" ]]
+			then
+				echo -e "${INFO}Swap device not found on this system."
+			else
+				echo -e "${INFO}Emptying swap space..."
+				SWAP_SPACE && echo -e "${GOOD}Done.${RC}" || "${WARN}Something went wrong!${RC}"
+		fi
 fi

@@ -1,5 +1,5 @@
 #!/bin/bash
-## Change the brightness of multiple monitor.
+## Change the brightness of multiple monitors.
 
 ## Set colors.
 RC="\e[0m"
