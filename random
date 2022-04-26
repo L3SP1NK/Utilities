@@ -1,0 +1,31 @@
+#!/bin/bash
+## Genrate a ~random password and copy it to the clipboard.
+## See the "pass" script to store them securely.
+
+## Set colors.
+RC="\e[0m"
+BOLD="\e[1m"
+GREEN="\e[32m"
+RED="\e[31m"
+BLUE="\e[34m"
+
+WARN="${RED}${BOLD} [-] ${RC}"
+INFO="${BLUE}${BOLD} [*] ${RC}"
+GOOD="${GREEN}${BOLD} [+] ${RC}"
+
+REQUIREMENTS="xclip notify-send"
+if ! which ${REQUIREMENTS} > /dev/null
+	then
+		echo -e "${WARN} To run this program, you need the following packages installed: ${REQUIREMENTS}\n${WARN} Exiting..."
+		exit 1
+	else
+		if [[ ${1} ]]
+			then
+				## Alpha + Num.
+				cat /dev/random | tr -cd 'a-z0-9' | head -c ${1} | xclip -selection clipboard
+				notify-send '  📄 Random password copied to clipoard! '
+			else
+				cat /dev/random | tr -cd 'a-z0-9' | head -c 32 | xclip -selection clipboard
+				notify-send '  📄 Random password copied to clipoard! '
+		fi
+fi
