@@ -1,6 +1,5 @@
 #!/bin/bash
-## Genrate a ~random password and copy it to the clipboard.
-## See the "pass" script to store them securely.
+## Genrate a ~random string and copy it to the clipboard.
 
 ## Set colors.
 RC="\e[0m"
@@ -22,10 +21,8 @@ if ! which ${REQUIREMENTS} > /dev/null
 		if [[ ${1} ]]
 			then
 				## Alpha + Num.
-				cat /dev/random | tr -cd 'a-z0-9' | head -c ${1} | xclip -selection clipboard
-				notify-send '  📄 Random password copied to clipoard! '
+				cat /dev/random | tr -cd 'a-z0-9' | head -c ${1}
 			else
-				cat /dev/random | tr -cd 'a-z0-9' | head -c 32 | xclip -selection clipboard
-				notify-send '  📄 Random password copied to clipoard! '
+				cat /dev/random | tr -cd 'a-z0-9' | head -c 32
 		fi
 fi
