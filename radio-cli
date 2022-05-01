@@ -1,77 +1,101 @@
 #!/bin/bash
-## Randomly play videos from a youtube channel.
+## Play your favorites songs without leaving the tty.
 
-RC="\e[0m"
-UL="\e[4m"
-BOLD="\e[1m"
-GREY="${BOLD}\e[37m"
-RED="${BOLD}\e[31m"
-YELLOW="${BOLD}\e[33m"
-BLUE="${BOLD}\e[34m"
-
-REQUIREMENTS="mpv yt-dlp"
-
-if ! which ${REQUIREMENTS}>/dev/null
-	then
-		echo -e "${RED}You need ${REQUIREMENTS} to run this script!${RC}"
-		exit 1
-fi
-
-## Eelf.
+## Youtube channels:
+## - Eelf.
 channel_[1]="https://www.youtube.com/c/EELFtrax"
-## Eelf records.
+## - Eelf records.
 channel_[2]="https://www.youtube.com/c/EELFRECORDS"
-## Theuppermostinlife
+## - The Uppermost In Life
 channel_[3]="https://www.youtube.com/c/theuppermostinlife"
-## Houseum
+## - Houseum
 channel_[4]="https://www.youtube.com/c/Houseum"
-## Slav
+## - Slav
 channel_[5]="https://www.youtube.com/c/SlavRecords"
-## CMYK
+## - CMYK
 channel_[6]="https://www.youtube.com/c/CMYKitsme"
+
+## Colors.
+rc="\e[0m"
+ul="\e[4m"
+bold="\e[1m"
+grey="${bold}\e[37m"
+red="${bold}\e[31m"
+yellow="${bold}\e[33m"
+blue="${bold}\e[34m"
 
 selectionMenu()
 {
-	echo -e "\n ${UL}${YELLOW}Select a channel:${RC}\n\n \
-${BLUE}[${RC}1${BLUE}] ${RC}Eelf${RC}\n \
-${BLUE}[${RC}2${BLUE}] ${RC}Eelf Records${RC}\n \
-${BLUE}[${RC}3${BLUE}] ${RC}The Uppermost In Life${RC}\n \
-${BLUE}[${RC}4${BLUE}] ${RC}Houseum${RC}\n \
-${BLUE}[${RC}5${BLUE}] ${RC}Slav${RC}\n \
-${BLUE}[${RC}6${BLUE}] ${RC}CMYK${RC}\n\n \
-${BLUE}[${GREY}?${BLUE}] ${GREY}Display player shortcut.${RC}\n "
+	clear
+	echo -e "\n ${ul}${yellow}Select a channel:${rc}\n\n \
+${blue}[${rc}1${blue}] ${rc}Eelf${rc}\n \
+${blue}[${rc}2${blue}] ${rc}Eelf Records${rc}\n \
+${blue}[${rc}3${blue}] ${rc}The Uppermost In Life${rc}\n \
+${blue}[${rc}4${blue}] ${rc}Houseum${rc}\n \
+${blue}[${rc}5${blue}] ${rc}Slav${rc}\n \
+${blue}[${rc}6${blue}] ${rc}CMYK${rc}\n\n \
+${blue}[${grey}?${blue}] ${grey}Display player shortcut.${rc}\n "
 }
 
 displayShortcut()
 {
-	echo -e "\n ${BLUE}<${GREY}SPACE${BLUE}>${RC}	pause.\n \
-${BLUE}<${GREY}ENTER${BLUE}>${RC}	skip.\n \
-${BLUE}<${GREY}M${BLUE}>${RC}		mute.\n
-${BLUE}<${GREY}Q${BLUE}>${RC}		quit.\n"
+	clear
+	echo -e "\n ${blue}<${grey}SPACE${blue}>${rc}	pause.\n \
+${blue}<${grey}ENTER${blue}>${rc}	skip.\n \
+${blue}<${grey}M${blue}>${rc}		mute.\n \
+${blue}<${grey}Q${blue}>${rc}		quit.\n\n \
+Try ${blue}'${grey}man mpv${blue}'${rc} for more informations.${rc}"
+}
+
+displayRequirements()
+{
+	clear
+	echo -e "\n ${ul}${red}To run this program you need:${rc}\n\n \
+- mpv\n \
+- cava/vis\n \
+- youtube-dl/yt-dlp\n"
+}
+
+checkRequirements()
+{
+	downloader=$(which yt-dlp youtube-dl | grep -v "not found" | head -n1)
+	visualizer=$(which vis cava | grep -v "not found" | head -n1)
+
+	if [[ ${downloader} == "" || ${visualizer} == "" ]]
+		then
+			displayRequirements
+			exit 1
+	fi
+
+	if ! which mpv>/dev/null
+		then
+			displayRequirements
+			exit 1
+	fi
 }
 
 main()
 {
-	clear
+	checkRequirements
 	selectionMenu
 	read -s -n 1 selectedChannel
 	case ${selectedChannel} in
 		[0-9])
 			currentlyPlaying=$(echo "${channel_[${selectedChannel}]}"|cut -d "/" -f 5)
 			clear
-			echo -e "\n ${YELLOW}Playing ${currentlyPlaying}...${RC}\n"
+			echo -e "\n ${yellow}Playing ${currentlyPlaying}...${rc}\n"
 			mpv --shuffle --no-video "${channel_[${selectedChannel}]}"
 			;;
 		?)
-			clear
 			displayShortcut
+			read
+			main
 			;;
 		*)
 			clear
-			echo -e "${RED}Please enter a valid number!${RC}"
+			echo -e "${red}Please enter a valid number!${rc}"
 			exit 1
 			;;
 	esac
 }
-
 main
