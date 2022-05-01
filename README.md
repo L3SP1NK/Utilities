@@ -1,3 +1,3 @@
 ## Utilities
-Personal script to do common task.
+Script to do common task.
 
