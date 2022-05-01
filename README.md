@@ -1,3 +1,3 @@
 ## Utilities
-⚠️ THESE SCRIPTS ARE PERSONAL AND FREQUENTLY UPDATED/BROKEN⚠️
+Personal script to do common task.
 
