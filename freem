@@ -33,7 +33,7 @@ CACHE_DIR()
 			rm -fr ${USER_HOME}/.cache 2>/dev/null
 	fi
 
-	if [[ -d ${USER_HOME}/.mozilla/firefox/*/cache ]]
+	if [[ -d ${USER_HOME}/.mozilla/ ]]
 		then
 			## Mozilla
 			echo -e "${INFO}Removing the firefox cache directory..."
