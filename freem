@@ -6,64 +6,59 @@
 
 ## Set colors.
 RC="\e[0m"
-BOLD="\e[1m"
-GREEN="\e[32m"
 RED="\e[31m"
-BLUE="\e[34m"
-
-WARN="${RED}${BOLD} [-] ${RC}"
-INFO="${BLUE}${BOLD} [*] ${RC}"
-GOOD="${GREEN}${BOLD} [+] ${RC}"
+GREEN="\e[32m"
+YELLOW="\e[33m"
 
 USER_HOME="/home/lespink"
 
-CACHE_DIR()
+cacheDir()
 {
 	if [[ -d /root/.cache ]]
 		then
 			## Root
-			echo -e "${INFO}Removing the root cache directory..."
+			echo -e " ${YELLOW}→ Removing the root cache directory..."
 			rm -fr /root/.cache 2>/dev/null
 	fi
 
 	if [[ -d ${USER_HOME}/.cache ]]
 		then
 			## User
-			echo -e "${INFO}Removing the user cache directory..."
+			echo -e " ${YELLOW}→ Removing the user cache directory..."
 			rm -fr ${USER_HOME}/.cache 2>/dev/null
 	fi
 
 	if [[ -d ${USER_HOME}/.mozilla/ ]]
 		then
 			## Mozilla
-			echo -e "${INFO}Removing the firefox cache directory..."
+			echo -e " ${YELLOW}→ Removing the firefox cache directory..."
 			rm -fr ${USER_HOME}/.mozilla/firefox/*/cache* 2>/dev/null
 	fi
 
 	if [[ -d ${USER_HOME}/.config/Binance/Partitions/binance.app/Cache/ ]]
 		then
 			## Binance
-			echo -e "${INFO}Removing the Binance cache directory..."
+			echo -e " ${YELLOW}→ Removing the Binance cache directory..."
 			rm -fr ${USER_HOME}/.config/Binance/Partitions/binance.app/Cache/* 2>/dev/null
 	fi
 
 	if [[ -d ${USER_HOME}/.config/molotov/Cache/ ]]
 		then
 			## Molotov
-			echo -e "${INFO}Removing the Molotov cache directory..."
+			echo -e " ${YELLOW}→ Removing the Molotov cache directory..."
 			rm -fr ${USER_HOME}/.config/molotov/Cache/* 2>/dev/null
 	fi
 
 	if [[ -d ${USER_HOME}/.local/share/TelegramDesktop/tdata/ ]]
 		then
 			## Telegram
-			echo -e "${INFO}Removing the Telegram cache directory..."
+			echo -e " ${YELLOW}→ Removing the Telegram cache directory..."
 			rm -fr ${USER_HOME}/.local/share/TelegramDesktop/tdata/user*/ 2>/dev/null
 	fi
 
 }
 
-SWAP_SPACE()
+swapSpace()
 {
 	sync
 	swapoff -a
@@ -74,17 +69,17 @@ SWAP_SPACE()
 ## Check privileges.
 if  [[ ${EUID} -ne "0" ]]
     then
-        echo -e "${WARN}This script must be run as root!"
+        echo -e " ${RED}× This script must be run as root!"
         exit 1
 	else
-		echo -e "${INFO}Synchronizing cache writes to persistent storage and emptying the swap space..."
-		CACHE_DIR
+		echo -e " ${YELLOW}→ Synchronizing cache writes to persistent storage and emptying the swap space..."
+		cacheDir
 
 		if [[ $(swapon --show) == "" ]]
 			then
-				echo -e "${INFO}Swap device not found on this system."
+				echo -e " ${YELLOW}→ Swap device not found on this system."
 			else
-				echo -e "${INFO}Emptying swap space..."
-				SWAP_SPACE && echo -e "${GOOD}Done.${RC}" || "${WARN}Something went wrong!${RC}"
+				echo -e " ${YELLOW}→ Emptying swap space..."
+				swapSpace && echo -e "${GOOD}Done.${RC}" || " ${RED}× Something went wrong!${RC}"
 		fi
 fi
