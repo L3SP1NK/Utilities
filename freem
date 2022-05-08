@@ -80,6 +80,6 @@ if  [[ ${EUID} -ne "0" ]]
 				echo -e " ${YELLOW}→ Swap device not found on this system."
 			else
 				echo -e " ${YELLOW}→ Emptying swap space..."
-				swapSpace && echo -e "${GOOD}Done.${RC}" || " ${RED}× Something went wrong!${RC}"
+				swapSpace && echo -e " ${GREEN}ø Done.${RC}" || " ${RED}× Something went wrong!${RC}"
 		fi
 fi
