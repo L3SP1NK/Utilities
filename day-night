@@ -1,5 +1,4 @@
 #!/bin/bash
-
 REQUIREMENTS='redshift'
 
 checkTheme()
@@ -65,13 +64,13 @@ PERIOD=$(redshift -p 2>/dev/null | grep "Period" | cut -d ' ' -f 2)
 
 if [[ ${PERIOD} == 'Daytime' ]]
 	then
-		setLightTheme
-		relaunchApp
+		setDarkTheme
+#		relaunchApp
 		echo "☀️ It's currently the day, setting the light theme..."
 elif [[ ${PERIOD} == 'NightTime' ]]
 	then
-		setDarkTheme
-		relaunchApp
+		setLightTheme
+#		relaunchApp
 		echo "🌙 It's currently the night, setting the dark theme..."
 	else
 		echo "Unable to get the current time..."
