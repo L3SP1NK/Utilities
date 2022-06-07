@@ -3,24 +3,24 @@
 
 ## Youtube channels:
 ## - Eelf.
-channel_[1]="https://www.youtube.com/c/EELFtrax"
+CHANNEL_[1]="https://www.youtube.com/c/EELFtrax"
 ## - Eelf records.
-channel_[2]="https://www.youtube.com/c/EELFRECORDS"
+CHANNEL_[2]="https://www.youtube.com/c/EELFRECORDS"
 ## - The Uppermost In Life
-channel_[3]="https://www.youtube.com/c/theuppermostinlife"
+CHANNEL_[3]="https://www.youtube.com/c/theuppermostinlife"
 ## - Houseum
-channel_[4]="https://www.youtube.com/c/Houseum"
+CHANNEL_[4]="https://www.youtube.com/c/Houseum"
 ## - Slav
-channel_[5]="https://www.youtube.com/c/SlavRecords"
+CHANNEL_[5]="https://www.youtube.com/c/SlavRecords"
 ## - CMYK
-channel_[6]="https://www.youtube.com/c/CMYKitsme"
+CHANNEL_[6]="https://www.youtube.com/c/CMYKitsme"
 
 ## Colors.
 RC="\e[0m"
 UL="\e[4m"
 BOLD="\e[1m"
 GREY="\e[37m"
-RED="$\e[31m"
+RED="\e[31m"
 YELLOW="\e[33m"
 BLUE="\e[34m"
 
@@ -34,7 +34,7 @@ ${BLUE}[${RC}3${BLUE}] ${RC}The Uppermost In Life${RC}\n \
 ${BLUE}[${RC}4${BLUE}] ${RC}Houseum${RC}\n \
 ${BLUE}[${RC}5${BLUE}] ${RC}Slav${RC}\n \
 ${BLUE}[${RC}6${BLUE}] ${RC}CMYK${RC}\n\n \
-${BLUE}[${GREY}?${BLUE}] ${GREY}Display player shortcut.${RC}\n "
+${BLUE}[${GREY}?${BLUE}] ${GREY}Display player shortcut.${RC}\n"
 }
 
 displayShortcut()
@@ -44,7 +44,7 @@ displayShortcut()
 ${BLUE}<${GREY}ENTER${BLUE}>${RC}	skip.\n \
 ${BLUE}<${GREY}M${BLUE}>${RC}		mute.\n \
 ${BLUE}<${GREY}Q${BLUE}>${RC}		quit.\n\n \
-Try ${BLUE}'${BOLD}${GREY}man mpv${BLUE}'${RC} for more informations.${RC}"
+Try ${BLUE}"${BOLD}${GREY}man mpv${BLUE}"${RC} for more informations.${RC}"
 }
 
 displayRequirements()
@@ -58,16 +58,9 @@ displayRequirements()
 
 checkRequirements()
 {
-	downloader=$(which yt-dlp youtube-dl | grep -v "not found" | head -n1)
-	visualizer=$(which vis cava | grep -v "not found" | head -n1)
+	DOWNLOADER=$(which yt-dlp youtube-dl|grep -v "not found"|head -n1)
 
-	if [[ ${downloader} == "" || ${visualizer} == "" ]]
-		then
-			displayRequirements
-			exit 1
-	fi
-
-	if ! which mpv>/dev/null
+	if [[ ${DOWNLOADER} == "" || ! $(which mpv) ]]
 		then
 			displayRequirements
 			exit 1
@@ -78,15 +71,15 @@ main()
 {
 	checkRequirements
 	selectionMenu
-	read -s -n 1 selectedChannel
-	case ${selectedChannel} in
+	read -s -n 1 SELECTED_CHANNEL
+	case ${SELECTED_CHANNEL} in
 		[0-9])
-			currentlyPlaying=$(echo "${channel_[${selectedChannel}]}"|cut -d "/" -f 5)
+			CURRENTLY_PLAYING=$(echo "${CHANNEL_[${SELECTED_CHANNEL}]}"|cut -d "/" -f 5)
 			clear
-			echo -e "\n ${YELLOW}Playing ${currentlyPlaying}...${RC}\n"
-			mpv --shuffle --no-video "${channel_[${selectedChannel}]}"
+			echo -e "\n ${YELLOW}Playing ${CURRENTLY_PLAYING}...${RC}\n"
+			mpv --shuffle --no-video "${CHANNEL_[${SELECTED_CHANNEL}]}"
 			;;
-		?)
+		'?')
 			displayShortcut
 			read
 			main
@@ -94,7 +87,8 @@ main()
 		*)
 			clear
 			echo -e "${RED}Please enter a valid number!${RC}"
-			exit 1
+			read
+			main
 			;;
 	esac
 }
