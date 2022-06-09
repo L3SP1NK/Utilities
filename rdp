@@ -1,20 +1,21 @@
 #!/bin/bash
+USER=${USER}
 HOST="thinkpad"
-echo "Password:"
+echo -n "${USER}@${HOST}'s password: "
 
 if ! xfreerdp > /dev/null
 	then
 		echo "xfreerdp is not installed!"
 		exit 1
-	else
-		read -s PASS
-		xfreerdp \
-			/v:${HOST} \
-			/u:lespink \
-			/p:${PASS} \
-			/f \
-			/cert-ignore \
-			/compression-level:9 \
-			+aero \
-			+auto-reconnect
 fi
+
+read -s PASS
+xfreerdp \
+	/v:${HOST} \
+	/u:${USER} \
+	/p:${PASS} \
+	/f \
+	/cert-ignore \
+	/compression-level:9 \
+	+aero \
+	+auto-reconnect
