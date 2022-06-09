@@ -1,0 +1,15 @@
+#!/bin/bash
+RED="\e[31m"
+REQUIREMENTS="xclip rofi"
+EMOJI_FILE="${HOME}/.emoji"
+
+if ! which ${REQUIREMENTS}>/dev/null
+    then
+        echo -e "${RED}To run this script, you need: ${REQUIREMENTS}"
+        exit 1
+fi
+
+cat ${EMOJI_FILE}\
+|rofi -dmenu -i -p "Emoji:"\
+|cut -d " " -f 1\
+|xclip -selection clipboard
