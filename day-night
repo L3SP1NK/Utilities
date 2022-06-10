@@ -4,8 +4,8 @@ REQUIREMENTS='redshift'
 #DARK_THEME="Adwaita-dark"
 LIGHT_THEME="Flat-Remix-GTK-Blue-Light-Solid"
 DARK_THEME="Flat-Remix-GTK-Blue-Darkest-Solid"
-ICON_LIGHT="Papirus-Light"
-ICON_DARK="Papirus-Dark"
+ICON_LIGHT="ePapirus-Light"
+ICON_DARK="ePapirus-Dark"
 LIGHT_CURSOR="Adwaita"
 DARK_CURSOR="Simp1e"
 
