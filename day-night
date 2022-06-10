@@ -1,13 +1,21 @@
 #!/bin/bash
 REQUIREMENTS='redshift'
+#LIGHT_THEME="Adwaita"
+#DARK_THEME="Adwaita-dark"
+LIGHT_THEME="Flat-Remix-GTK-Blue-Light-Solid"
+DARK_THEME="Flat-Remix-GTK-Blue-Darkest-Solid"
+ICON_LIGHT="Papirus-Light"
+ICON_DARK="Papirus-Dark"
+LIGHT_CURSOR="Adwaita"
+DARK_CURSOR="Simp1e"
 
 checkTheme()
 {
-	if [[ -e /usr/share/themes/Adwaita-dark ]] && \
-	[[ -e /usr/share/themes/HighContrast ]] && \
+	if [[ -e /usr/share/themes/${DARK_THEME} ]] && \
+	[[ -e /usr/share/themes/${LIGHT_THEME} ]] && \
 	[[ -e /usr/share/icons/Papirus-Dark ]] && \
 	[[ -e /usr/share/icons/Papirus-Light ]] && \
-	[[ -e /usr/share/icons/Adwaita ]] && \
+	[[ -e /usr/share/icons/${LIGHT_THEME} ]] && \
 	[[ -e /usr/share/icons/Simp1e ]]
 		then
 			echo -e "\e[32mThemes found..."
@@ -19,24 +27,30 @@ checkTheme()
 
 setLightTheme()
 {
-	xfconf-query -c xsettings -p /Net/ThemeName -s 'High Contrast'
-	xfconf-query -c xsettings -p /Net/IconThemeName -s 'Papirus-Light'
-	xfconf-query -c xsettings -p /Gtk/CursorThemeName -s 'Adwaita'
+    ## Set xfce theme
+	xfconf-query -c xsettings -p /Net/ThemeName -s "${LIGHT_THEME}"
+	xfconf-query -c xsettings -p /Net/IconThemeName -s "${ICON_LIGHT}"
+    ## Set cursor theme
+	xfconf-query -c xsettings -p /Gtk/CursorThemeName -s "${LIGHT_CURSOR}"
+    ## Set GTK theme
 	gsettings set org.gnome.desktop.interface color-scheme prefer-light
-	[[ -e ~/.config/rofi/config.rasi ]] && [[ -e ~/.config/rofi/light.rasi ]]
-	sed -i 's#@theme "~/.config/rofi/dark.rasi"#@theme "~/.config/rofi/light.rasi"#g' \
-	~/.config/rofi/config.rasi
+#	[[ -e ~/.config/rofi/config.rasi ]] && [[ -e ~/.config/rofi/light.rasi ]]
+#	sed -i 's#@theme "~/.config/rofi/dark.rasi"#@theme "~/.config/rofi/light.rasi"#g' \
+#	~/.config/rofi/config.rasi
 }
 
 setDarkTheme()
 {
-	xfconf-query -c xsettings -p /Net/ThemeName -s 'Adwaita-dark'
-	xfconf-query -c xsettings -p /Net/IconThemeName -s 'Papirus-Dark'
-	xfconf-query -c xsettings -p /Gtk/CursorThemeName -s 'Simple'
+    ## Set xfce theme
+	xfconf-query -c xsettings -p /Net/ThemeName -s "${DARK_THEME}"
+	xfconf-query -c xsettings -p /Net/IconThemeName -s "${ICON_LIGHT}"
+    ## Set cursor theme
+	xfconf-query -c xsettings -p /Gtk/CursorThemeName -s "${DARK_CURSOR}"
+    ## Set GTK theme
 	gsettings set org.gnome.desktop.interface color-scheme prefer-dark
-	[[ -e ~/.config/rofi/config.rasi ]] && [[ -e ~/.config/rofi/dark.rasi ]]
-	sed -i 's#@theme "~/.config/rofi/light.rasi"#@theme "~/.config/rofi/dark.rasi"#g' \
-	~/.config/rofi/config.rasi
+#	[[ -e ~/.config/rofi/config.rasi ]] && [[ -e ~/.config/rofi/dark.rasi ]]
+#	sed -i 's#@theme "~/.config/rofi/light.rasi"#@theme "~/.config/rofi/dark.rasi"#g' \
+#	~/.config/rofi/config.rasi
 }
 
 relaunchApp()
@@ -65,12 +79,12 @@ PERIOD=$(redshift -p 2>/dev/null | grep "Period" | cut -d ' ' -f 2)
 if [[ ${PERIOD} == 'Daytime' ]]
 	then
 		setLightTheme
-#		relaunchApp
+		relaunchApp
 		echo "☀️ It's currently the day, setting the light theme..."
 elif [[ ${PERIOD} == 'Night' ]]
 	then
 		setDarkTheme
-#		relaunchApp
+		relaunchApp
 		echo "🌙 It's currently the night, setting the dark theme..."
 	else
 		echo "Unable to get the current time..."
