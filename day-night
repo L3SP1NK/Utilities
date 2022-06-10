@@ -64,12 +64,12 @@ PERIOD=$(redshift -p 2>/dev/null | grep "Period" | cut -d ' ' -f 2)
 
 if [[ ${PERIOD} == 'Daytime' ]]
 	then
-		setDarkTheme
+		setLightTheme
 #		relaunchApp
 		echo "☀️ It's currently the day, setting the light theme..."
-elif [[ ${PERIOD} == 'NightTime' ]]
+elif [[ ${PERIOD} == 'Night' ]]
 	then
-		setLightTheme
+		setDarkTheme
 #		relaunchApp
 		echo "🌙 It's currently the night, setting the dark theme..."
 	else
