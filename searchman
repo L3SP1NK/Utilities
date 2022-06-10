@@ -1,0 +1,14 @@
+#!/bin/bash
+MAN_PAGE=$(man -k .|cut -d " " -f 1|rofi -dmenu)
+OUT_FILE="/tmp/${MAN_PAGE}_man.pdf"
+REQUIREMENTS="man atril rofi"
+if ! which ${REQUIREMENTS}>/dev/null
+    then
+        echo "To run this program, you need: ${REQUIREMENTS}!"
+        exit 1
+fi
+
+[[ ! ${MAN_PAGE} ]] && exit
+man -T pdf ${MAN_PAGE}>${OUT_FILE}
+atril ${OUT_FILE}
+rm ${OUT_FILE}

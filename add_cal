@@ -1,0 +1,54 @@
+#!/bin/bash
+## Add an appointments everyday to calcurse.
+RC="\e[0m"
+RED="\e[31m"
+
+REQUIREMENTS="calcurse ncal date"
+DIM=$(cal $(date +"%m %Y") | awk 'NF {DAYS = $NF}; END {print DAYS}') ## Day in month
+APTS_FILE="${HOME}/.local/share/calcurse/apts"
+
+if ! which ${REQUIREMENTS}>/dev/null
+    then
+        echo -e "${RED}To run this program, you need: ${REQUIREMENTS}${RC}"
+fi
+
+if [[ ${1} ]]
+    then
+        APTS_NAME="${1}"
+    else
+        echo -e "${RED}Please, specify the appointment name!${RC}"
+        exit 1
+fi
+
+if [[ ${2} ]]
+    then
+        START_TIME=${2}
+    else
+        echo -e "${RED}Please, specify the start time!${RC}"
+        exit 1
+fi
+
+if [[ ${3} ]]
+    then
+        END_TIME=${3}
+    else
+        echo -e "${RED}Please, specify the end time!"
+        exit 1
+fi
+
+if [[ ${START_TIME} > ${END_TIME} ]]
+    then
+        echo -e "${RED}The end time must be after the start time!"
+        exit 1
+fi
+
+if [[ ! -f ${APTS_FILE} ]]
+    then
+        echo -e "${RED}The appointments file does not exist!${RC}"
+        exit 1
+fi
+
+for NUMBER in $(seq -w ${DIM})
+	do
+		echo "06/${NUMBER}/2022 @ ${START_TIME} -> 06/${NUMBER}/2022 @ ${END_TIME}|${APTS_NAME}" >> ${APTS_FILE}
+done

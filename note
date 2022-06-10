@@ -1,0 +1,85 @@
+#!/bin/bash
+BACKUP_DIR="/tmp/my_note_backup"
+ENCRYPTED_NOTE_FILE="${HOME}/.me/my_note.gpg"
+UNENCRYPTED_NOTE_FILE="/tmp/my_note"
+ENCRYPTED_NOTE_FILE_BACKUP="${HOME}/.me/my_note.gpg~"
+
+RC="\e[0m"
+RED="\e[31m"
+GREEN="\e[32m"
+
+checkEnv()
+{
+    REQUIREMENTS="gpg nano shred"
+    if ! which ${REQUIREMENTS}>/dev/null
+        then
+            echo -e "${RED}To run this program, you need: ${REQUIREMENTS}${RC}"
+            rm ${PID_FILE} && exit 1
+    fi
+
+    if [[ ! -f ${ENCRYPTED_NOTE_FILE} ]]
+        then
+            echo -e "${RED}${CRYPTED_NOTE_FILE} does not exist!${RC}"
+            rm ${PID_FILE} && exit 1
+    fi
+
+    PID_FILE="/tmp/note.pid"
+    if [[ -f ${PID_FILE} ]]
+        then
+            echo -e "${RED}Another instance is already running!${RC}"
+            rm ${PID_FILE} && exit 1
+        else
+            touch ${PID_FILE}
+    fi
+
+}
+
+backupFile()
+{
+    cp ${ENCRYPTED_NOTE_FILE} ${ENCRYPTED_NOTE_FILE_BACKUP}
+    if [[ ${?} -eq '0' ]]
+        then
+            echo -e "${GREEN}Backup made successfully${RC}"
+        else
+            echo -e "${RED}Something went wrong during the backup!${RC}"
+            rm ${PID_FILE} && exit 1
+    fi
+}
+
+decryptFile()
+{
+    gpg --yes -d -o ${UNENCRYPTED_NOTE_FILE} --no-symkey-cache ${ENCRYPTED_NOTE_FILE}
+    if [[ ${?} -ne '0' ]]
+        then
+            echo -e "${RED}Something went wrong during file decryption!${RC}"
+            rm ${PID_FILE} && exit 1
+    fi
+}
+
+editFile()
+{
+    mkdir -p ${BACKUP_DIR}
+    nano --backupdir=${BACKUP_DIR} ${UNENCRYPTED_NOTE_FILE}
+    if [[ ${?} -ne '0' ]]
+        then
+            echo -e "${RED}Something went wrong while editing the file!${RC}"
+            rm ${PID_FILE} && exit 1
+    fi
+}
+
+encryptFile()
+{
+    gpg --yes -o ${ENCRYPTED_NOTE_FILE} -c --cipher-algo AES256 --no-symkey-cache ${UNENCRYPTED_NOTE_FILE}
+    if [[ ${?} -ne '0' ]]
+        then
+            echo -e "${RED}Something went wrong during file encryption!${RC}"
+            rm ${PID_FILE} && exit 1
+    fi
+    rm -r ${BACKUP_DIR} ${PID_FILE} ${UNENCRYPTED_NOTE_FILE}
+}
+
+checkEnv
+backupFile
+decryptFile
+editFile
+encryptFile
