@@ -1,0 +1,38 @@
+#!/bin/bash
+## Get the weather using wttr.in
+## For more info, see: https://github.com/chubin/wttr.in
+REQUIREMENTS="curl"
+URL="https://wttr.in"
+
+usage()
+{
+    echo -e "Usage:\nweather <city>"
+}
+
+checkEnv()
+{
+    if ! which ${REQUIREMENTS}>/dev/null
+        then
+            echo "To run this program, you need: ${REQUIREMENTS}"
+            exit 1
+    fi
+
+    if [[ ${1} ]]
+        then
+            CITY="${1}"
+        else
+            usage
+            exit 1
+    fi
+}
+
+
+getWeather()
+{
+    clear
+    curl -sSL ${URL}/${CITY}?1\
+    |grep -v "Follow"
+}
+
+checkEnv
+getWeather
