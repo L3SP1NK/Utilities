@@ -1,5 +1,5 @@
 #!/bin/bash
-## Genrate a ~random string and copy it to the clipboard.
+## Genrate a ~random string.
 
 ## Set colors.
 RC="\e[0m"

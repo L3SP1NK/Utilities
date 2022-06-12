@@ -1,15 +1,38 @@
 #!/bin/bash
-USER=${USER}
-HOST="thinkpad"
+## Connect to a rdp server.
+
+RC="\e[0m"
+RED="\e[31m"
+GREEN="\e[32m"
+REQUIREMENTS="xfreerdp"
+
+if [[ ${1} ]]
+    then
+        USER="${1}"
+    else
+        echo -e "${RED}Specify the username!${RC}"
+        exit 1
+fi
+
+if [[ ${2} ]]
+    then
+        HOST="${2}"
+    else
+        echo -e "${RED}Specify the host!${RC}"
+        exit 1
+fi
+
+
 echo -n "${USER}@${HOST}'s password: "
 
-if ! xfreerdp > /dev/null
+if ! ${REQUIREMENTS} > /dev/null
 	then
-		echo "xfreerdp is not installed!"
+		echo -e "${RED}To run this program you need: ${REQUIREMENTS}${RC}"
 		exit 1
 fi
 
 read -s PASS
+echo -e "${GREEN}Connecting...${RC}"
 xfreerdp \
 	/v:${HOST} \
 	/u:${USER} \

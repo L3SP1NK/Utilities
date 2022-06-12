@@ -1,7 +1,15 @@
 #!/bin/bash
-MAN_PAGE=$(man -k .|cut -d " " -f 1|rofi -dmenu)
+## Search for a specific program, and print it's man pages into a pdf reader.
+
+DMENU="rofi"
+DMENU_CMD="rofi -dmenu"
+PDF_READER="atril"
+PDF_CMD="atril -f"
+
+MAN_PAGE=$(man -k .|cut -d " " -f 1|${DMENU_CMD})
 OUT_FILE="/tmp/${MAN_PAGE}_man.pdf"
-REQUIREMENTS="man atril rofi"
+REQUIREMENTS="man ${PDF_READER} ${DMENU}"
+
 if ! which ${REQUIREMENTS}>/dev/null
     then
         echo "To run this program, you need: ${REQUIREMENTS}!"
@@ -10,5 +18,5 @@ fi
 
 [[ ! ${MAN_PAGE} ]] && exit
 man -T pdf ${MAN_PAGE}>${OUT_FILE}
-atril ${OUT_FILE}
+${PDF_CMD} ${OUT_FILE}
 rm ${OUT_FILE}

@@ -1,6 +1,8 @@
 #!/bin/bash
+## Copy emoji to your clipboard.
 RED="\e[31m"
 REQUIREMENTS="xclip rofi"
+DMENU="rofi -dmenu -i -p"
 EMOJI_FILE="${HOME}/.emoji"
 
 if ! which ${REQUIREMENTS}>/dev/null
@@ -10,6 +12,6 @@ if ! which ${REQUIREMENTS}>/dev/null
 fi
 
 cat ${EMOJI_FILE}\
-|rofi -dmenu -i -p "Emoji:"\
+| ${DMENU} "Emoji:"\
 |cut -d " " -f 1\
 |xclip -selection clipboard

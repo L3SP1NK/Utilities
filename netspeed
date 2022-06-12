@@ -1,4 +1,6 @@
 #!/bin/bash
+## Get the network speed of the desired interface.
+
 ## Set colors.
 RC="\e[0m"
 BOLD="\e[1m"
@@ -23,3 +25,4 @@ if [[ ${?} -ne "0" ]]
 	else
 		echo -e "${BOLD}${GREY}${INTERFACE}: ${BOLD}${GREEN}$(ethtool ${INTERFACE} 2>/dev/null | grep Speed | awk {'print $2'})"
 fi
+
