@@ -26,19 +26,19 @@ fi
 echo -n "${USER}@${HOST}'s password: "
 
 if ! ${REQUIREMENTS} > /dev/null
-	then
-		echo -e "${RED}To run this program you need: ${REQUIREMENTS}${RC}"
-		exit 1
+    then
+        echo -e "${RED}To run this program you need: ${REQUIREMENTS}${RC}"
+        exit 1
 fi
 
 read -s PASS
 echo -e "${GREEN}Connecting...${RC}"
 xfreerdp \
-	/v:${HOST} \
-	/u:${USER} \
-	/p:${PASS} \
-	/f \
-	/cert-ignore \
-	/compression-level:9 \
-	+aero \
-	+auto-reconnect
+    /v:${HOST} \
+    /u:${USER} \
+    /p:${PASS} \
+    /f \
+    /cert-ignore \
+    /compression-level:9 \
+    +aero \
+    +auto-reconnect

@@ -14,15 +14,15 @@ GOOD="${GREEN}${BOLD} [+] ${RC}"
 
 REQUIREMENTS="xclip notify-send"
 if ! which ${REQUIREMENTS} > /dev/null
-	then
-		echo -e "${WARN} To run this program, you need the following packages installed: ${REQUIREMENTS}\n${WARN} Exiting..."
-		exit 1
-	else
-		if [[ ${1} ]]
-			then
-				## Alpha + Num.
-				cat /dev/random | tr -cd 'a-z0-9' | head -c ${1}
-			else
-				cat /dev/random | tr -cd 'a-z0-9' | head -c 32
-		fi
+    then
+        echo -e "${WARN} To run this program, you need the following packages installed: ${REQUIREMENTS}\n${WARN} Exiting..."
+        exit 1
+    else
+        if [[ ${1} ]]
+            then
+                ## Alpha + Num.
+                cat /dev/random | tr -cd 'a-z0-9' | head -c ${1}
+            else
+                cat /dev/random | tr -cd 'a-z0-9' | head -c 32
+        fi
 fi

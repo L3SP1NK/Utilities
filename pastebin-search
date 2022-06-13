@@ -16,9 +16,9 @@ GOOD="${GREEN}${BOLD} [+] ${RC}"
 REQUEST="https://www.google.com/search?q=site:'pastebin.com'%20intext:'${1}'"
 
 if [[ ${1} ]]
-	then
-		x-www-browser ${REQUEST} 2>/dev/null&
-		echo -e "Searching for ${CYAN}${1}..."
-	else
-		echo -e "${WARN} Please, enter a term to search on Pastebin (e.g. 'cars')."
+    then
+        x-www-browser ${REQUEST} 2>/dev/null&
+        echo -e "Searching for ${CYAN}${1}..."
+    else
+        echo -e "${WARN} Please, enter a term to search on Pastebin (e.g. 'cars')."
 fi

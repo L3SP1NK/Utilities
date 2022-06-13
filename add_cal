@@ -49,6 +49,6 @@ if [[ ! -f ${APTS_FILE} ]]
 fi
 
 for NUMBER in $(seq -w ${DIM})
-	do
-		echo "06/${NUMBER}/2022 @ ${START_TIME} -> 06/${NUMBER}/2022 @ ${END_TIME}|${APTS_NAME}" >> ${APTS_FILE}
+    do
+        echo "06/${NUMBER}/2022 @ ${START_TIME} -> 06/${NUMBER}/2022 @ ${END_TIME}|${APTS_NAME}" >> ${APTS_FILE}
 done

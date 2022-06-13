@@ -26,8 +26,8 @@ BLUE="\e[34m"
 
 selectionMenu()
 {
-	clear
-	echo -e "\n ${UL}${YELLOW}Select a channel:${RC}\n\n \
+    clear
+    echo -e "\n ${UL}${YELLOW}Select a channel:${RC}\n\n \
 ${BLUE}[${RC}1${BLUE}] ${RC}Eelf${RC}\n \
 ${BLUE}[${RC}2${BLUE}] ${RC}Eelf Records${RC}\n \
 ${BLUE}[${RC}3${BLUE}] ${RC}The Uppermost In Life${RC}\n \
@@ -39,18 +39,18 @@ ${BLUE}[${GREY}?${BLUE}] ${GREY}Display player shortcut.${RC}\n"
 
 displayShortcut()
 {
-	clear
-	echo -e "\n ${BLUE}<${GREY}SPACE${BLUE}>${RC}	pause.\n \
-${BLUE}<${GREY}ENTER${BLUE}>${RC}	skip.\n \
-${BLUE}<${GREY}M${BLUE}>${RC}		mute.\n \
-${BLUE}<${GREY}Q${BLUE}>${RC}		quit.\n\n \
+    clear
+    echo -e "\n ${BLUE}<${GREY}SPACE${BLUE}>${RC}    pause.\n \
+${BLUE}<${GREY}ENTER${BLUE}>${RC}    skip.\n \
+${BLUE}<${GREY}M${BLUE}>${RC}        mute.\n \
+${BLUE}<${GREY}Q${BLUE}>${RC}        quit.\n\n \
 Try ${BLUE}"${BOLD}${GREY}man mpv${BLUE}"${RC} for more informations.${RC}"
 }
 
 displayRequirements()
 {
-	clear
-	echo -e "\n ${UL}${RED}To run this program you need:${RC}\n\n \
+    clear
+    echo -e "\n ${UL}${RED}To run this program you need:${RC}\n\n \
 - mpv\n \
 - cava/vis\n \
 - youtube-dl/yt-dlp\n"
@@ -58,38 +58,38 @@ displayRequirements()
 
 checkRequirements()
 {
-	DOWNLOADER=$(which yt-dlp youtube-dl|grep -v "not found"|head -n1)
+    DOWNLOADER=$(which yt-dlp youtube-dl|grep -v "not found"|head -n1)
 
-	if [[ ${DOWNLOADER} == "" || ! $(which mpv) ]]
-		then
-			displayRequirements
-			exit 1
-	fi
+    if [[ ${DOWNLOADER} == "" || ! $(which mpv) ]]
+        then
+            displayRequirements
+            exit 1
+    fi
 }
 
 main()
 {
-	checkRequirements
-	selectionMenu
-	read -s -n 1 SELECTED_CHANNEL
-	case ${SELECTED_CHANNEL} in
-		[0-9])
-			CURRENTLY_PLAYING=$(echo "${CHANNEL_[${SELECTED_CHANNEL}]}"|cut -d "/" -f 5)
-			clear
-			echo -e "\n ${YELLOW}Playing ${CURRENTLY_PLAYING}...${RC}\n"
-			mpv --shuffle --no-video "${CHANNEL_[${SELECTED_CHANNEL}]}"
-			;;
-		'?')
-			displayShortcut
-			read
-			main
-			;;
-		*)
-			clear
-			echo -e "${RED}Please enter a valid number!${RC}"
-			read
-			main
-			;;
-	esac
+    checkRequirements
+    selectionMenu
+    read -s -n 1 SELECTED_CHANNEL
+    case ${SELECTED_CHANNEL} in
+        [0-9])
+            CURRENTLY_PLAYING=$(echo "${CHANNEL_[${SELECTED_CHANNEL}]}"|cut -d "/" -f 5)
+            clear
+            echo -e "\n ${YELLOW}Playing ${CURRENTLY_PLAYING}...${RC}\n"
+            mpv --shuffle --no-video "${CHANNEL_[${SELECTED_CHANNEL}]}"
+            ;;
+        '?')
+            displayShortcut
+            read
+            main
+            ;;
+        *)
+            clear
+            echo -e "${RED}Please enter a valid number!${RC}"
+            read
+            main
+            ;;
+    esac
 }
 main

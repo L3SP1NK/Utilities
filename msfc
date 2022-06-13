@@ -7,11 +7,11 @@
 REQUIREMENTS="msfconsole"
 
 if ! which ${REQUIREMENTS}>/dev/null
-	then
-		echo "The Metasploit framework is not installed on this system!"
-		exit 1
-	else
-		## Disable Ctrl-Z
-		trap "" TSTP
-		/usr/bin/msfconsole
+    then
+        echo "The Metasploit framework is not installed on this system!"
+        exit 1
+    else
+        ## Disable Ctrl-Z
+        trap "" TSTP
+        /usr/bin/msfconsole
 fi

@@ -19,10 +19,10 @@ REQUIREMENTS="ethtool ifconfig"
 which ethtool > /dev/null
 
 if [[ ${?} -ne "0" ]]
-	then
-		echo -e "${WARN} \n To run this program, you need the following packages installed: ${REQUIREMENTS}\n${WARN} Exiting...\n"
-		exit 1
-	else
-		echo -e "${BOLD}${GREY}${INTERFACE}: ${BOLD}${GREEN}$(ethtool ${INTERFACE} 2>/dev/null | grep Speed | awk {'print $2'})"
+    then
+        echo -e "${WARN} \n To run this program, you need the following packages installed: ${REQUIREMENTS}\n${WARN} Exiting...\n"
+        exit 1
+    else
+        echo -e "${BOLD}${GREY}${INTERFACE}: ${BOLD}${GREEN}$(ethtool ${INTERFACE} 2>/dev/null | grep Speed | awk {'print $2'})"
 fi
 
