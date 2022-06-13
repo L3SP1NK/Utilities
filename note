@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 ## Take (encrypted) note.
 BACKUP_DIR="/tmp/my_note_backup"
 ENCRYPTED_NOTE_FILE="${HOME}/.me/my_note.gpg"

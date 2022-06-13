@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 ## Play your favorites songs without leaving the tty.
 
 ## Youtube channels:

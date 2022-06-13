@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 ## Get the weather using wttr.in
 ## For more info, see: https://github.com/chubin/wttr.in
 REQUIREMENTS="curl"

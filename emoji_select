@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 ## Copy emoji to your clipboard.
 RED="\e[31m"
 REQUIREMENTS="xclip rofi"

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 ## Get the network speed of the desired interface.
 
 ## Set colors.

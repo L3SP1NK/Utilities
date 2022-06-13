@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 BACKUP_DIR="/tmp/my_diary_backup"
 ENCRYPTED_DIARY_FILE="${HOME}/.me/my_diary.gpg"
 UNENCRYPTED_DIARY_FILE="/tmp/my_diary"

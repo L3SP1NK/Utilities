@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 ## Connect to a rdp server.
 
 RC="\e[0m"

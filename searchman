@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 ## Search for a specific program, and print it's man pages into a pdf reader.
 
 DMENU="rofi"

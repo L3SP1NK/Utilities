@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 ## Search for a keyword on pastebin with Google dorks.
 
 ## Set colors.

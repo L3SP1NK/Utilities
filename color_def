@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 RC="\e[0m"
 BOLD="\e[1m"
 UL="\e[4m"
