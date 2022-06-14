@@ -1,38 +1,23 @@
 #!/usr/bin/env bash
-## Get the weather using wttr.in
+## Get the weather (using wttr.in)
 ## For more info, see: https://github.com/chubin/wttr.in
-REQUIREMENTS="curl"
+
+## TODO:
+## Make a custom format.
+
+REQUIREMENTS="curl redshift" ## Redshift to get the current location.
+if ! which ${REQUIREMENTS}>/dev/null
+    then
+        echo "To run this program, you need: ${REQUIREMENTS}"
+        exit 1
+fi
+
 URL="https://wttr.in"
+LOCATION=$(redshift -p 2>/dev/null|grep "Location:"|cut -d ":" -f 2|sed -e "s/ //g" -e "s/N//g" -e "s/E//g")
+FORMAT="2"
+## 1: ☀️   +12°C
+## 2: ☀️   🌡️+12°C 🌬️↓6km/h
+## 3: ${LOCATION}: ☀️   +12°C
+## 4: ${LOCATION}: ☀️   🌡️+12°C 🌬️↓6km/h
 
-usage()
-{
-    echo -e "Usage:\nweather <city>"
-}
-
-checkEnv()
-{
-    if ! which ${REQUIREMENTS}>/dev/null
-        then
-            echo "To run this program, you need: ${REQUIREMENTS}"
-            exit 1
-    fi
-
-    if [[ ${1} ]]
-        then
-            CITY="${1}"
-        else
-            usage
-            exit 1
-    fi
-}
-
-
-getWeather()
-{
-    clear
-    curl -sSL ${URL}/${CITY}?1\
-    |grep -v "Follow"
-}
-
-checkEnv
-getWeather
+curl -sSL ${URL}/${LOCATION}?format=${FORMAT}|grep -v "Follow"
