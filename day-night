@@ -2,28 +2,33 @@
 ## Switch to light/dark themes if it's the day or the night (made for Xfce).
 ## Typically you would run this program in a cronjob.
 
-REQUIREMENTS='redshift'
-LIGHT_THEME="Adwaita"
+REQUIREMENTS='redshift zenity notify-send'
+
+## Themes
+#LIGHT_THEME="Adwaita"
+LIGHT_THEME="Flat-Remix-GTK-Blue-Light-Solid"
 #DARK_THEME="Adwaita-dark"
-#LIGHT_THEME="Flat-Remix-GTK-Blue-Light-Solid"
 DARK_THEME="Flat-Remix-GTK-Blue-Darkest-Solid"
-LIGHT_ICON="ePapirus-Light"
-DARK_ICON="ePapirus-Dark"
+
+## Icons
+LIGHT_ICON="Papirus-Light"
+DARK_ICON="Papirus-Dark"
+
 LIGHT_CURSOR="Adwaita"
 DARK_CURSOR="Simp1e"
 
 checkTheme()
 {
-    if [[ -e /usr/share/themes/${DARK_THEME} ]] && \
-    [[ -e /usr/share/themes/${LIGHT_THEME} ]] && \
-    [[ -e /usr/share/icons/Papirus-Dark ]] && \
-    [[ -e /usr/share/icons/Papirus-Light ]] && \
-    [[ -e /usr/share/icons/${LIGHT_THEME} ]] && \
-    [[ -e /usr/share/icons/Simp1e ]]
+    if [[ -e /usr/share/themes/${DARK_THEME} ]]&&\
+    [[ -e /usr/share/themes/${LIGHT_THEME} ]]&&\
+    [[ -e /usr/share/icons/${LIGHT_ICON} ]]&&\
+    [[ -e /usr/share/icons/${DARK_ICON} ]]&&\
+    [[ -e /usr/share/icons/${DARK_CURSOR} ]]&&\
+    [[ -e /usr/share/icons/${LIGHT_CURSOR} ]]
         then
-            echo -e "\e[32mThemes found..."
+            echo -e "\e[32mThemes and icons found..."
         else
-            echo -e "\e[31mThemes missing..."
+            echo -e "\e[31mThemes and/or icons missing..."
             exit 1
     fi
 }
@@ -37,9 +42,9 @@ setLightTheme()
     xfconf-query -c xsettings -p /Gtk/CursorThemeName -s "${LIGHT_CURSOR}"
     ## Set GTK theme
     gsettings set org.gnome.desktop.interface color-scheme prefer-light
-#    [[ -e ~/.config/rofi/config.rasi ]] && [[ -e ~/.config/rofi/light.rasi ]]
-#    sed -i 's#@theme "~/.config/rofi/dark.rasi"#@theme "~/.config/rofi/light.rasi"#g' \
-#    ~/.config/rofi/config.rasi
+    [[ -e ~/.config/rofi/config.rasi ]]&&[[ -e ~/.config/rofi/light.rasi ]]
+    sed -i 's#@theme "~/.config/rofi/dark.rasi"#@theme "~/.config/rofi/light.rasi"#g' \
+    ~/.config/rofi/config.rasi
 }
 
 setDarkTheme()
@@ -51,44 +56,68 @@ setDarkTheme()
     xfconf-query -c xsettings -p /Gtk/CursorThemeName -s "${DARK_CURSOR}"
     ## Set GTK theme
     gsettings set org.gnome.desktop.interface color-scheme prefer-dark
-#    [[ -e ~/.config/rofi/config.rasi ]] && [[ -e ~/.config/rofi/dark.rasi ]]
-#    sed -i 's#@theme "~/.config/rofi/light.rasi"#@theme "~/.config/rofi/dark.rasi"#g' \
-#    ~/.config/rofi/config.rasi
+    [[ -e ~/.config/rofi/config.rasi ]]&&[[ -e ~/.config/rofi/dark.rasi ]]
+    sed -i 's#@theme "~/.config/rofi/light.rasi"#@theme "~/.config/rofi/dark.rasi"#g' \
+    ~/.config/rofi/config.rasi
 }
 
 relaunchApp()
 {
     ## Restart xfce component
-    xfwm4 -r&
-    xfce4-panel -r&
+    if pidof xfwm4>/dev/null
+        then
+            xfwm4 -r&
+    fi
+
+    if pidof xfce4-panel>/dev/null
+        then
+            xfce4-panel -r&
+    fi
 
     ## Restart clipman to update the taskbar icon.
-    if [[ $(pidof xfce4-clipman) != "" ]]
+    if pidof xfce4-clipman>/dev/null
         then
             killall xfce4-clipman
             xfce4-clipman&
     fi
 
     ## Restart Telegram to update the taskbar icon.
-    if [[ $(pidof Telegram) != "" ]]
+    if pidof Telegram>/dev/null
         then
             killall Telegram
-            [[ -f /opt/Telegram/Telegram ]] && /opt/Telegram/Telegram&
+            [[ -f /opt/Telegram/Telegram ]]&&/opt/Telegram/Telegram&
     fi
 }
 
-PERIOD=$(redshift -p 2>/dev/null | grep "Period" | cut -d ' ' -f 2)
+if ! pidof Xorg>/dev/null
+    then
+        echo "Xorg isn't running!"
+        exit 1
+fi
 
-if [[ ${PERIOD} == 'Daytime' ]]
+## Use zenity to ask the user before switching.
+TIME=$(redshift -p 2>/dev/null|grep "Period"|cut -d ' ' -f 2)
+if [[ ${TIME} == 'Daytime' ]]
     then
-        setDarkTheme
-        relaunchApp
-        echo "☀️ It's currently the day, setting the light theme..."
-elif [[ ${PERIOD} == 'Night' ]]
+        if zenity --text "☀️ It's currently day time, do you want to switch to the light mode?" --question
+            then
+                notify-send "Switching to light theme..."
+                setLightTheme
+                relaunchApp
+            else
+                exit
+        fi
+        echo "Switching to light theme..."
+elif [[ ${TIME} == 'Night' ]]
     then
-        setLightTheme
-        relaunchApp
-        echo "🌙 It's currently the night, setting the dark theme..."
+        if zenity --text "🌙 It's currently night time, do you want to switch to the dark mode?" --question
+            then
+                notify-send "Switching to dark theme..."
+                setDarkTheme
+                relaunchApp
+            else
+                exit
+        fi
     else
         echo "Unable to get the current time..."
         exit 1

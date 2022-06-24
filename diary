@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 BACKUP_DIR="/tmp/my_diary_backup"
-ENCRYPTED_DIARY_FILE="${HOME}/.me/my_diary.gpg"
-UNENCRYPTED_DIARY_FILE="/tmp/my_diary"
-ENCRYPTED_DIARY_FILE_BACKUP="${HOME}/.me/my_diary.gpg~"
+ENCRYPTED_DIARY_FILE="${HOME}/.me/my_diary.tex.gpg"
+UNENCRYPTED_DIARY_FILE="/tmp/my_diary.tex"
+ENCRYPTED_DIARY_FILE_BACKUP="${HOME}/.me/my_diary.tex.gpg~"
 
 RC="\e[0m"
 RED="\e[31m"
