@@ -102,7 +102,7 @@ if [[ ${TIME} == 'Daytime' ]]
         if zenity --text "☀️ It's currently day time, do you want to switch to the light mode?" --question
             then
                 notify-send "Switching to light theme..."
-                setLightTheme
+                setDarkTheme
                 relaunchApp
             else
                 exit
@@ -113,7 +113,7 @@ elif [[ ${TIME} == 'Night' ]]
         if zenity --text "🌙 It's currently night time, do you want to switch to the dark mode?" --question
             then
                 notify-send "Switching to dark theme..."
-                setDarkTheme
+                setLightTheme
                 relaunchApp
             else
                 exit
