@@ -42,3 +42,4 @@ xfreerdp \
     /compression-level:9 \
     +aero \
     +auto-reconnect
+

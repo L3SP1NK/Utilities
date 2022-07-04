@@ -17,42 +17,42 @@ cacheDir()
     if [[ -d /root/.cache ]]
         then
             ## Root
-            echo -e " ${YELLOW}→ Removing the root cache directory..."
+            echo -e " ${YELLOW} → Removing the root cache directory..."
             rm -fr /root/.cache 2>/dev/null
     fi
 
     if [[ -d ${USER_HOME}/.cache ]]
         then
             ## User
-            echo -e " ${YELLOW}→ Removing the user cache directory..."
+            echo -e " ${YELLOW} → Removing the user cache directory..."
             rm -fr ${USER_HOME}/.cache 2>/dev/null
     fi
 
     if [[ -d ${USER_HOME}/.mozilla/ ]]
         then
             ## Mozilla
-            echo -e " ${YELLOW}→ Removing the firefox cache directory..."
+            echo -e " ${YELLOW} → Removing the firefox cache directory..."
             rm -fr ${USER_HOME}/.mozilla/firefox/*/cache* 2>/dev/null
     fi
 
     if [[ -d ${USER_HOME}/.config/Binance/Partitions/binance.app/Cache/ ]]
         then
             ## Binance
-            echo -e " ${YELLOW}→ Removing the Binance cache directory..."
+            echo -e " ${YELLOW} → Removing the Binance cache directory..."
             rm -fr ${USER_HOME}/.config/Binance/Partitions/binance.app/Cache/* 2>/dev/null
     fi
 
     if [[ -d ${USER_HOME}/.config/molotov/Cache/ ]]
         then
             ## Molotov
-            echo -e " ${YELLOW}→ Removing the Molotov cache directory..."
+            echo -e " ${YELLOW} → Removing the Molotov cache directory..."
             rm -fr ${USER_HOME}/.config/molotov/Cache/* 2>/dev/null
     fi
 
     if [[ -d ${USER_HOME}/.local/share/TelegramDesktop/tdata/ ]]
         then
             ## Telegram
-            echo -e " ${YELLOW}→ Removing the Telegram cache directory..."
+            echo -e " ${YELLOW} → Removing the Telegram cache directory..."
             rm -fr ${USER_HOME}/.local/share/TelegramDesktop/tdata/user*/ 2>/dev/null
     fi
 
@@ -72,14 +72,14 @@ if  [[ ${EUID} -ne "0" ]]
         echo -e " ${RED}× This script must be run as root!"
         exit 1
     else
-        echo -e " ${YELLOW}→ Synchronizing cache writes to persistent storage and emptying the swap space..."
+        echo -e " ${YELLOW} → Synchronizing cache writes to persistent storage and emptying the swap space..."
         cacheDir
 
         if [[ $(swapon --show) == "" ]]
             then
-                echo -e " ${YELLOW}→ Swap device not found on this system."
+                echo -e " ${YELLOW} → Swap device not found on this system."
             else
-                echo -e " ${YELLOW}→ Emptying swap space..."
+                echo -e " ${YELLOW} → Emptying swap space..."
                 swapSpace && echo -e " ${GREEN}ø Done.${RC}" || " ${RED}× Something went wrong!${RC}"
         fi
 fi

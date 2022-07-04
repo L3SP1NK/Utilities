@@ -12,6 +12,6 @@ if ! which ${REQUIREMENTS}>/dev/null
 fi
 
 cat ${EMOJI_FILE}\
-| ${DMENU} "Emoji:"\
+|${DMENU} "Emoji:"\
 |cut -d " " -f 1\
 |xclip -selection clipboard

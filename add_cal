@@ -3,6 +3,7 @@
 RC="\e[0m"
 RED="\e[31m"
 
+MONTH="06"
 REQUIREMENTS="calcurse ncal date"
 DIM=$(cal $(date +"%m %Y") | awk 'NF {DAYS = $NF}; END {print DAYS}') ## Day in month
 APTS_FILE="${HOME}/.local/share/calcurse/apts"
@@ -50,5 +51,5 @@ fi
 
 for NUMBER in $(seq -w ${DIM})
     do
-        echo "06/${NUMBER}/2022 @ ${START_TIME} -> 06/${NUMBER}/2022 @ ${END_TIME}|${APTS_NAME}" >> ${APTS_FILE}
+        echo "${MONTH}/${NUMBER}/2022 @ ${START_TIME} -> ${MONTH}/${NUMBER}/2022 @ ${END_TIME}|${APTS_NAME}" >> ${APTS_FILE}
 done
